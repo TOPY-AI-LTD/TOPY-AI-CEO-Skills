@@ -1,0 +1,8 @@
+interface:
+  display_name: "TOPY Media"
+  short_description: "List and manage media assets"
+  brand_color: "#ff1212"
+  default_prompt: "Use $topy-media to list, register, or delete TOPY media assets."
+
+policy:
+  allow_implicit_invocation: true

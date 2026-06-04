@@ -1,0 +1,8 @@
+interface:
+  display_name: "TOPY Templates"
+  short_description: "Create and refine templates"
+  brand_color: "#ff1212"
+  default_prompt: "Use $topy-templates to create, edit, star, or restore TOPY templates."
+
+policy:
+  allow_implicit_invocation: true

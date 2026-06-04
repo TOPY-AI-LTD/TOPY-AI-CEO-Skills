@@ -1,0 +1,8 @@
+interface:
+  display_name: "TOPY Onboarding"
+  short_description: "Create projects from sources"
+  brand_color: "#ff1212"
+  default_prompt: "Use $topy-onboarding to create a project from a website, file, brainstorm, or idea."
+
+policy:
+  allow_implicit_invocation: true

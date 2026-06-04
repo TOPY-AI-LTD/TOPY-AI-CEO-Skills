@@ -1,0 +1,8 @@
+interface:
+  display_name: "TOPY AI CEO Dashboard"
+  short_description: "Route TOPY AI CEO tasks"
+  brand_color: "#ff1212"
+  default_prompt: "Use $topy-dashboard to choose the right TOPY AI CEO workflow for this task."
+
+policy:
+  allow_implicit_invocation: true

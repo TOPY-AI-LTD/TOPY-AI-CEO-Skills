@@ -1,0 +1,8 @@
+interface:
+  display_name: "TOPY Billing"
+  short_description: "Check credits and subscription state"
+  brand_color: "#ff1212"
+  default_prompt: "Use $topy-billing to inspect credits, entitlements, or billing flows."
+
+policy:
+  allow_implicit_invocation: true
