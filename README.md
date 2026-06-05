@@ -48,7 +48,7 @@
 |---|---|
 | Repository | `TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
 | License | `MIT` |
-| Version | `v0.4.3` |
+| Version | `v0.4.5` |
 | Primary install | `npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
 
 ---
@@ -244,6 +244,12 @@ Install the full catalog:
 npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills
 ```
 
+Install all skills without prompting:
+
+```bash
+npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills --all
+```
+
 Install a specific skill:
 
 ```bash
@@ -364,6 +370,7 @@ This repository follows simple semantic version tags.
 - `v0.4.1` removed the TOPY-specific example set from the core package
 - `v0.4.2` expanded the README into a fuller landing page and usage guide
 - `v0.4.3` added the CEO daily workflow across TOPY product skills
+- `v0.4.5` documented the `--all` install path for the full skills catalog
 - future releases will add new skills, route updates, or installation improvements
 
 ---

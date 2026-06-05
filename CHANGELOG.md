@@ -45,3 +45,7 @@
 
 - Added a CEO daily workflow section across the TOPY product skills
 - Explained how `topy-ai-ceo-core` works with projects, templates, plans, and billing
+
+## v0.4.5
+
+- Documented the `--all` install path for the full skills catalog
