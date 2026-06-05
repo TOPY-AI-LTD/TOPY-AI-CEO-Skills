@@ -20,3 +20,8 @@
 - Rewrote `topy-ai-ceo-core` into an original, cleaner executive playbook
 - Consolidated the quantitative utilities into a single helper script
 - Added focused examples for market entry, crisis, prioritization, and fundraising
+
+## v0.3.1
+
+- Removed an accidental Python bytecode artifact from the package
+- Added a scripts-level ignore rule for bytecode caches

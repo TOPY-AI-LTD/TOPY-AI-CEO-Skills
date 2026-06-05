@@ -40,7 +40,7 @@
   <tr>
     <td><strong>Repository</strong><br/>TOPY-AI-LTD/TOPY-AI-CEO-Skills</td>
     <td><strong>License</strong><br/>MIT</td>
-    <td><strong>Version</strong><br/>v0.3.0</td>
+    <td><strong>Version</strong><br/>v0.3.1</td>
     <td><strong>Primary Install</strong><br/><code>npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills</code></td>
   </tr>
 </table>
@@ -134,6 +134,7 @@ This repository follows simple semantic version tags.
 - `v0.1.1` README branding and repo validation workflow
 - `v0.2.0` added the general `topy-ai-ceo-core` skill and organized references
 - `v0.3.0` rewrote `topy-ai-ceo-core` into an original, organized executive playbook
+- `v0.3.1` removed packaging artifacts and added a scripts ignore rule
 - future releases will add new skills, route updates, or installation improvements
 
 ---
