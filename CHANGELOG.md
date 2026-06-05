@@ -40,3 +40,8 @@
 ## v0.4.2
 
 - Rewrote the README into a fuller landing page and usage guide
+
+## v0.4.3
+
+- Added a CEO daily workflow section across the TOPY product skills
+- Explained how `topy-ai-ceo-core` works with projects, templates, plans, and billing

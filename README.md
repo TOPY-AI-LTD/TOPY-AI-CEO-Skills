@@ -27,6 +27,7 @@
     <a href="#fit-check">Fit Check</a> ·
     <a href="#why-this-exists">Why This Exists</a> ·
     <a href="#core-capabilities">Core Capabilities</a> ·
+    <a href="#ceo-daily-loop">CEO Daily Loop</a> ·
     <a href="#install">Install</a> ·
     <a href="#examples">Examples</a> ·
     <a href="#repository-structure">Structure</a>
@@ -47,7 +48,7 @@
 |---|---|
 | Repository | `TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
 | License | `MIT` |
-| Version | `v0.4.2` |
+| Version | `v0.4.3` |
 | Primary install | `npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
 
 ---
@@ -184,6 +185,44 @@ Use this when a structured calculation is better than a narrative answer.
 
 ---
 
+## CEO Daily Loop
+
+The real value of the TOPY skill set comes from using the reasoning core together with the product workflow skills around it. A CEO can move through the day like this:
+
+| Moment | Skill(s) | What you do |
+|---|---|---|
+| Morning review | `topy-dashboard`, `topy-projects`, `topy-billing` | Review active projects, check resource constraints, and confirm credit or subscription status before starting expensive work |
+| New opportunity intake | `topy-onboarding` | Convert a website, local file, brainstorm, or rough idea into a structured project |
+| Business plan creation | `topy-business-plans` | Draft or regenerate the plan for a project, then prepare it for review or export |
+| Plan critique and next-step selection | `topy-ai-ceo-core` | Analyze the plan, find weak points, evaluate GTM strategy, test competitor response, and recommend the next move |
+| Template design | `topy-templates` | Turn strong plan patterns into reusable templates so future projects start faster |
+| Project editing and decisions | `topy-projects` | Update the live project record with the decisions, risks, research, and action items that came out of the review |
+| Media and assets | `topy-media` | Attach and manage uploaded or URL-based media that supports the project or plan |
+
+### How the skills fit together
+
+- Use **`topy-dashboard`** when you want the router skill to choose the right workflow.
+- Use **`topy-onboarding`** to create the first structured project record from raw input.
+- Use **`topy-business-plans`** to create, edit, export, and regenerate the business plan.
+- Use **`topy-ai-ceo-core`** to think like the CEO: diagnose the weak points, choose the next step, and pressure-test the strategy.
+- Use **`topy-projects`** to keep project decisions, research, and resources synchronized.
+- Use **`topy-templates`** to capture a reusable structure once the plan shape is working.
+- Use **`topy-billing`** to understand credits, entitlements, and subscription limits before expensive actions.
+- Use **`topy-media`** to manage the supporting assets attached to the work.
+
+### Typical CEO flow
+
+1. A founder sends a website, file, or rough concept.
+2. `topy-onboarding` turns it into a project.
+3. `topy-business-plans` creates a first-pass plan.
+4. `topy-ai-ceo-core` reviews the plan, identifies weak points, and recommends the next step.
+5. `topy-projects` stores the decision trail and supporting research.
+6. `topy-templates` captures the reusable structure if the pattern is worth repeating.
+7. `topy-billing` verifies that the current account can support more generation or growth.
+8. `topy-media` attaches any files or visual assets needed for the plan.
+
+---
+
 ## Install
 
 Install the full catalog:
@@ -311,6 +350,7 @@ This repository follows simple semantic version tags.
 - `v0.4.0` expanded the core references, examples, and eval suite
 - `v0.4.1` removed the TOPY-specific example set from the core package
 - `v0.4.2` expanded the README into a fuller landing page and usage guide
+- `v0.4.3` added the CEO daily workflow across TOPY product skills
 - future releases will add new skills, route updates, or installation improvements
 
 ---
