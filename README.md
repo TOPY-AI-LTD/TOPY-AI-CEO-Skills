@@ -210,6 +210,19 @@ The real value of the TOPY skill set comes from using the reasoning core togethe
 - Use **`topy-billing`** to understand credits, entitlements, and subscription limits before expensive actions.
 - Use **`topy-media`** to manage the supporting assets attached to the work.
 
+### Skill map
+
+| Skill | Typical inputs | Typical outputs |
+|---|---|---|
+| `topy-dashboard` | A broad CEO task, a request to choose the right workflow, or a multi-skill starting point | A routed next step and the right specialist skill |
+| `topy-onboarding` | Website URL, local file, brainstorm, or short idea | A structured project record with initial scope and context |
+| `topy-projects` | Existing project ID, project metadata, resources, or edits | Updated project records, archived or restored state, and project-level decisions |
+| `topy-business-plans` | Project context, plan options, template choices, edits, or export request | A generated, edited, regenerated, or exported business plan |
+| `topy-templates` | Template content, structure goals, or refinement request | A reusable business-plan template definition |
+| `topy-billing` | Account status, credit questions, entitlements, subscription actions | Credit balance, transaction data, plans, or checkout/portal actions |
+| `topy-media` | Image URL, uploaded asset reference, or deletion request | Media registration, listing, or removal actions |
+| `topy-ai-ceo-core` | A decision, trade-off, plan, market move, crisis, or uncertainty question | A structured decision memo with recommendation, risks, and next steps |
+
 ### Typical CEO flow
 
 1. A founder sends a website, file, or rough concept.
