@@ -29,7 +29,7 @@
     <a href="#requirements">Requirements</a> ·
     <a href="#releases">Releases</a>
   </p>
-  <p><strong>TOPY AI CEO is the agent-facing surface for user-dashboard workflows: onboarding, projects, business plans, templates, billing, and media.</strong></p>
+  <p><strong>TOPY AI CEO is the agent-facing surface for user-dashboard workflows plus a general executive core skill for strategy, prioritization, crisis, stakeholders, competition, and debiasing.</strong></p>
 </div>
 
 ---
@@ -40,7 +40,7 @@
   <tr>
     <td><strong>Repository</strong><br/>TOPY-AI-LTD/TOPY-AI-CEO-Skills</td>
     <td><strong>License</strong><br/>MIT</td>
-    <td><strong>Version</strong><br/>v0.1.1</td>
+    <td><strong>Version</strong><br/>v0.2.0</td>
     <td><strong>Primary Install</strong><br/><code>npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills</code></td>
   </tr>
 </table>
@@ -97,6 +97,7 @@ Use $topy-business-plans to generate a business plan for my project.
 
 <table>
   <tr>
+    <td><strong><code>topy-ai-ceo-core</code></strong><br/>General CEO decision advisor and strategic reasoning core.</td>
     <td><strong><code>topy-dashboard</code></strong><br/>Router skill for TOPY workflows and skill selection.</td>
     <td><strong><code>topy-onboarding</code></strong><br/>Create projects from website, file, brainstorm, or direct idea.</td>
   </tr>
@@ -130,6 +131,7 @@ This repository follows simple semantic version tags.
 
 - `v0.1.0` initial public release
 - `v0.1.1` README branding and repo validation workflow
+- `v0.2.0` added the general `topy-ai-ceo-core` skill and organized references
 - future releases will add new skills, route updates, or installation improvements
 
 ---
@@ -138,6 +140,7 @@ This repository follows simple semantic version tags.
 
 ```text
 skills/
+  topy-ai-ceo-core/
   topy-dashboard/
   topy-onboarding/
   topy-projects/
