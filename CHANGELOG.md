@@ -31,3 +31,8 @@
 - Expanded every core reference into a fuller executive playbook
 - Added TOPY-specific examples and a lightweight eval suite
 - Moved the core examples into the skill package where they belong
+
+## v0.4.1
+
+- Removed the TOPY-specific example set from the core package
+- Cleaned up the remaining TOPY wording in the eval suite
