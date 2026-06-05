@@ -1,6 +1,6 @@
 ---
 name: topy-business-plans
-description: Generate, inspect, edit, regenerate, and export TOPY business plans. Use when the user wants to work on a plan lifecycle for a specific project.
+description: Generate, inspect, edit, regenerate, and export TOPY business plans using TOPY_AI_KEY. Use when the user wants to work on a plan lifecycle for a specific project.
 ---
 
 # TOPY Business Plans
@@ -22,28 +22,34 @@ Handle the full business-plan workflow for a project, including job creation, pl
 
 ## Route map
 
-- `GET /api/v1/projects/business-plan/options`
-- `GET /api/v1/projects/{pid}/business-plan/options`
-- `POST /api/v1/projects/{pid}/business-plan/jobs`
-- `GET /api/v1/projects/{pid}/business-plan/jobs/{job_id}`
-- `GET /api/v1/projects/{pid}/business-plan/jobs/latest`
-- `POST /api/v1/projects/{pid}/business-plan/jobs/{job_id}/cancel`
-- `POST /api/v1/projects/{pid}/business-plan/jobs/{job_id}/retry`
-- `GET /api/v1/projects/{pid}/business-plan`
-- `GET /api/v1/projects/{pid}/business-plan/{plan_id}`
-- `PATCH /api/v1/projects/{pid}/business-plan/{plan_id}`
-- `PATCH /api/v1/projects/{pid}/business-plan/{plan_id}/meta`
-- `DELETE /api/v1/projects/{pid}/business-plan/{plan_id}`
-- `POST /api/v1/projects/{pid}/business-plan/{plan_id}/restore`
-- `GET /api/v1/projects/{pid}/business-plan/{plan_id}/export/markdown`
-- `GET /api/v1/projects/{pid}/business-plan/{plan_id}/export/docx`
-- `GET /api/v1/projects/{pid}/business-plan/{plan_id}/export/print`
-- `POST /api/v1/projects/{pid}/business-plan/{plan_id}/subtasks/{subtask_no}/regenerate`
-- `POST /api/v1/projects/{pid}/business-plan/{plan_id}/ai/section-edit`
-- `PATCH /api/v1/projects/{pid}/business-plan/preferences`
+- `GET https://topy.ai/api/v1/projects/business-plan/options`
+- `GET https://topy.ai/api/v1/projects/{pid}/business-plan/options`
+- `POST https://topy.ai/api/v1/projects/{pid}/business-plan/jobs`
+- `GET https://topy.ai/api/v1/projects/{pid}/business-plan/jobs/{job_id}`
+- `GET https://topy.ai/api/v1/projects/{pid}/business-plan/jobs/latest`
+- `POST https://topy.ai/api/v1/projects/{pid}/business-plan/jobs/{job_id}/cancel`
+- `POST https://topy.ai/api/v1/projects/{pid}/business-plan/jobs/{job_id}/retry`
+- `GET https://topy.ai/api/v1/projects/{pid}/business-plan`
+- `GET https://topy.ai/api/v1/projects/{pid}/business-plan/{plan_id}`
+- `PATCH https://topy.ai/api/v1/projects/{pid}/business-plan/{plan_id}`
+- `PATCH https://topy.ai/api/v1/projects/{pid}/business-plan/{plan_id}/meta`
+- `DELETE https://topy.ai/api/v1/projects/{pid}/business-plan/{plan_id}`
+- `POST https://topy.ai/api/v1/projects/{pid}/business-plan/{plan_id}/restore`
+- `GET https://topy.ai/api/v1/projects/{pid}/business-plan/{plan_id}/export/markdown`
+- `GET https://topy.ai/api/v1/projects/{pid}/business-plan/{plan_id}/export/docx`
+- `GET https://topy.ai/api/v1/projects/{pid}/business-plan/{plan_id}/export/print`
+- `POST https://topy.ai/api/v1/projects/{pid}/business-plan/{plan_id}/subtasks/{subtask_no}/regenerate`
+- `POST https://topy.ai/api/v1/projects/{pid}/business-plan/{plan_id}/ai/section-edit`
+- `PATCH https://topy.ai/api/v1/projects/{pid}/business-plan/preferences`
+
+## API and auth
+
+See [references/auth-and-api.md](../topy-ai-ceo-core/references/auth-and-api.md) for the shared convention.
 
 ## Rules
 
+- Before any API call, verify that `TOPY_AI_KEY` is available.
+- Use `https://topy.ai/api` as the base URL for all calls.
 - Check credit balance before starting a generation job if the amount is not already known.
 - Do not start generation if the user does not have enough credits.
 - Keep template and parameter selections aligned with the backend options payload.
@@ -52,5 +58,6 @@ Handle the full business-plan workflow for a project, including job creation, pl
 
 ## Failure behavior
 
+- If `TOPY_AI_KEY` is missing, stop and route the user to `topy-init`.
 - If the job is queued or running, report the current state instead of retrying blindly.
 - If the backend says credits are insufficient, stop and surface that message.

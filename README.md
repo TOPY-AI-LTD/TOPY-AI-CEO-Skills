@@ -29,6 +29,7 @@
     <a href="#core-capabilities">Core Capabilities</a> ·
     <a href="#ceo-daily-loop">CEO Daily Loop</a> ·
     <a href="#install">Install</a> ·
+    <a href="#auth-and-api">Auth and API</a> ·
     <a href="#product-skill-workflow">Product Skill Workflow</a> ·
     <a href="#examples">Examples</a> ·
     <a href="#repository-structure">Structure</a>
@@ -49,7 +50,7 @@
 |---|---|
 | Repository | `TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
 | License | `MIT` |
-| Version | `v0.4.6` |
+| Version | `v0.5.0` |
 | Primary install | `npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
 
 ---
@@ -192,7 +193,7 @@ The real value of the TOPY skill set comes from using the reasoning core togethe
 
 | Moment | Skill(s) | What you do |
 |---|---|---|
-| Morning review | `topy-dashboard`, `topy-projects`, `topy-billing` | Review active projects, check resource constraints, and confirm credit or subscription status before starting expensive work |
+| Morning review | `topy-dashboard`, `topy-projects`, `topy-billing`, `topy-init` | Review active projects, check resource constraints, and confirm the TOPY key and account state before starting expensive work |
 | New opportunity intake | `topy-onboarding` | Convert a website, local file, brainstorm, or rough idea into a structured project |
 | Business plan creation | `topy-business-plans` | Draft or regenerate the plan for a project, then prepare it for review or export |
 | Plan critique and next-step selection | `topy-ai-ceo-core` | Analyze the plan, find weak points, evaluate GTM strategy, test competitor response, and recommend the next move |
@@ -210,6 +211,7 @@ The real value of the TOPY skill set comes from using the reasoning core togethe
 - Use **`topy-templates`** to capture a reusable structure once the plan shape is working.
 - Use **`topy-billing`** to understand credits, entitlements, and subscription limits before expensive actions.
 - Use **`topy-media`** to manage the supporting assets attached to the work.
+- Use **`topy-init`** first when the TOPY key is missing or the environment has not been prepared yet.
 
 ### Skill map
 
@@ -222,6 +224,7 @@ The real value of the TOPY skill set comes from using the reasoning core togethe
 | `topy-templates` | Template content, structure goals, or refinement request | A reusable business-plan template definition |
 | `topy-billing` | Account status, credit questions, entitlements, subscription actions | Credit balance, transaction data, plans, or checkout/portal actions |
 | `topy-media` | Image URL, uploaded asset reference, or deletion request | Media registration, listing, or removal actions |
+| `topy-init` | Missing key, new environment, or first-time setup | A ready `TOPY_AI_KEY` and confirmed base URL |
 | `topy-ai-ceo-core` | A decision, trade-off, plan, market move, crisis, or uncertainty question | A structured decision memo with recommendation, risks, and next steps |
 
 ### Typical CEO flow
@@ -234,6 +237,7 @@ The real value of the TOPY skill set comes from using the reasoning core togethe
 6. `topy-templates` captures the reusable structure if the pattern is worth repeating.
 7. `topy-billing` verifies that the current account can support more generation or growth.
 8. `topy-media` attaches any files or visual assets needed for the plan.
+9. `topy-init` is used first whenever the key is missing, expired, or not loaded in the environment.
 
 ---
 
@@ -316,6 +320,14 @@ Use `topy-billing` before generation-heavy or access-controlled operations:
 
 Use `topy-media` for files, images, or URL-based assets that belong to the project or plan.
 
+### 8. Initialize access when needed
+
+Use `topy-init` when the environment is not ready yet:
+
+- set `TOPY_AI_KEY`
+- confirm `https://topy.ai/api`
+- stop any non-core workflow until auth is available
+
 ### Why this matters for a CEO
 
 A good CEO workflow is not:
@@ -359,6 +371,12 @@ Install a specific skill:
 npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills --skill topy-ai-ceo-core
 ```
 
+Install the initializer:
+
+```bash
+npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills --skill topy-init
+```
+
 Install for Codex:
 
 ```bash
@@ -371,15 +389,47 @@ Use a local checkout:
 npx skills add ./topy-ai-ceo-skills
 ```
 
+Upgrade installed skills:
+
+```bash
+npx skills update
+```
+
+Upgrade a single skill:
+
+```bash
+npx skills update topy-init
+```
+
+---
+
+## Auth and API
+
+All non-core TOPY skills call the live API at:
+
+```text
+https://topy.ai/api
+```
+
+Use `TOPY_AI_KEY` as the bearer token for those calls. If the key is missing:
+
+1. stop the workflow
+2. route the user to `topy-init`
+3. ask them to set `TOPY_AI_KEY`
+4. resume the original skill only after auth is available
+
+`topy-ai-ceo-core` does not call the TOPY API and does not require the key.
+
 ---
 
 ## Quick Start
 
 1. Install the repo or the skill you need.
-2. Set `TOPY_API_KEY` in your shell or agent environment.
-3. Ask the agent to use the relevant TOPY skill.
-4. If you are unsure, start with `topy-ai-ceo-core`.
-5. Use the examples or evals when you want a repeatable prompt pattern.
+2. If the key is missing, start with `topy-init`.
+3. Set `TOPY_AI_KEY` in your shell or agent environment.
+4. Ask the agent to use the relevant TOPY skill.
+5. If you are unsure, start with `topy-ai-ceo-core`.
+6. Use the examples or evals when you want a repeatable prompt pattern.
 
 Examples:
 
@@ -417,6 +467,7 @@ There is also a lightweight eval suite for repeatable checks:
 | Skill | Purpose |
 |---|---|
 | `topy-ai-ceo-core` | Recommended starting point for CEO-level reasoning |
+| `topy-init` | Initialize `TOPY_AI_KEY` and confirm the TOPY API base URL |
 | `topy-dashboard` | Router skill for TOPY workflows and skill selection |
 | `topy-onboarding` | Create projects from website, file, brainstorm, or direct idea |
 | `topy-projects` | Inspect, edit, archive, restore, and manage project resources |
@@ -429,7 +480,7 @@ There is also a lightweight eval suite for repeatable checks:
 
 ## Requirements
 
-- A valid `TOPY_API_KEY`
+- A valid `TOPY_AI_KEY`
 - Access to the TOPY backend API that powers the route maps in each skill
 - `npx skills` available in the user environment
 
@@ -445,6 +496,9 @@ skills/
     examples/
     references/
     scripts/
+  topy-init/
+    SKILL.md
+    agents/
   topy-dashboard/
   topy-onboarding/
   topy-projects/
@@ -475,6 +529,8 @@ This repository follows simple semantic version tags.
 - `v0.4.3` added the CEO daily workflow across TOPY product skills
 - `v0.4.5` documented the `--all` install path for the full skills catalog
 - `v0.4.6` expanded the README with the TOPY product skill workflow
+- `v0.5.0` added `topy-init`, standardized `TOPY_AI_KEY`, and documented auth preflight
+- `v0.5.1` added the upgrade flow for installed skills
 - future releases will add new skills, route updates, or installation improvements
 
 ---

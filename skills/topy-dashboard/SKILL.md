@@ -1,6 +1,6 @@
 ---
 name: topy-dashboard
-description: Entry point for TOPY.AI Codex workflows using a TOPY API key. Use when the user wants to manage TOPY projects, onboarding, business plans, templates, billing, or media from Codex.
+description: Entry point for TOPY.AI Codex workflows using TOPY_AI_KEY. Use when the user wants to manage TOPY projects, onboarding, business plans, templates, billing, or media from Codex.
 ---
 
 # TOPY Dashboard
@@ -20,10 +20,17 @@ Use this as the router skill for the TOPY plugin.
 - Create, edit, star, or restore templates: `../topy-templates/SKILL.md`
 - Inspect credits, entitlements, or subscriptions: `../topy-billing/SKILL.md`
 - Manage user media: `../topy-media/SKILL.md`
+- If `TOPY_AI_KEY` is missing, route to `../topy-init/SKILL.md` first.
+
+## API and auth
+
+See [references/auth-and-api.md](../topy-ai-ceo-core/references/auth-and-api.md) for the shared convention.
 
 ## Common rules
 
-- Authenticate with `TOPY_API_KEY`.
+- Authenticate with `TOPY_AI_KEY`.
+- Use `https://topy.ai/api` as the base URL for all non-core TOPY calls.
 - Keep payloads faithful to the backend schema.
 - Stop on credit or subscription errors instead of trying to bypass them.
+- If the key is missing, stop and use `topy-init` before continuing.
 - This plugin release is user-dashboard only.

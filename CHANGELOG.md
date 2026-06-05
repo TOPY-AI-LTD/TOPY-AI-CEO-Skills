@@ -53,3 +53,13 @@
 ## v0.4.6
 
 - Expanded the README with the TOPY product skill workflow
+
+## v0.5.0
+
+- Added the `topy-init` setup skill for `TOPY_AI_KEY`
+- Standardized non-core TOPY skills on `https://topy.ai/api`
+- Added auth preflight rules so non-core skills stop and route to init when the key is missing
+
+## v0.5.1
+
+- Documented the `skills update` upgrade path for installed skills

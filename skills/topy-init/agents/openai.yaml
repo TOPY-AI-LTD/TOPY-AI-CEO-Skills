@@ -1,0 +1,8 @@
+interface:
+  display_name: "TOPY Init"
+  short_description: "Set up TOPY_AI_KEY and API access"
+  brand_color: "#ff1212"
+  default_prompt: "Use $topy-init to set up TOPY_AI_KEY and the https://topy.ai/api base URL before using any non-core TOPY skill."
+
+policy:
+  allow_implicit_invocation: true

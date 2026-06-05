@@ -1,6 +1,6 @@
 ---
 name: topy-onboarding
-description: Create a TOPY project from a website, local file, brainstorm, or direct idea. Use when the user wants to turn an external source or rough concept into a new project record.
+description: Create a TOPY project from a website, local file, brainstorm, or direct idea using TOPY_AI_KEY. Use when the user wants to turn an external source or rough concept into a new project record.
 ---
 
 # TOPY Onboarding
@@ -19,13 +19,17 @@ Create a new project from one of the supported onboarding sources.
 
 ## Route map
 
-- `POST /api/v1/projects/website`
-- `POST /api/v1/projects/upload`
-- `POST /api/v1/projects/from-brainstorm`
-- `POST /api/v1/projects/from-idea`
-- `POST /api/v1/onboarding/chat/start`
-- `POST /api/v1/onboarding/chat/turn`
-- `POST /api/v1/onboarding/chat/sessions/{session_id}/complete`
+- `POST https://topy.ai/api/v1/projects/website`
+- `POST https://topy.ai/api/v1/projects/upload`
+- `POST https://topy.ai/api/v1/projects/from-brainstorm`
+- `POST https://topy.ai/api/v1/projects/from-idea`
+- `POST https://topy.ai/api/v1/onboarding/chat/start`
+- `POST https://topy.ai/api/v1/onboarding/chat/turn`
+- `POST https://topy.ai/api/v1/onboarding/chat/sessions/{session_id}/complete`
+
+## API and auth
+
+See [references/auth-and-api.md](../topy-ai-ceo-core/references/auth-and-api.md) for the shared convention.
 
 ## Inputs
 
@@ -36,6 +40,8 @@ Create a new project from one of the supported onboarding sources.
 
 ## Rules
 
+- Before any API call, verify that `TOPY_AI_KEY` is available.
+- Use `https://topy.ai/api` as the base URL for all calls.
 - Normalize source material into the backend payload shape, do not invent fields.
 - If the source is a file, read and summarize the file before creating the project.
 - If the user has not specified the target project name or scope, infer only from the provided source and keep the payload conservative.
@@ -43,5 +49,6 @@ Create a new project from one of the supported onboarding sources.
 
 ## Failure behavior
 
+- If `TOPY_AI_KEY` is missing, stop and route the user to `topy-init`.
 - If validation fails, surface the backend error and stop.
 - If the source content is ambiguous or incomplete, ask a clarifying question before creating the project.
