@@ -1,6 +1,12 @@
 # TOPY AI CEO Skills
 
+<p align="center">
+  <img src="https://www.topy.ai/long_logo.svg" alt="TOPY" width="420" />
+</p>
+
 Agent skills for TOPY dashboard workflows, published for `npx skills` install flows.
+
+**Current version:** `v0.1.1`
 
 ## Install
 
@@ -21,6 +27,14 @@ Install for Codex:
 ```bash
 npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills --agent codex
 ```
+
+## Releases
+
+This repository follows simple semantic version tags:
+
+- `v0.1.0` initial public release
+- `v0.1.1` README branding and repo validation workflow
+- future releases will add new skills or route updates
 
 ## Available Skills
 
