@@ -1,0 +1,38 @@
+[
+  {
+    "id": "strategy_market_entry",
+    "prompt": "Should TOPY enter a new market now or wait until the core workflow is stable?",
+    "expected_modes": ["strategy", "prioritization"],
+    "must_include": ["3 options plus do nothing", "trade-offs", "clear recommendation", "evidence that would change the answer"]
+  },
+  {
+    "id": "topy_skill_launch",
+    "prompt": "Should we launch the public TOPY AI CEO Core skills repo now or wait for more polish?",
+    "expected_modes": ["strategy", "operating model"],
+    "must_include": ["launch gating", "risk vs reach trade-off", "decision gate"]
+  },
+  {
+    "id": "credits_vs_subscription",
+    "prompt": "How should we balance credits and subscriptions for business plan generation and unlimited access?",
+    "expected_modes": ["capital", "operating model"],
+    "must_include": ["pricing logic", "metric consequences", "user behavior consequences"]
+  },
+  {
+    "id": "api_key_governance",
+    "prompt": "Should more TOPY APIs accept user API keys, and where should admin keys remain separate?",
+    "expected_modes": ["stakeholder", "risk"],
+    "must_include": ["blast radius", "scope boundaries", "audit trail or logging"]
+  },
+  {
+    "id": "crisis_release_regression",
+    "prompt": "Our staging release regressed robots and sitemap behavior. What should we do now?",
+    "expected_modes": ["crisis"],
+    "must_include": ["immediate containment", "stakeholder sequencing", "follow-up review point"]
+  },
+  {
+    "id": "dashboard_priorities",
+    "prompt": "We can only ship two dashboard improvements this sprint. Rank the options and explain the trade-offs.",
+    "expected_modes": ["prioritization"],
+    "must_include": ["ranking method", "dependencies", "opportunity cost"]
+  }
+]

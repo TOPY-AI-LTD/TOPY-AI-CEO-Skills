@@ -25,3 +25,9 @@
 
 - Removed an accidental Python bytecode artifact from the package
 - Added a scripts-level ignore rule for bytecode caches
+
+## v0.4.0
+
+- Expanded every core reference into a fuller executive playbook
+- Added TOPY-specific examples and a lightweight eval suite
+- Moved the core examples into the skill package where they belong

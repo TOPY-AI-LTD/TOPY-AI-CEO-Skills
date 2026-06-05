@@ -5,27 +5,86 @@ Use this reference when the decision is about how the company runs, how success 
 ## Good fits
 
 - org design and team structure
-- operating cadence and management rhythm
-- OKR design, KPI selection, or metric cleanup
+- management cadence and accountability
+- OKR design, KPI selection, or dashboard cleanup
 - runway planning and capital allocation
-- fundraising narrative, use of funds, and investor positioning
+- fundraising story, use of funds, and investor positioning
 - budgeting for growth, efficiency, or resilience
 
-## Core questions
+## Operating model questions
 
-- What behavior should this system incentivize?
-- Which metrics are leading indicators versus lagging indicators?
-- What must be true for the current operating model to scale?
-- What is the runway / capacity / burn implication of this choice?
-- What does a board or investor need to believe for this to work?
+- What behavior should this system encourage?
+- What is the minimum set of decisions that need a human owner?
+- Where does coordination cost exceed the benefit of centralization?
+- Which metric is an outcome, which is a leading indicator, and which is just activity?
+- What happens to decision speed if we add or remove layers?
 
-## Practical guidance
+## OKR and KPI design
 
-- Prefer a small metric set over a bloated dashboard.
-- Separate outcome metrics from activity metrics.
-- Tie OKRs to actual capacity and ownership.
-- For fundraising, connect story, traction, and capital plan.
-- For org design, optimize for decision speed, accountability, and coordination cost.
+Good metrics do three things:
+
+1. measure the outcome you care about
+2. predict the outcome early enough to act
+3. prevent gaming or overfitting
+
+Practical guidance:
+
+- keep the top-level dashboard small
+- separate outcome, leading, and guardrail metrics
+- define thresholds before the quarter starts
+- attach each metric to an owner and a review rhythm
+- avoid mixing reporting metrics with decision metrics
+
+## Org design guidance
+
+For org decisions, evaluate:
+
+- span of control
+- decision rights
+- single-threaded ownership
+- inter-team dependency load
+- escalation path
+- what can be delegated without losing quality
+
+The best org structure is usually the one that makes the next decision faster without hiding the cost.
+
+## Fundraising and capital planning
+
+When capital is part of the decision, answer:
+
+- How much runway do we actually need?
+- What milestones unlock the next round or next stage?
+- What evidence will make the story credible?
+- How much dilution is acceptable for the growth we want?
+- What is the fallback if fundraising takes longer than expected?
+
+For investors, connect:
+
+- narrative
+- traction
+- use of funds
+- milestones
+- downside protection
+
+## Operating cadence
+
+If the problem is recurring, define the cadence:
+
+- weekly execution review
+- monthly metric review
+- quarterly strategy review
+- annual planning reset
+
+If the cadence is broken, the company is usually deciding with stale information.
+
+## Anti-patterns
+
+- too many KPIs
+- no clear owner
+- no leading indicator
+- no guardrail metric
+- metrics that are easy to report but hard to act on
+- raising money without a clear operating plan for the capital
 
 ## Output checklist
 
@@ -33,4 +92,4 @@ Use this reference when the decision is about how the company runs, how success 
 2. Show the measurement consequence of the decision.
 3. Show the capital consequence of the decision.
 4. Show who owns execution.
-
+5. Show what meeting rhythm or metric would catch drift early.

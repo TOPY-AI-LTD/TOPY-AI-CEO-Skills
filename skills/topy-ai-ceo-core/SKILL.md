@@ -56,6 +56,11 @@ Load only the reference that fits the moment:
 - Debiasing and uncertainty: [references/debiasing-and-uncertainty.md](references/debiasing-and-uncertainty.md)
 - Quantitative tools: [references/quantitative-tools.md](references/quantitative-tools.md)
 
+## Examples and evals
+
+- Real prompt patterns: [examples/](examples/)
+- Lightweight evaluation prompts: [evals/evals.json](evals/evals.json)
+
 ## Default output shape
 
 Prefer a brief, structured decision memo:
@@ -97,3 +102,4 @@ Prefer a brief, structured decision memo:
 - For crisis, lead with immediate containment, then stabilization, then root cause.
 - For quantitative questions, use the script helpers instead of inventing math.
 - For uncertain decisions, say what evidence would change your mind.
+- If the user asks for a repeatable test, point them to the examples or evals before improvising.
