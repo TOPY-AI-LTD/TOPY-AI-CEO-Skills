@@ -6,7 +6,7 @@
     <span style="color:#ff1212;">TOPY AI CEO Skills</span>
   </h1>
   <p style="font-weight: 700; color: #ff1212;">
-    Install TOPY dashboard skills with <code>npx skills</code> and use them from Codex, Claude Code, and other skills-aware agents.
+    A public skill catalog for CEO-level decision support, strategy, prioritization, crisis response, stakeholder management, competitive analysis, debiasing, and quantitative trade-offs.
   </p>
   <p>
     <a href="https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills" aria-label="GitHub Repository">
@@ -23,27 +23,164 @@
     </a>
   </p>
   <p>
+    <a href="#one-line">One Line</a> ·
+    <a href="#fit-check">Fit Check</a> ·
+    <a href="#why-this-exists">Why This Exists</a> ·
+    <a href="#core-capabilities">Core Capabilities</a> ·
     <a href="#install">Install</a> ·
-    <a href="#available-skills">Available Skills</a> ·
-    <a href="#quick-start">Quick Start</a> ·
-    <a href="#requirements">Requirements</a> ·
-    <a href="#releases">Releases</a>
+    <a href="#examples">Examples</a> ·
+    <a href="#repository-structure">Structure</a>
   </p>
-  <p><strong>TOPY AI CEO is the agent-facing surface for user-dashboard workflows plus a general executive core skill for strategy, prioritization, crisis, stakeholders, competition, and debiasing.</strong></p>
 </div>
+
+---
+
+## One Line
+
+**AI can give advice quickly. TOPY AI CEO Skills are designed to decompose trade-offs, expose hidden assumptions, predict competitive reactions, and keep high-stakes decisions grounded in actual constraints.**
 
 ---
 
 ## At a Glance
 
-<table>
-  <tr>
-    <td><strong>Repository</strong><br/>TOPY-AI-LTD/TOPY-AI-CEO-Skills</td>
-    <td><strong>License</strong><br/>MIT</td>
-    <td><strong>Version</strong><br/>v0.4.1</td>
-    <td><strong>Primary Install</strong><br/><code>npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills</code></td>
-  </tr>
-</table>
+| Field | Value |
+|---|---|
+| Repository | `TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
+| License | `MIT` |
+| Version | `v0.4.2` |
+| Primary install | `npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
+
+---
+
+## Fit Check
+
+If you regularly face decisions like these, this skill set is a good fit:
+
+| Scenario | Typical Questions |
+|---|---|
+| Strategic decisions | Enter a new market, build or buy, continue or stop? |
+| Resource allocation | Which initiatives deserve scarce time, budget, and attention? |
+| Crisis response | What do we do in the next 2 hours, 24 hours, and 2 weeks? |
+| Stakeholder management | How do we align board, investors, leadership, and partners? |
+| Competitive moves | If we launch, cut price, or expand, how will others respond? |
+| Uncertainty | What evidence would change the answer, and how confident are we? |
+
+---
+
+## Why This Exists
+
+Generic AI advice often looks polished but stops before the hard part:
+
+- it names a framework but does not choose the right one
+- it recommends action without showing the trade-off
+- it overstates certainty when the evidence is weak
+- it ignores who can block the decision
+- it does not model competitor response
+- it does not separate reversible tests from irreversible bets
+
+TOPY AI CEO Core is the opposite: it forces the reasoning into a structured memo, then points to the smallest useful playbook for the task.
+
+---
+
+## What Makes It Different
+
+### 1. Decision classification
+
+It starts by naming the decision type:
+
+- Type 1: irreversible or costly-to-reverse
+- Type 2: reversible experiment
+- Crisis: time-critical response
+- Strategic bet: long-horizon uncertainty
+- Operating design: org, process, OKR, KPI, or capacity question
+- Capital decision: runway, budget, or investment choice
+- Stakeholder decision: board, investor, employee, or partner alignment
+- Competitive move: pricing, launch, position, or market entry
+
+### 2. Trade-off discipline
+
+It does not stop at "what should we do?"
+It also shows:
+
+- what we are giving up
+- what happens if we do nothing
+- what evidence would change the answer
+- what makes the move reversible or irreversible
+
+### 3. Bias and uncertainty checks
+
+The skill explicitly calls out:
+
+- anchoring
+- confirmation bias
+- sunk cost
+- availability bias
+- overconfidence
+- status quo bias
+- planning fallacy
+- framing effects
+
+### 4. Competitive and stakeholder realism
+
+Good decisions fail when the world reacts.
+This skill asks:
+
+- who supports the move
+- who resists it
+- who needs to hear it first
+- how competitors are likely to respond
+- what the second round of the game looks like
+
+### 5. Quantitative support
+
+When the decision needs a calculation, the package includes small helper utilities for:
+
+- weighted decision matrices
+- ICE scoring
+- expected value
+- Monte Carlo simulation
+- NPV and IRR
+- Bayesian updates
+
+---
+
+## Core Capabilities
+
+### Structured decision memo
+
+The default output shape is a short memo with:
+
+1. the real question
+2. context and constraints
+3. stakeholders
+4. options and trade-offs
+5. recommendation
+6. risks to monitor
+7. next steps
+
+### Strategy and prioritization
+
+Use this when the problem is choosing among competing paths with limited resources.
+
+### Operating model and capital planning
+
+Use this when the decision is about how the company runs, how metrics work, or how money should be raised or deployed.
+
+### Crisis and stakeholder handling
+
+Use this when timing matters and the sequence of communication is part of the solution.
+
+### Competitive and market moves
+
+Use this when the right answer depends on how competitors, customers, or the market are likely to react.
+
+### Debiasing and uncertainty
+
+Use this when confidence is too high, the evidence is incomplete, or the decision has hidden assumptions.
+
+### Quantitative tools
+
+Use this when a structured calculation is better than a narrative answer.
 
 ---
 
@@ -58,7 +195,7 @@ npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills
 Install a specific skill:
 
 ```bash
-npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills --skill topy-onboarding
+npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills --skill topy-ai-ceo-core
 ```
 
 Install for Codex:
@@ -83,39 +220,49 @@ npx skills add ./topy-ai-ceo-skills
 4. If you are unsure, start with `topy-ai-ceo-core`.
 5. Use the examples or evals when you want a repeatable prompt pattern.
 
-Example:
+Examples:
 
 ```text
-Use $topy-onboarding to create a project from this website.
+Use $topy-ai-ceo-core to evaluate a market entry decision with trade-offs and a recommendation.
 ```
 
 ```text
-Use $topy-business-plans to generate a business plan for my project.
+Use $topy-ai-ceo-core to prioritize five initiatives and explain the opportunity cost of delay.
 ```
+
+```text
+Use $topy-ai-ceo-core to handle a crisis response plan with immediate containment and stakeholder sequencing.
+```
+
+---
+
+## Examples
+
+The core skill package includes example prompts that show what good output should look like:
+
+- [market-entry.md](skills/topy-ai-ceo-core/examples/market-entry.md)
+- [crisis-response.md](skills/topy-ai-ceo-core/examples/crisis-response.md)
+- [prioritization.md](skills/topy-ai-ceo-core/examples/prioritization.md)
+- [fundraising.md](skills/topy-ai-ceo-core/examples/fundraising.md)
+
+There is also a lightweight eval suite for repeatable checks:
+
+- [evals/evals.json](evals/evals.json)
 
 ---
 
 ## Available Skills
 
-<table>
-  <tr>
-    <td><strong><code>topy-ai-ceo-core</code></strong><br/>Recommended starting point for CEO-level reasoning.</td>
-    <td><strong><code>topy-dashboard</code></strong><br/>Router skill for TOPY workflows and skill selection.</td>
-    <td><strong><code>topy-onboarding</code></strong><br/>Create projects from website, file, brainstorm, or direct idea.</td>
-  </tr>
-  <tr>
-    <td><strong><code>topy-projects</code></strong><br/>Inspect, edit, archive, restore, and manage project resources.</td>
-    <td><strong><code>topy-business-plans</code></strong><br/>Generate, inspect, edit, export, and manage business plans.</td>
-  </tr>
-  <tr>
-    <td><strong><code>topy-templates</code></strong><br/>Create and edit business-plan templates.</td>
-    <td><strong><code>topy-billing</code></strong><br/>Inspect credits, entitlements, subscriptions, and billing flows.</td>
-  </tr>
-  <tr>
-    <td><strong><code>topy-media</code></strong><br/>List, register, and delete media assets.</td>
-    <td><strong>All skills</strong><br/>Designed for user-dashboard workflows only in this release.</td>
-  </tr>
-</table>
+| Skill | Purpose |
+|---|---|
+| `topy-ai-ceo-core` | Recommended starting point for CEO-level reasoning |
+| `topy-dashboard` | Router skill for TOPY workflows and skill selection |
+| `topy-onboarding` | Create projects from website, file, brainstorm, or direct idea |
+| `topy-projects` | Inspect, edit, archive, restore, and manage project resources |
+| `topy-business-plans` | Generate, inspect, edit, export, and manage business plans |
+| `topy-templates` | Create and edit business-plan templates |
+| `topy-billing` | Inspect credits, entitlements, subscriptions, and billing flows |
+| `topy-media` | List, register, and delete media assets |
 
 ---
 
@@ -124,6 +271,31 @@ Use $topy-business-plans to generate a business plan for my project.
 - A valid `TOPY_API_KEY`
 - Access to the TOPY backend API that powers the route maps in each skill
 - `npx skills` available in the user environment
+
+---
+
+## Repository Structure
+
+```text
+skills/
+  topy-ai-ceo-core/
+    SKILL.md
+    agents/
+    examples/
+    references/
+    scripts/
+  topy-dashboard/
+  topy-onboarding/
+  topy-projects/
+  topy-business-plans/
+  topy-templates/
+  topy-billing/
+  topy-media/
+evals/
+README.md
+CHANGELOG.md
+LICENSE
+```
 
 ---
 
@@ -138,25 +310,8 @@ This repository follows simple semantic version tags.
 - `v0.3.1` removed packaging artifacts and added a scripts ignore rule
 - `v0.4.0` expanded the core references, examples, and eval suite
 - `v0.4.1` removed the TOPY-specific example set from the core package
+- `v0.4.2` expanded the README into a fuller landing page and usage guide
 - future releases will add new skills, route updates, or installation improvements
-
----
-
-## Repository Layout
-
-```text
-skills/
-  topy-ai-ceo-core/
-  topy-dashboard/
-  topy-onboarding/
-  topy-projects/
-  topy-business-plans/
-  topy-templates/
-  topy-billing/
-  topy-media/
-examples/
-evals/
-```
 
 ---
 

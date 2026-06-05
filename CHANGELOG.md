@@ -36,3 +36,7 @@
 
 - Removed the TOPY-specific example set from the core package
 - Cleaned up the remaining TOPY wording in the eval suite
+
+## v0.4.2
+
+- Rewrote the README into a fuller landing page and usage guide
