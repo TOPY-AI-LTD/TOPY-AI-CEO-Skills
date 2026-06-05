@@ -29,6 +29,7 @@
     <a href="#core-capabilities">Core Capabilities</a> ·
     <a href="#ceo-daily-loop">CEO Daily Loop</a> ·
     <a href="#install">Install</a> ·
+    <a href="#product-skill-workflow">Product Skill Workflow</a> ·
     <a href="#examples">Examples</a> ·
     <a href="#repository-structure">Structure</a>
   </p>
@@ -48,7 +49,7 @@
 |---|---|
 | Repository | `TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
 | License | `MIT` |
-| Version | `v0.4.5` |
+| Version | `v0.4.6` |
 | Primary install | `npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
 
 ---
@@ -236,6 +237,108 @@ The real value of the TOPY skill set comes from using the reasoning core togethe
 
 ---
 
+## Product Skill Workflow
+
+The product skills are not separate from the CEO work. They are the operating system the CEO uses every day.
+
+### 1. Start with the project
+
+Use `topy-onboarding` to turn raw material into a structured project:
+
+- website URL
+- local file
+- brainstorm notes
+- rough idea or founder pitch
+
+What you get:
+
+- a project record
+- initial scope
+- source context
+- a base to iterate from
+
+### 2. Shape the plan
+
+Use `topy-business-plans` to create the business plan from that project.
+
+What you get:
+
+- initial plan draft
+- edited sections
+- regenerated weak sections
+- exportable output
+
+### 3. Pressure-test the plan
+
+Use `topy-ai-ceo-core` to act like the CEO and challenge the plan:
+
+- what is weak or missing
+- what are the biggest assumptions
+- what is the GTM sequence
+- what are the weak competitors and likely responses
+- what is the next best step
+
+This is where the CEO answers:
+
+- should we continue?
+- should we change the plan?
+- should we wait?
+- should we kill the idea?
+
+### 4. Keep the project live
+
+Use `topy-projects` to record the project state after the decision:
+
+- decisions made
+- risks discovered
+- research and notes
+- updated metadata
+- archive or restore actions
+
+### 5. Turn good structure into a template
+
+Use `topy-templates` when a plan shape is repeatable:
+
+- create a template from a strong structure
+- refine the template
+- reuse it for similar opportunities
+
+### 6. Check limits before expensive actions
+
+Use `topy-billing` before generation-heavy or access-controlled operations:
+
+- credits
+- subscriptions
+- entitlements
+- portal or checkout actions
+
+### 7. Attach supporting assets
+
+Use `topy-media` for files, images, or URL-based assets that belong to the project or plan.
+
+### Why this matters for a CEO
+
+A good CEO workflow is not:
+
+- one prompt
+- one plan
+- one answer
+
+It is a loop:
+
+1. capture the opportunity
+2. turn it into a project
+3. generate a plan
+4. critique the plan
+5. update the project
+6. turn the pattern into a template
+7. manage credits and constraints
+8. keep the supporting assets organized
+
+That is the daily operating loop the TOPY skills are built to support.
+
+---
+
 ## Install
 
 Install the full catalog:
@@ -371,6 +474,7 @@ This repository follows simple semantic version tags.
 - `v0.4.2` expanded the README into a fuller landing page and usage guide
 - `v0.4.3` added the CEO daily workflow across TOPY product skills
 - `v0.4.5` documented the `--all` install path for the full skills catalog
+- `v0.4.6` expanded the README with the TOPY product skill workflow
 - future releases will add new skills, route updates, or installation improvements
 
 ---

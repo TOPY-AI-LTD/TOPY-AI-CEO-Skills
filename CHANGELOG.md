@@ -49,3 +49,7 @@
 ## v0.4.5
 
 - Documented the `--all` install path for the full skills catalog
+
+## v0.4.6
+
+- Expanded the README with the TOPY product skill workflow
