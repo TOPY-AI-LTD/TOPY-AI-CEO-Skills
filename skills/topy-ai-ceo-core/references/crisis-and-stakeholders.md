@@ -1,25 +1,33 @@
 # Crisis and Stakeholders
 
-Use this reference for urgent incidents, executive transitions, board issues, investor communication, team friction, or any decision where communication order matters.
+Use this reference for incidents, executive departures, board friction, restructuring, partner disputes, or any case where communication sequence matters.
 
 ## Crisis response
 
-- Stabilize first.
-- Separate facts from rumors.
-- Give immediate actions with owners and a time horizon.
-- Identify who needs to know now versus later.
+- Lead with facts, not theory.
+- Separate containment from root cause.
+- Give immediate actions first, then stabilization, then follow-up.
+- Define what must be true before declaring the situation controlled.
 
 ## Stakeholder handling
 
-- Map power and interest.
-- Identify supporters, skeptics, and blockers.
-- Pre-wire important decisions privately before public communication.
-- Frame the message in the recipient's interests, not the CEO's vocabulary.
+- Map power, interest, and likely reaction.
+- Identify who can block, who can amplify, and who can quietly create damage.
+- Pre-wire major decisions privately before broad communication.
+- Frame the message in the audience's terms, not the CEO's terms.
 
-## Output priorities
+## Communication order
 
-1. Immediate containment
-2. Communication sequence
-3. Short-term stabilization
-4. Root-cause follow-up
+1. strongest ally
+2. most powerful stakeholder
+3. swing votes
+4. affected managers and individuals
+5. broad announcement
+
+## Output checklist
+
+1. Who needs to know now?
+2. Who needs to know next?
+3. What is the message for each audience?
+4. What is the rollback or containment plan?
 

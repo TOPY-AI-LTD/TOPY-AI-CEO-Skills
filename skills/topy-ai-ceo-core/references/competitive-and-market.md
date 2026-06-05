@@ -1,25 +1,38 @@
-# Competitive and Market Analysis
+# Competitive and Market Moves
 
-Use this reference for competitive moves, market entry, pricing changes, product launches, and strategic response modeling.
+Use this reference for pricing, launches, market entry, response modeling, and war-gaming.
 
 ## Good fits
 
-- War-gaming a launch or expansion
-- Predicting competitor reactions
-- Testing whether a strategic move is robust
-- Evaluating market structure and positioning
+- pricing changes
+- product launch sequencing
+- entry into a new geography or segment
+- reacting to a competitor move
+- assessing a strategic partnership
 
-## Suggested methods
+## War-gaming structure
 
-- War game 2-4 relevant competitors
-- Model most likely, aggressive, and unexpected responses
-- Run at least one counter-response round
-- Favor strategies that remain acceptable across multiple scenarios
+1. Define the move.
+2. Identify the 2-4 relevant competitors.
+3. Predict their most likely response.
+4. Predict an aggressive response.
+5. Predict an unexpected response.
+6. Run at least one counter-move round.
+7. Decide whether the strategy is robust or fragile.
 
-## Output priorities
+## What matters
 
-1. Define the move
-2. Identify likely competitor reactions
-3. Surface the market dynamics the move could trigger
-4. Recommend the most robust path, not just the boldest one
+- speed of response
+- financial headroom
+- product differentiation
+- distribution leverage
+- regulation and switching costs
+
+## Output checklist
+
+1. State the move in plain language.
+2. State the competitor's likely interpretation.
+3. Show the likely market reaction.
+4. Show the no-regret elements.
+5. Show the kill criteria.
 

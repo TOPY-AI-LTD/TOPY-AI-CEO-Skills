@@ -14,3 +14,9 @@
 
 - Added `topy-ai-ceo-core` as a general executive decision skill
 - Organized the strategy, crisis, competitive, and debiasing references into focused files
+
+## v0.3.0
+
+- Rewrote `topy-ai-ceo-core` into an original, cleaner executive playbook
+- Consolidated the quantitative utilities into a single helper script
+- Added focused examples for market entry, crisis, prioritization, and fundraising

@@ -1,27 +1,28 @@
-# Strategy and Priority
+# Strategy and Prioritization
 
-Use this reference for portfolio decisions, major trade-offs, market entry, and any situation where multiple options compete for limited time, money, or attention.
+Use this reference for portfolio trade-offs, market entry, M&A screening, and any situation where multiple options compete for the same scarce resources.
 
 ## Good fits
 
-- Entering or delaying a market
-- Allocating budget across initiatives
-- Deciding whether to acquire, partner, or build
-- Choosing between growth, retention, product quality, and expansion
+- choosing between mutually exclusive strategic options
+- prioritizing initiatives under capacity constraints
+- deciding whether to build, buy, partner, or wait
+- evaluating new market entry or retreat
+- weighing upside against reversibility
 
-## Suggested methods
+## Frameworks to prefer
 
-- Decision matrix for 2-5 mutually exclusive options
-- ICE scoring for initiative prioritization
-- Opportunity-cost analysis for trade-offs
-- Scenario planning when uncertainty is high
+- Decision matrix when options are comparable and criteria are known
+- ICE scoring when the problem is backlog-like and time is limited
+- Expected value when outcomes can be quantified
+- Scenario planning when uncertainty is dominated by a few variables
+- Opportunity cost when saying yes implies a meaningful no
 
-## Recommended workflow
+## Output checklist
 
-1. Define the decision and success criteria.
-2. List options, including do nothing.
-3. Score options against the criteria that matter.
-4. Identify dependencies and hidden costs.
-5. Check whether the winner changes under different assumptions.
-6. Give a recommendation with a clear reason.
+1. State the actual decision in one sentence.
+2. Show the trade-offs, not just the winner.
+3. Include the do-nothing option when it is realistic.
+4. Call out dependencies and sequencing.
+5. Note what would change the recommendation.
 

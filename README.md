@@ -40,7 +40,7 @@
   <tr>
     <td><strong>Repository</strong><br/>TOPY-AI-LTD/TOPY-AI-CEO-Skills</td>
     <td><strong>License</strong><br/>MIT</td>
-    <td><strong>Version</strong><br/>v0.2.0</td>
+    <td><strong>Version</strong><br/>v0.3.0</td>
     <td><strong>Primary Install</strong><br/><code>npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills</code></td>
   </tr>
 </table>
@@ -80,6 +80,7 @@ npx skills add ./topy-ai-ceo-skills
 1. Install the repo or the skill you need.
 2. Set `TOPY_API_KEY` in your shell or agent environment.
 3. Ask the agent to use the relevant TOPY skill.
+4. If you are unsure, start with `topy-ai-ceo-core`.
 
 Example:
 
@@ -97,7 +98,7 @@ Use $topy-business-plans to generate a business plan for my project.
 
 <table>
   <tr>
-    <td><strong><code>topy-ai-ceo-core</code></strong><br/>General CEO decision advisor and strategic reasoning core.</td>
+    <td><strong><code>topy-ai-ceo-core</code></strong><br/>Recommended starting point for CEO-level reasoning.</td>
     <td><strong><code>topy-dashboard</code></strong><br/>Router skill for TOPY workflows and skill selection.</td>
     <td><strong><code>topy-onboarding</code></strong><br/>Create projects from website, file, brainstorm, or direct idea.</td>
   </tr>
@@ -132,6 +133,7 @@ This repository follows simple semantic version tags.
 - `v0.1.0` initial public release
 - `v0.1.1` README branding and repo validation workflow
 - `v0.2.0` added the general `topy-ai-ceo-core` skill and organized references
+- `v0.3.0` rewrote `topy-ai-ceo-core` into an original, organized executive playbook
 - future releases will add new skills, route updates, or installation improvements
 
 ---

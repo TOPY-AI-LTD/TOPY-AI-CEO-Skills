@@ -1,6 +1,6 @@
 # Debiasing and Uncertainty
 
-Use this reference when the decision is uncertain, the evidence is incomplete, or the user may be anchoring on a preferred answer.
+Use this reference when the answer depends on incomplete evidence, strong opinions, or hidden assumptions.
 
 ## Bias scan
 
@@ -14,19 +14,29 @@ Check for:
 - status quo bias
 - framing effects
 - groupthink
+- planning fallacy
 
 ## Uncertainty tools
 
-- Bayesian updating when new evidence arrives
-- sensitivity analysis for key assumptions
-- base-rate checks
-- pre-mortem for major irreversible decisions
-- first-principles reconstruction when assumptions look shaky
+- base-rate check
+- pre-mortem
+- red team / steel man
+- first-principles reconstruction
+- Bayesian updating
+- sensitivity analysis
+- reference class forecasting
 
-## Output priorities
+## Evidence handling
 
-1. State what is known versus unknown
-2. Name the key assumptions
-3. Show what evidence would change the answer
-4. Keep confidence explicit and bounded
+- separate facts from interpretations
+- grade evidence quality
+- avoid double counting related evidence
+- use ranges when precision is fake
+
+## Output checklist
+
+1. What do we know?
+2. What do we not know?
+3. What evidence would change the answer?
+4. What assumption is doing the most work?
 
