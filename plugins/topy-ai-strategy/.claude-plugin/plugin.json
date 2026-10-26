@@ -1,0 +1,20 @@
+{
+	"name": "topy-ai-strategy",
+	"version": "0.7.0",
+	"description": "TOPY Strategy & direction skills (7): Business model, Competitive strategy, Decision memo, Market entry, OKRs, Prioritization…. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
+	"author": {
+		"name": "TOPY AI LTD",
+		"email": "startup@topy.ai",
+		"url": "https://topy.ai"
+	},
+	"homepage": "https://topy.ai/developers",
+	"repository": "https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills",
+	"license": "MIT",
+	"keywords": [
+		"topy.ai",
+		"ai-ceo",
+		"founders",
+		"strategy"
+	],
+	"privacyPolicyUrl": "https://topy.ai/privacy"
+}

@@ -1,0 +1,1015 @@
+{
+	"name": "TOPY.AI AI CEO skills",
+	"description": "AI CEO skills for founders, built for TOPY.AI. Core skills run on the TOPY MCP server (https://topy.ai/mcp); connected skills use it when available; standalone skills are CEO methods that work anywhere.",
+	"version": "0.7.0",
+	"updated": "2026-10-26",
+	"publisher": {
+		"name": "TOPY AI LTD",
+		"email": "startup@topy.ai",
+		"url": "https://topy.ai"
+	},
+	"install": {
+		"claude_code": "/plugin marketplace add TOPY-AI-LTD/TOPY-AI-CEO-Skills",
+		"npm": "npx @topy-ai/skills install",
+		"mcp_server": "https://topy.ai/mcp"
+	},
+	"tiers": {
+		"core": "Runs on the TOPY MCP server; needs a TOPY account.",
+		"connected": "Uses TOPY data and actions when the MCP server is connected; works on its own otherwise.",
+		"standalone": "A CEO method that works with any agent; can save results to TOPY where it fits."
+	},
+	"categories": [
+		{
+			"id": "core",
+			"name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"count": 17
+		},
+		{
+			"id": "strategy",
+			"name": "Strategy & direction",
+			"plugin": "topy-ai-strategy",
+			"count": 7
+		},
+		{
+			"id": "fundraising",
+			"name": "Fundraising",
+			"plugin": "topy-ai-fundraising",
+			"count": 5
+		},
+		{
+			"id": "finance",
+			"name": "Finance",
+			"plugin": "topy-ai-finance",
+			"count": 4
+		},
+		{
+			"id": "operations",
+			"name": "Operations & people",
+			"plugin": "topy-ai-operations",
+			"count": 5
+		},
+		{
+			"id": "leadership",
+			"name": "Leadership & decisions",
+			"plugin": "topy-ai-leadership",
+			"count": 4
+		}
+	],
+	"skills": [
+		{
+			"id": "topy-business-plan",
+			"name": "Business plans",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Write a new TOPY.AI business plan (after a credit check), follow it to the end, then read, edit, fix and export it.",
+			"mcp_tools": [
+				"projects_list",
+				"plan_options_get",
+				"plan_estimate",
+				"plan_generate",
+				"plan_status",
+				"plans_list",
+				"plan_get",
+				"plan_section_suggest",
+				"plan_update",
+				"plan_section_regenerate",
+				"plan_fix_markdown",
+				"plan_export",
+				"plan_rename",
+				"plan_delete",
+				"plan_restore",
+				"plan_job_retry",
+				"plan_job_cancel",
+				"dashboard_link"
+			],
+			"pairs_with": [
+				"topy-plan-revision",
+				"topy-investor-ready",
+				"topy-plan-templates",
+				"topy-projects"
+			],
+			"path": "plugins/topy-ai/skills/topy-business-plan/SKILL.md"
+		},
+		{
+			"id": "topy-connect",
+			"name": "Connect to TOPY.AI",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Connect an AI agent to TOPY.AI's AI CEO through the MCP server (OAuth, or the CLI / an API key without a browser) and pick the project to work on.",
+			"mcp_tools": [
+				"account_get",
+				"projects_list",
+				"dashboard_link"
+			],
+			"pairs_with": [
+				"topy-daily",
+				"topy-business-plan",
+				"topy-projects"
+			],
+			"path": "plugins/topy-ai/skills/topy-connect/SKILL.md"
+		},
+		{
+			"id": "topy-daily",
+			"name": "Daily CEO check-in",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "The founder's daily check-in on TOPY.AI — plans being written, changes agents made, risks and experiments that need a call — cleared one approved action at a time.",
+			"mcp_tools": [
+				"projects_list",
+				"plans_list",
+				"plan_status",
+				"agent_actions_list",
+				"risks_list",
+				"growth_experiments_list",
+				"decisions_list",
+				"credits_get"
+			],
+			"pairs_with": [
+				"topy-connect",
+				"topy-weekly-review",
+				"topy-business-plan",
+				"topy-risk-register",
+				"topy-growth-experiments"
+			],
+			"path": "plugins/topy-ai/skills/topy-daily/SKILL.md"
+		},
+		{
+			"id": "topy-decision-log",
+			"name": "Decision log",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Record a founder's decisions in TOPY with context, options, rationale, confidence and a review date, and later review them against what actually happened.",
+			"mcp_tools": [
+				"projects_list",
+				"account_get",
+				"decisions_list",
+				"decision_get",
+				"decision_create",
+				"decision_update",
+				"decision_delete"
+			],
+			"pairs_with": [
+				"topy-decision-memo",
+				"topy-weekly-review",
+				"topy-debiasing"
+			],
+			"path": "plugins/topy-ai/skills/topy-decision-log/SKILL.md"
+		},
+		{
+			"id": "topy-founder-journal",
+			"name": "Founder journal and project memory",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Keep the founder's dated journal and the AI CEO's durable project memory in TOPY, and put each note in the right place so the CEO remembers facts without cluttering them with feelings.",
+			"mcp_tools": [
+				"projects_list",
+				"account_get",
+				"journal_entries_list",
+				"journal_entry_get",
+				"journal_entry_create",
+				"journal_entry_update",
+				"journal_entry_delete",
+				"memories_list",
+				"memory_get",
+				"memory_create",
+				"memory_update",
+				"memory_delete"
+			],
+			"pairs_with": [
+				"topy-weekly-review",
+				"topy-decision-log",
+				"topy-scheduled-agent"
+			],
+			"path": "plugins/topy-ai/skills/topy-founder-journal/SKILL.md"
+		},
+		{
+			"id": "topy-growth-experiments",
+			"name": "Growth experiments",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Run growth experiments end to end in TOPY: a falsifiable hypothesis, one metric and target fixed before launch, one owner, an honest read-out and a ship, kill or iterate call.",
+			"mcp_tools": [
+				"projects_list",
+				"account_get",
+				"growth_experiments_list",
+				"growth_experiment_get",
+				"growth_experiment_create",
+				"growth_experiment_update",
+				"decision_create"
+			],
+			"pairs_with": [
+				"topy-decision-log",
+				"topy-gtm-plan",
+				"topy-pricing-decisions"
+			],
+			"path": "plugins/topy-ai/skills/topy-growth-experiments/SKILL.md"
+		},
+		{
+			"id": "topy-gtm-plan",
+			"name": "Go-to-market plan",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Build and keep the project's go-to-market plan in TOPY (positioning, channels, activation, retention, pricing, sales motion, funnel targets, launch) and hand plan-wide changes to topy-plan-revision.",
+			"mcp_tools": [
+				"projects_list",
+				"project_get",
+				"plans_list",
+				"plan_get",
+				"gtm_plans_list",
+				"gtm_plan_get",
+				"gtm_plan_create",
+				"gtm_plan_update",
+				"gtm_plan_delete",
+				"research_sources_list",
+				"growth_experiments_list"
+			],
+			"pairs_with": [
+				"topy-plan-revision",
+				"topy-growth-experiments",
+				"topy-pricing-decisions"
+			],
+			"path": "plugins/topy-ai/skills/topy-gtm-plan/SKILL.md"
+		},
+		{
+			"id": "topy-investor-ready",
+			"name": "Investor-ready check",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Review a TOPY.AI business plan the way a seed investor would and list the five fixes that matter most, each with its section — then fix the ones the founder picks.",
+			"mcp_tools": [
+				"plans_list",
+				"plan_get",
+				"plan_section_suggest",
+				"plan_update",
+				"research_sources_list"
+			],
+			"pairs_with": [
+				"topy-business-plan",
+				"topy-plan-revision",
+				"topy-pitch-deck",
+				"topy-fundraising-strategy"
+			],
+			"path": "plugins/topy-ai/skills/topy-investor-ready/SKILL.md"
+		},
+		{
+			"id": "topy-investor-relations",
+			"name": "Investor relations",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Keep a founder's investor pipeline and follow-ups in TOPY, and draft, approve and save the periodic investor update from the project's own records.",
+			"mcp_tools": [
+				"projects_list",
+				"investor_contacts_list",
+				"investor_contact_get",
+				"investor_contact_create",
+				"investor_contact_update",
+				"investor_contact_delete",
+				"investor_updates_list",
+				"investor_update_get",
+				"investor_update_create",
+				"investor_update_update",
+				"decisions_list",
+				"growth_experiments_list",
+				"journal_entries_list",
+				"risks_list"
+			],
+			"pairs_with": [
+				"topy-fundraising-strategy",
+				"topy-board-meetings",
+				"topy-decision-log"
+			],
+			"path": "plugins/topy-ai/skills/topy-investor-relations/SKILL.md"
+		},
+		{
+			"id": "topy-plan-revision",
+			"name": "Revise a plan for a change",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Carry a change — a funding amount, price, milestone, KPI, hire or team change — through every affected section of a TOPY.AI business plan, consistently, as a new version.",
+			"mcp_tools": [
+				"plans_list",
+				"plan_revise_analyze",
+				"plan_status",
+				"plan_revise_apply",
+				"plan_get"
+			],
+			"pairs_with": [
+				"topy-business-plan",
+				"topy-financial-model",
+				"topy-investor-ready"
+			],
+			"path": "plugins/topy-ai/skills/topy-plan-revision/SKILL.md"
+		},
+		{
+			"id": "topy-plan-templates",
+			"name": "Business plan templates",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Choose, copy, build and refine TOPY.AI business plan templates — official ones, the founder's own, AI-built from a requirement or a document — and set a project's defaults.",
+			"mcp_tools": [
+				"templates_list",
+				"plan_options_get",
+				"template_create",
+				"template_assistant",
+				"template_update",
+				"template_star",
+				"template_delete",
+				"template_restore",
+				"plan_defaults_set"
+			],
+			"pairs_with": [
+				"topy-business-plan"
+			],
+			"path": "plugins/topy-ai/skills/topy-plan-templates/SKILL.md"
+		},
+		{
+			"id": "topy-projects",
+			"name": "Projects and ideas",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Create a TOPY.AI project from an idea or an existing website, keep its details right, explore and brainstorm ideas, and manage the media library.",
+			"mcp_tools": [
+				"projects_list",
+				"project_get",
+				"project_create_from_idea",
+				"project_create_from_website",
+				"project_job_get",
+				"project_update",
+				"project_delete",
+				"project_restore",
+				"ideas_generate",
+				"idea_get",
+				"idea_brainstorm",
+				"idea_to_project",
+				"media_list",
+				"media_add_url",
+				"media_delete"
+			],
+			"pairs_with": [
+				"topy-connect",
+				"topy-business-plan",
+				"topy-business-model"
+			],
+			"path": "plugins/topy-ai/skills/topy-projects/SKILL.md"
+		},
+		{
+			"id": "topy-research-library",
+			"name": "Research library",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Keep the research sources behind a project's business plan in TOPY, matched to the claims they support, with clean citations and no invented sources.",
+			"mcp_tools": [
+				"projects_list",
+				"plans_list",
+				"plan_get",
+				"research_sources_list",
+				"research_source_get",
+				"research_source_create",
+				"research_source_update",
+				"research_source_delete"
+			],
+			"pairs_with": [
+				"topy-plan-revision",
+				"topy-investor-ready",
+				"topy-data-room"
+			],
+			"path": "plugins/topy-ai/skills/topy-research-library/SKILL.md"
+		},
+		{
+			"id": "topy-risk-register",
+			"name": "Risk register",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Keep the project's risk register in TOPY: score likelihood and impact, name an owner and a mitigation, review on a cadence, and close risks by status, never by deleting them.",
+			"mcp_tools": [
+				"projects_list",
+				"account_get",
+				"risks_list",
+				"risk_get",
+				"risk_create",
+				"risk_update",
+				"risk_delete"
+			],
+			"pairs_with": [
+				"topy-crisis-response",
+				"topy-decision-log",
+				"topy-daily"
+			],
+			"path": "plugins/topy-ai/skills/topy-risk-register/SKILL.md"
+		},
+		{
+			"id": "topy-scheduled-agent",
+			"name": "Scheduled AI CEO agent",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Set up an agent that runs on a schedule (a daily brief, a weekly journal) with its own TOPY.AI key and a standing permission, and keep it inside what the founder allowed.",
+			"mcp_tools": [
+				"standing_permissions_list",
+				"agent_actions_list",
+				"dashboard_link",
+				"account_get",
+				"decision_create",
+				"journal_entry_create",
+				"memory_create",
+				"research_source_create",
+				"risk_create",
+				"growth_experiment_create"
+			],
+			"pairs_with": [
+				"topy-connect",
+				"topy-daily",
+				"topy-weekly-review",
+				"topy-decision-log",
+				"topy-founder-journal"
+			],
+			"path": "plugins/topy-ai/skills/topy-scheduled-agent/SKILL.md"
+		},
+		{
+			"id": "topy-seis",
+			"name": "SEIS Advance Assurance",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "Draft the answers for a UK SEIS Advance Assurance application from a TOPY.AI business plan, choose the right qualifying route, and list the documents HMRC expects.",
+			"mcp_tools": [
+				"plans_list",
+				"plan_get",
+				"plan_seis_assurance",
+				"plan_section_suggest",
+				"plan_update"
+			],
+			"pairs_with": [
+				"topy-business-plan",
+				"topy-investor-ready",
+				"topy-fundraising-strategy",
+				"topy-cap-table"
+			],
+			"path": "plugins/topy-ai/skills/topy-seis/SKILL.md"
+		},
+		{
+			"id": "topy-weekly-review",
+			"name": "Weekly CEO review",
+			"category": "core",
+			"category_name": "TOPY core (MCP)",
+			"plugin": "topy-ai",
+			"tier": "core",
+			"summary": "A weekly CEO review on TOPY.AI — what was decided, what moved, which risks grew, which experiments need a call — ending in next week's three priorities, recorded only with the founder's yes.",
+			"mcp_tools": [
+				"projects_list",
+				"decisions_list",
+				"risks_list",
+				"growth_experiments_list",
+				"journal_entries_list",
+				"gtm_plans_list",
+				"plans_list",
+				"decision_create",
+				"journal_entry_create"
+			],
+			"pairs_with": [
+				"topy-daily",
+				"topy-decision-log",
+				"topy-risk-register",
+				"topy-growth-experiments",
+				"topy-founder-journal"
+			],
+			"path": "plugins/topy-ai/skills/topy-weekly-review/SKILL.md"
+		},
+		{
+			"id": "topy-business-model",
+			"name": "Business model",
+			"category": "strategy",
+			"category_name": "Strategy & direction",
+			"plugin": "topy-ai-strategy",
+			"tier": "connected",
+			"summary": "Maps how a startup creates, delivers and captures value on a business model canvas, checks that the pieces add up, and turns the riskiest assumptions into cheap, pre-registered tests.",
+			"mcp_tools": [
+				"projects_list",
+				"project_get",
+				"plans_list",
+				"plan_get",
+				"growth_experiments_list",
+				"growth_experiment_create"
+			],
+			"pairs_with": [
+				"topy-growth-experiments",
+				"topy-unit-economics",
+				"topy-pricing-decisions"
+			],
+			"path": "plugins/topy-ai-strategy/skills/topy-business-model/SKILL.md"
+		},
+		{
+			"id": "topy-competitive-strategy",
+			"name": "Competitive strategy",
+			"category": "strategy",
+			"category_name": "Strategy & direction",
+			"plugin": "topy-ai-strategy",
+			"tier": "connected",
+			"summary": "Reads competitor moves calmly, war-games the likely responses to a startup's own move, and identifies which defensible advantage the company can realistically build.",
+			"mcp_tools": [
+				"projects_list",
+				"project_get",
+				"research_sources_list",
+				"research_source_get",
+				"research_source_create"
+			],
+			"pairs_with": [
+				"topy-research-library",
+				"topy-decision-memo",
+				"topy-scenario-planning"
+			],
+			"path": "plugins/topy-ai-strategy/skills/topy-competitive-strategy/SKILL.md"
+		},
+		{
+			"id": "topy-decision-memo",
+			"name": "Decision memo",
+			"category": "strategy",
+			"category_name": "Strategy & direction",
+			"plugin": "topy-ai-strategy",
+			"tier": "connected",
+			"summary": "Turns a hard founder call into a one-page decision memo with real options (including doing nothing), weighed trade-offs, a recommendation and the signals that would reverse it.",
+			"mcp_tools": [
+				"projects_list",
+				"project_get",
+				"decisions_list",
+				"decision_create"
+			],
+			"pairs_with": [
+				"topy-decision-log",
+				"topy-debiasing",
+				"topy-scenario-planning"
+			],
+			"path": "plugins/topy-ai-strategy/skills/topy-decision-memo/SKILL.md"
+		},
+		{
+			"id": "topy-market-entry",
+			"name": "Market entry",
+			"category": "strategy",
+			"category_name": "Strategy & direction",
+			"plugin": "topy-ai-strategy",
+			"tier": "connected",
+			"summary": "Decides whether, where and how a startup should enter a new geography or customer segment: readiness, bottom-up sizing, entry mode, a beachhead, gated phases and kill criteria set in advance.",
+			"mcp_tools": [
+				"projects_list",
+				"project_get",
+				"research_sources_list",
+				"decisions_list",
+				"decision_create"
+			],
+			"pairs_with": [
+				"topy-competitive-strategy",
+				"topy-decision-memo",
+				"topy-gtm-plan"
+			],
+			"path": "plugins/topy-ai-strategy/skills/topy-market-entry/SKILL.md"
+		},
+		{
+			"id": "topy-okrs",
+			"name": "OKRs",
+			"category": "strategy",
+			"category_name": "Strategy & direction",
+			"plugin": "topy-ai-strategy",
+			"tier": "connected",
+			"summary": "Turns a startup's strategy into a small set of quarterly objectives and measurable key results, then scores them honestly at the end of the quarter and carries the lessons forward.",
+			"mcp_tools": [
+				"projects_list",
+				"project_get",
+				"plans_list",
+				"plan_get",
+				"memories_list",
+				"memory_create",
+				"memory_update"
+			],
+			"pairs_with": [
+				"topy-prioritization",
+				"topy-kpi-dashboard",
+				"topy-operating-cadence"
+			],
+			"path": "plugins/topy-ai-strategy/skills/topy-okrs/SKILL.md"
+		},
+		{
+			"id": "topy-prioritization",
+			"name": "Prioritization",
+			"category": "strategy",
+			"category_name": "Strategy & direction",
+			"plugin": "topy-ai-strategy",
+			"tier": "connected",
+			"summary": "Ranks a startup's competing initiatives against one goal and the team's real capacity using RICE, ICE or cost of delay, draws the cut line and writes down what the company will not do.",
+			"mcp_tools": [
+				"projects_list",
+				"project_get",
+				"decisions_list",
+				"gtm_plans_list",
+				"gtm_plan_get",
+				"decision_create"
+			],
+			"pairs_with": [
+				"topy-okrs",
+				"topy-decision-memo",
+				"topy-weekly-review"
+			],
+			"path": "plugins/topy-ai-strategy/skills/topy-prioritization/SKILL.md"
+		},
+		{
+			"id": "topy-scenario-planning",
+			"name": "Scenario planning",
+			"category": "strategy",
+			"category_name": "Strategy & direction",
+			"plugin": "topy-ai-strategy",
+			"tier": "standalone",
+			"summary": "Builds a small set of plausible futures around the uncertainties that matter most, tests the company's plans against each, and sets early-warning signals with responses agreed in advance.",
+			"mcp_tools": [],
+			"pairs_with": [
+				"topy-decision-memo",
+				"topy-risk-register",
+				"topy-runway"
+			],
+			"path": "plugins/topy-ai-strategy/skills/topy-scenario-planning/SKILL.md"
+		},
+		{
+			"id": "topy-cap-table",
+			"name": "Cap table and dilution",
+			"category": "fundraising",
+			"category_name": "Fundraising",
+			"plugin": "topy-ai-fundraising",
+			"tier": "standalone",
+			"summary": "Build a fully diluted cap table and model dilution across rounds: SAFE/ASA and convertible conversion, option pool top-ups and the founders' ownership after each step. Not legal or tax advice.",
+			"mcp_tools": [],
+			"pairs_with": [
+				"topy-term-sheet",
+				"topy-fundraising-strategy",
+				"topy-hiring-plan",
+				"topy-seis"
+			],
+			"path": "plugins/topy-ai-fundraising/skills/topy-cap-table/SKILL.md"
+		},
+		{
+			"id": "topy-data-room",
+			"name": "Data room",
+			"category": "fundraising",
+			"category_name": "Fundraising",
+			"plugin": "topy-ai-fundraising",
+			"tier": "connected",
+			"summary": "Build the due-diligence data room for a raise: a stage-appropriate checklist, a numbered index, the gaps and red flags to fix before investors find them, and who sees what when.",
+			"mcp_tools": [
+				"plans_list",
+				"plan_export",
+				"research_sources_list"
+			],
+			"pairs_with": [
+				"topy-term-sheet",
+				"topy-cap-table",
+				"topy-research-library",
+				"topy-pitch-deck",
+				"topy-fundraising-strategy"
+			],
+			"path": "plugins/topy-ai-fundraising/skills/topy-data-room/SKILL.md"
+		},
+		{
+			"id": "topy-fundraising-strategy",
+			"name": "Fundraising strategy",
+			"category": "fundraising",
+			"category_name": "Fundraising",
+			"plugin": "topy-ai-fundraising",
+			"tier": "connected",
+			"summary": "Decide whether to raise, how much, on what instrument, from which kinds of investor and when, tied to the milestones the money must buy, with a fallback if the round is late.",
+			"mcp_tools": [
+				"plans_list",
+				"plan_get",
+				"investor_contacts_list"
+			],
+			"pairs_with": [
+				"topy-runway",
+				"topy-pitch-deck",
+				"topy-cap-table",
+				"topy-investor-relations",
+				"topy-seis",
+				"topy-plan-revision"
+			],
+			"path": "plugins/topy-ai-fundraising/skills/topy-fundraising-strategy/SKILL.md"
+		},
+		{
+			"id": "topy-pitch-deck",
+			"name": "Pitch deck",
+			"category": "fundraising",
+			"category_name": "Fundraising",
+			"plugin": "topy-ai-fundraising",
+			"tier": "connected",
+			"summary": "Build the 10-12 slide investor story from the business plan: one claim per slide, the evidence behind it, and numbers that match the plan exactly.",
+			"mcp_tools": [
+				"plans_list",
+				"plan_get"
+			],
+			"pairs_with": [
+				"topy-fundraising-strategy",
+				"topy-investor-ready",
+				"topy-business-plan",
+				"topy-plan-revision"
+			],
+			"path": "plugins/topy-ai-fundraising/skills/topy-pitch-deck/SKILL.md"
+		},
+		{
+			"id": "topy-term-sheet",
+			"name": "Term sheet review",
+			"category": "fundraising",
+			"category_name": "Fundraising",
+			"plugin": "topy-ai-fundraising",
+			"tier": "standalone",
+			"summary": "Read a startup term sheet in plain language: the economic and control terms, what they cost at real exit values, and the few points worth pushing on. Not legal advice.",
+			"mcp_tools": [],
+			"pairs_with": [
+				"topy-cap-table",
+				"topy-fundraising-strategy",
+				"topy-data-room",
+				"topy-seis"
+			],
+			"path": "plugins/topy-ai-fundraising/skills/topy-term-sheet/SKILL.md"
+		},
+		{
+			"id": "topy-financial-model",
+			"name": "Financial model",
+			"category": "finance",
+			"category_name": "Finance",
+			"plugin": "topy-ai-finance",
+			"tier": "connected",
+			"summary": "Build a driver-based, three-statement-lite startup model (revenue build, headcount, costs, P&L, cash flow, simple balance sheet) with an assumptions sheet, scenarios and checks.",
+			"mcp_tools": [
+				"plans_list",
+				"plan_get"
+			],
+			"pairs_with": [
+				"topy-runway",
+				"topy-unit-economics",
+				"topy-plan-revision",
+				"topy-hiring-plan",
+				"topy-fundraising-strategy"
+			],
+			"path": "plugins/topy-ai-finance/skills/topy-financial-model/SKILL.md"
+		},
+		{
+			"id": "topy-pricing-decisions",
+			"name": "Pricing decisions",
+			"category": "finance",
+			"category_name": "Finance",
+			"plugin": "topy-ai-finance",
+			"tier": "connected",
+			"summary": "Make the CEO-level pricing call: what to charge for, how to package it, whether to raise or cut prices, the break-even maths for each option, and a test plan saved as a decision and an experiment.",
+			"mcp_tools": [
+				"decision_create",
+				"growth_experiment_create"
+			],
+			"pairs_with": [
+				"topy-unit-economics",
+				"topy-decision-memo",
+				"topy-growth-experiments",
+				"topy-decision-log",
+				"topy-plan-revision"
+			],
+			"path": "plugins/topy-ai-finance/skills/topy-pricing-decisions/SKILL.md"
+		},
+		{
+			"id": "topy-runway",
+			"name": "Runway and burn",
+			"category": "finance",
+			"category_name": "Finance",
+			"plugin": "topy-ai-finance",
+			"tier": "standalone",
+			"summary": "Measure burn and runway properly, check whether the company is default alive, and build a tiered cut plan with triggers so the founder decides early instead of in a panic.",
+			"mcp_tools": [],
+			"pairs_with": [
+				"topy-financial-model",
+				"topy-fundraising-strategy",
+				"topy-unit-economics",
+				"topy-hiring-plan",
+				"topy-decision-memo"
+			],
+			"path": "plugins/topy-ai-finance/skills/topy-runway/SKILL.md"
+		},
+		{
+			"id": "topy-unit-economics",
+			"name": "Unit economics",
+			"category": "finance",
+			"category_name": "Finance",
+			"plugin": "topy-ai-finance",
+			"tier": "standalone",
+			"summary": "Work out what one customer is worth and costs to win: CAC, contribution margin, LTV, payback, net revenue retention and cohorts, then name the one thing to fix first.",
+			"mcp_tools": [],
+			"pairs_with": [
+				"topy-pricing-decisions",
+				"topy-financial-model",
+				"topy-runway",
+				"topy-growth-experiments"
+			],
+			"path": "plugins/topy-ai-finance/skills/topy-unit-economics/SKILL.md"
+		},
+		{
+			"id": "topy-board-meetings",
+			"name": "Board meetings",
+			"category": "operations",
+			"category_name": "Operations & people",
+			"plugin": "topy-ai-operations",
+			"tier": "connected",
+			"summary": "Prepare and run a startup board meeting: the board pack, a timed agenda, the asks and decisions, and minutes with actions, built from TOPY's decisions, risks and investor updates.",
+			"mcp_tools": [
+				"decisions_list",
+				"risks_list",
+				"investor_updates_list",
+				"decision_create"
+			],
+			"pairs_with": [
+				"topy-investor-relations",
+				"topy-decision-log",
+				"topy-risk-register",
+				"topy-kpi-dashboard",
+				"topy-stakeholder-alignment"
+			],
+			"path": "plugins/topy-ai-operations/skills/topy-board-meetings/SKILL.md"
+		},
+		{
+			"id": "topy-hiring-plan",
+			"name": "Hiring plan",
+			"category": "operations",
+			"category_name": "Operations & people",
+			"plugin": "topy-ai-operations",
+			"tier": "connected",
+			"summary": "Decide which roles to hire, in what order and when, what they cost against runway, and what each hire must achieve, with a scorecard per role.",
+			"mcp_tools": [
+				"plans_list",
+				"plan_get",
+				"decision_create"
+			],
+			"pairs_with": [
+				"topy-org-design",
+				"topy-runway",
+				"topy-financial-model",
+				"topy-plan-revision",
+				"topy-decision-log"
+			],
+			"path": "plugins/topy-ai-operations/skills/topy-hiring-plan/SKILL.md"
+		},
+		{
+			"id": "topy-kpi-dashboard",
+			"name": "KPI dashboard",
+			"category": "operations",
+			"category_name": "Operations & people",
+			"plugin": "topy-ai-operations",
+			"tier": "standalone",
+			"summary": "Choose the north-star metric, the input metrics that drive it and the guardrails, and turn them into a weekly scorecard with owners, targets and red/amber/green rules.",
+			"mcp_tools": [],
+			"pairs_with": [
+				"topy-operating-cadence",
+				"topy-okrs",
+				"topy-unit-economics",
+				"topy-board-meetings",
+				"topy-growth-experiments"
+			],
+			"path": "plugins/topy-ai-operations/skills/topy-kpi-dashboard/SKILL.md"
+		},
+		{
+			"id": "topy-operating-cadence",
+			"name": "Operating cadence",
+			"category": "operations",
+			"category_name": "Operations & people",
+			"plugin": "topy-ai-operations",
+			"tier": "connected",
+			"summary": "Set the company's rhythm of weekly, monthly, quarterly and annual meetings, each with an owner, inputs, a timed agenda and the decisions it exists to make.",
+			"mcp_tools": [
+				"memories_list",
+				"memory_create"
+			],
+			"pairs_with": [
+				"topy-weekly-review",
+				"topy-daily",
+				"topy-kpi-dashboard",
+				"topy-okrs",
+				"topy-board-meetings"
+			],
+			"path": "plugins/topy-ai-operations/skills/topy-operating-cadence/SKILL.md"
+		},
+		{
+			"id": "topy-org-design",
+			"name": "Org design",
+			"category": "operations",
+			"category_name": "Operations & people",
+			"plugin": "topy-ai-operations",
+			"tier": "standalone",
+			"summary": "Design a startup's structure as it grows: who owns which outcomes (DRI and RACI), reporting lines, spans of control and decision rights, plus how to roll the change out.",
+			"mcp_tools": [],
+			"pairs_with": [
+				"topy-hiring-plan",
+				"topy-operating-cadence",
+				"topy-stakeholder-alignment",
+				"topy-kpi-dashboard"
+			],
+			"path": "plugins/topy-ai-operations/skills/topy-org-design/SKILL.md"
+		},
+		{
+			"id": "topy-ceo-advisor",
+			"name": "CEO advisor",
+			"category": "leadership",
+			"category_name": "Leadership & decisions",
+			"plugin": "topy-ai-leadership",
+			"tier": "standalone",
+			"summary": "A general CEO decision advisor for cross-functional, ambiguous or board-level calls: frames the real question, compares options, checks bias, runs the numbers and ends in a recommendation, routing to narrower TOPY skills when one fits.",
+			"mcp_tools": [],
+			"pairs_with": [
+				"topy-decision-memo",
+				"topy-debiasing",
+				"topy-crisis-response",
+				"topy-stakeholder-alignment",
+				"topy-prioritization",
+				"topy-decision-log"
+			],
+			"path": "plugins/topy-ai-leadership/skills/topy-ceo-advisor/SKILL.md"
+		},
+		{
+			"id": "topy-crisis-response",
+			"name": "Crisis response",
+			"category": "leadership",
+			"category_name": "Leadership & decisions",
+			"plugin": "topy-ai-leadership",
+			"tier": "connected",
+			"summary": "Lead a company through a live crisis: classify severity, contain in the first hours, sequence who hears what and when, recover, and run a blameless review, recording the risk and decisions in TOPY.",
+			"mcp_tools": [
+				"risks_list",
+				"risk_create",
+				"decision_create"
+			],
+			"pairs_with": [
+				"topy-stakeholder-alignment",
+				"topy-risk-register",
+				"topy-decision-log",
+				"topy-runway",
+				"topy-ceo-advisor"
+			],
+			"path": "plugins/topy-ai-leadership/skills/topy-crisis-response/SKILL.md"
+		},
+		{
+			"id": "topy-debiasing",
+			"name": "Debiasing a big decision",
+			"category": "leadership",
+			"category_name": "Leadership & decisions",
+			"plugin": "topy-ai-leadership",
+			"tier": "standalone",
+			"summary": "Stress-test a big call before committing: independent estimates, base rates, a pre-mortem, a red team, a bias scan and pre-set kill criteria, ending in an adjusted confidence.",
+			"mcp_tools": [],
+			"pairs_with": [
+				"topy-ceo-advisor",
+				"topy-decision-memo",
+				"topy-scenario-planning",
+				"topy-decision-log",
+				"topy-stakeholder-alignment"
+			],
+			"path": "plugins/topy-ai-leadership/skills/topy-debiasing/SKILL.md"
+		},
+		{
+			"id": "topy-stakeholder-alignment",
+			"name": "Stakeholder alignment",
+			"category": "leadership",
+			"category_name": "Leadership & decisions",
+			"plugin": "topy-ai-leadership",
+			"tier": "standalone",
+			"summary": "Bring the people who matter along on a decision or change: map their power, interests and likely objections, choose the order to talk to them, and prepare each conversation.",
+			"mcp_tools": [],
+			"pairs_with": [
+				"topy-board-meetings",
+				"topy-crisis-response",
+				"topy-org-design",
+				"topy-decision-memo",
+				"topy-ceo-advisor"
+			],
+			"path": "plugins/topy-ai-leadership/skills/topy-stakeholder-alignment/SKILL.md"
+		}
+	]
+}

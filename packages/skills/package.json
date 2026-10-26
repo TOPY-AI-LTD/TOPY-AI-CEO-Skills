@@ -1,0 +1,56 @@
+{
+	"name": "@topy-ai/skills",
+	"version": "0.7.0",
+	"description": "Install the TOPY.AI AI CEO skills (business plans, strategy, fundraising, finance, operations, leadership) into Claude Code, Codex, Pi, Cursor, Gemini CLI, OpenCode, Copilot and other coding agents, for one project or for your user. Also a Pi package.",
+	"type": "module",
+	"license": "MIT",
+	"homepage": "https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills.git",
+		"directory": "packages/skills"
+	},
+	"bugs": "https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/issues",
+	"keywords": [
+		"topy.ai",
+		"ai-ceo",
+		"founders",
+		"business-plan",
+		"fundraising",
+		"skills",
+		"agent-skills",
+		"claude-code",
+		"codex",
+		"pi-package",
+		"pi",
+		"cursor",
+		"gemini-cli",
+		"opencode",
+		"mcp"
+	],
+	"bin": {
+		"topy-skills": "bin/topy-skills.mjs"
+	},
+	"pi": {
+		"skills": [
+			"./skills"
+		]
+	},
+	"files": [
+		"bin",
+		"skills",
+		"catalog.json",
+		"README.md",
+		"LICENSE"
+	],
+	"engines": {
+		"node": ">=18"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"prepack": "node scripts/bundle.mjs",
+		"test": "node scripts/bundle.mjs && node --test scripts/cli.test.mjs"
+	}
+}

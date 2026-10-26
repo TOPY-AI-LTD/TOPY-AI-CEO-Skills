@@ -1,0 +1,38 @@
+{
+	"$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+	"name": "topy-ai",
+	"version": "0.7.0",
+	"description": "TOPY core: connects the TOPY MCP server and runs the AI CEO day to day — Business plans, Connect to TOPY.AI, Daily CEO check-in, Decision log, Founder journal and project memory, Growth experiments….",
+	"author": {
+		"name": "TOPY AI LTD",
+		"email": "startup@topy.ai",
+		"url": "https://topy.ai"
+	},
+	"homepage": "https://topy.ai/developers",
+	"repository": "https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills",
+	"license": "MIT",
+	"keywords": [
+		"topy.ai",
+		"ai-ceo",
+		"founders",
+		"core"
+	],
+	"extensions": {
+		"com.openai": {
+			"interface": {
+				"displayName": "TOPY.AI",
+				"shortDescription": "TOPY core: connects the TOPY MCP server and runs the AI CEO day to day — Business plans, Connect to TOPY.AI, Daily CEO c",
+				"longDescription": "TOPY core: connects the TOPY MCP server and runs the AI CEO day to day — Business plans, Connect to TOPY.AI, Daily CEO check-in, Decision log, Founder journal and project memory, Growth experiments….",
+				"capabilities": [
+					"Read",
+					"Write"
+				],
+				"category": "Productivity",
+				"brandColor": "#FF1212",
+				"privacyPolicyURL": "https://topy.ai/privacy",
+				"websiteURL": "https://topy.ai",
+				"developerName": "TOPY AI LTD"
+			}
+		}
+	}
+}

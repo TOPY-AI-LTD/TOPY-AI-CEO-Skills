@@ -1,0 +1,19 @@
+{
+	"name": "topy-ai-ceo-skills",
+	"private": true,
+	"version": "0.7.0",
+	"description": "AI CEO skills for founders, built for TOPY.AI. Core skills run on the TOPY MCP server (https://topy.ai/mcp); connected skills use it when available; standalone skills are CEO methods that work anywhere.",
+	"license": "MIT",
+	"repository": "https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills",
+	"keywords": [
+		"pi-package",
+		"agent-skills",
+		"ai-ceo",
+		"topy.ai"
+	],
+	"pi": {
+		"skills": [
+			"./plugins/*/skills"
+		]
+	}
+}

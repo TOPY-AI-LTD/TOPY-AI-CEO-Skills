@@ -1,0 +1,27 @@
+{
+	"name": "topy-ai-all",
+	"version": "0.7.0",
+	"description": "All 42 TOPY AI CEO skills in one install: TOPY core (MCP), Strategy & direction, Fundraising, Finance, Operations & people, Leadership & decisions.",
+	"author": {
+		"name": "TOPY AI LTD",
+		"email": "startup@topy.ai",
+		"url": "https://topy.ai"
+	},
+	"homepage": "https://topy.ai/developers",
+	"repository": "https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills",
+	"license": "MIT",
+	"keywords": [
+		"topy.ai",
+		"ai-ceo",
+		"bundle"
+	],
+	"privacyPolicyUrl": "https://topy.ai/privacy",
+	"dependencies": [
+		"topy-ai",
+		"topy-ai-strategy",
+		"topy-ai-fundraising",
+		"topy-ai-finance",
+		"topy-ai-operations",
+		"topy-ai-leadership"
+	]
+}

@@ -1,0 +1,80 @@
+{
+	"name": "topy-ai",
+	"interface": {
+		"displayName": "TOPY.AI AI CEO skills"
+	},
+	"plugins": [
+		{
+			"name": "topy-ai",
+			"source": {
+				"source": "local",
+				"path": "./plugins/topy-ai"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "ON_INSTALL"
+			},
+			"category": "Productivity"
+		},
+		{
+			"name": "topy-ai-strategy",
+			"source": {
+				"source": "local",
+				"path": "./plugins/topy-ai-strategy"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "NONE"
+			},
+			"category": "Productivity"
+		},
+		{
+			"name": "topy-ai-fundraising",
+			"source": {
+				"source": "local",
+				"path": "./plugins/topy-ai-fundraising"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "NONE"
+			},
+			"category": "Productivity"
+		},
+		{
+			"name": "topy-ai-finance",
+			"source": {
+				"source": "local",
+				"path": "./plugins/topy-ai-finance"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "NONE"
+			},
+			"category": "Productivity"
+		},
+		{
+			"name": "topy-ai-operations",
+			"source": {
+				"source": "local",
+				"path": "./plugins/topy-ai-operations"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "NONE"
+			},
+			"category": "Productivity"
+		},
+		{
+			"name": "topy-ai-leadership",
+			"source": {
+				"source": "local",
+				"path": "./plugins/topy-ai-leadership"
+			},
+			"policy": {
+				"installation": "AVAILABLE",
+				"authentication": "NONE"
+			},
+			"category": "Productivity"
+		}
+	]
+}

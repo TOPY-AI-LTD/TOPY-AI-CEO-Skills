@@ -1,8 +1,0 @@
-interface:
-  display_name: "TOPY Projects"
-  short_description: "Create and update TOPY projects; generate and brainstorm ideas"
-  brand_color: "#ff1212"
-  default_prompt: "Use $topy-projects to create a TOPY project from my website."
-
-policy:
-  allow_implicit_invocation: true

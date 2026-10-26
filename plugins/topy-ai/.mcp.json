@@ -1,0 +1,8 @@
+{
+	"mcpServers": {
+		"topy": {
+			"type": "http",
+			"url": "https://topy.ai/mcp"
+		}
+	}
+}

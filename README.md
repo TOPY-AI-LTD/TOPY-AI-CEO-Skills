@@ -2,365 +2,220 @@
   <p>
     <img src="https://www.topy.ai/long_logo.svg" alt="TOPY AI CEO" width="420" />
   </p>
-  <h1>
-    <span style="color:#ff1212;">TOPY AI CEO Skills</span>
-  </h1>
-  <p style="font-weight: 700; color: #ff1212;">
-    A public skill catalog for CEO-level decision support, strategy, prioritization, crisis response, stakeholder management, competitive analysis, debiasing, and quantitative trade-offs.
+  <h1>TOPY AI CEO Skills</h1>
+  <p><strong>42 skills that make your coding agent a founder's AI CEO: business plans and revisions, strategy, fundraising, finance, operations and leadership, on top of the TOPY.AI MCP server.</strong></p>
+  <p>
+    <a href="https://www.npmjs.com/package/@topy-ai/skills"><img alt="npm" src="https://img.shields.io/npm/v/@topy-ai/skills?style=for-the-badge&color=ff1212" /></a>
+    <a href="https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-111827?style=for-the-badge" /></a>
+    <a href="https://topy.ai/developers"><img alt="MCP" src="https://img.shields.io/badge/MCP-topy.ai%2Fmcp-0f172a?style=for-the-badge" /></a>
   </p>
   <p>
-    <a href="https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills" aria-label="GitHub Repository">
-      <img alt="GitHub Repo" src="https://img.shields.io/badge/GitHub-TOPY--AI--CEO--Skills-111827?style=for-the-badge&logo=github&logoColor=white" />
-    </a>
-    <a href="https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/LICENSE" aria-label="MIT License">
-      <img alt="MIT License" src="https://img.shields.io/badge/License-MIT-ff1212?style=for-the-badge" />
-    </a>
-    <a href="https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/actions" aria-label="GitHub Actions">
-      <img alt="Build Status" src="https://img.shields.io/badge/Validation-passing-16a34a?style=for-the-badge" />
-    </a>
-    <a href="https://www.npmjs.com/search?q=skills" aria-label="npx skills">
-      <img alt="npx Skills" src="https://img.shields.io/badge/npx-skills-0f172a?style=for-the-badge" />
-    </a>
-  </p>
-  <p>
-    <a href="#one-line">One Line</a> ·
-    <a href="#fit-check">Fit Check</a> ·
-    <a href="#why-this-exists">Why This Exists</a> ·
-    <a href="#core-capabilities">Core Capabilities</a> ·
-    <a href="#ceo-daily-loop">CEO Daily Loop</a> ·
     <a href="#install">Install</a> ·
-    <a href="#auth-and-api">Auth and API</a> ·
-    <a href="#product-skill-workflow">Product Skill Workflow</a> ·
-    <a href="#examples">Examples</a> ·
-    <a href="#repository-structure">Structure</a>
+    <a href="#connect-topyai">Connect TOPY.AI</a> ·
+    <a href="#how-the-skills-fit-together">How they fit</a> ·
+    <a href="#packages">Packages</a> ·
+    <a href="#repository-structure">Structure</a> ·
+    <a href="#skills">Skills</a>
   </p>
 </div>
 
 ---
 
-## One Line
+[TOPY.AI](https://topy.ai) writes and maintains founders' business plans and keeps their CEO records:
+decisions, risks, growth experiments, investors, GTM plans, research and the founder journal. These
+skills teach Claude Code, Codex, Cursor, Gemini CLI, Pi and other agents to run that work the way a
+good CEO would.
 
-**AI can give advice quickly. TOPY AI CEO Skills are designed to decompose trade-offs, expose hidden assumptions, predict competitive reactions, and keep high-stakes decisions grounded in actual constraints.**
+- **Core** (17, `topy-ai` plugin): connect, the daily brief and weekly review, business plans,
+  revisions and templates, investor-ready checks, SEIS Advance Assurance, and every CEO record. They
+  use the TOPY.AI MCP server.
+- **Strategy, fundraising, finance, operations, leadership** (25): decision memos, OKRs, business
+  models, pitch decks, term sheets, cap tables, financial models, unit economics, runway, hiring,
+  board meetings, crisis response, debiasing and more. Most work without a TOPY account and offer to
+  save the outcome to TOPY when it is connected.
 
----
-
-## At a Glance
-
-| Field | Value |
-|---|---|
-| Repository | `TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
-| License | `MIT` |
-| Version | `v0.6.0` |
-| Primary install | `npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
-
----
-
-## Fit Check
-
-If you regularly face decisions like these, this skill set is a good fit:
-
-| Scenario | Typical Questions |
-|---|---|
-| Strategic decisions | Enter a new market, build or buy, continue or stop? |
-| Resource allocation | Which initiatives deserve scarce time, budget, and attention? |
-| Crisis response | What do we do in the next 2 hours, 24 hours, and 2 weeks? |
-| Stakeholder management | How do we align board, investors, leadership, and partners? |
-| Competitive moves | If we launch, cut price, or expand, how will others respond? |
-| Uncertainty | What evidence would change the answer, and how confident are we? |
-
----
-
-## Why This Exists
-
-Generic AI advice often looks polished but stops before the hard part:
-
-- it names a framework but does not choose the right one
-- it recommends action without showing the trade-off
-- it overstates certainty when the evidence is weak
-- it ignores who can block the decision
-- it does not model competitor response
-- it does not separate reversible tests from irreversible bets
-
-TOPY AI CEO Core is the opposite: it forces the reasoning into a structured memo, then points to the smallest useful playbook for the task.
-
----
-
-## What Makes It Different
-
-### 1. Decision classification
-
-It starts by naming the decision type:
-
-- Type 1: irreversible or costly-to-reverse
-- Type 2: reversible experiment
-- Crisis: time-critical response
-- Strategic bet: long-horizon uncertainty
-- Operating design: org, process, OKR, KPI, or capacity question
-- Capital decision: runway, budget, or investment choice
-- Stakeholder decision: board, investor, employee, or partner alignment
-- Competitive move: pricing, launch, position, or market entry
-
-### 2. Trade-off discipline
-
-It does not stop at "what should we do?"
-It also shows:
-
-- what we are giving up
-- what happens if we do nothing
-- what evidence would change the answer
-- what makes the move reversible or irreversible
-
-### 3. Bias and uncertainty checks
-
-The skill explicitly calls out:
-
-- anchoring
-- confirmation bias
-- sunk cost
-- availability bias
-- overconfidence
-- status quo bias
-- planning fallacy
-- framing effects
-
-### 4. Competitive and stakeholder realism
-
-Good decisions fail when the world reacts.
-This skill asks:
-
-- who supports the move
-- who resists it
-- who needs to hear it first
-- how competitors are likely to respond
-- what the second round of the game looks like
-
-### 5. Quantitative support
-
-When the decision needs a calculation, the package includes small helper utilities for:
-
-- weighted decision matrices
-- ICE scoring
-- expected value
-- Monte Carlo simulation
-- NPV and IRR
-- Bayesian updates
-
----
-
-## Core Capabilities
-
-### Structured decision memo
-
-The default output shape is a short memo with:
-
-1. the real question
-2. context and constraints
-3. stakeholders
-4. options and trade-offs
-5. recommendation
-6. risks to monitor
-7. next steps
-
-### Strategy and prioritization
-
-Use this when the problem is choosing among competing paths with limited resources.
-
-### Operating model and capital planning
-
-Use this when the decision is about how the company runs, how metrics work, or how money should be raised or deployed.
-
-### Crisis and stakeholder handling
-
-Use this when timing matters and the sequence of communication is part of the solution.
-
-### Competitive and market moves
-
-Use this when the right answer depends on how competitors, customers, or the market are likely to react.
-
-### Debiasing and uncertainty
-
-Use this when confidence is too high, the evidence is incomplete, or the decision has hidden assumptions.
-
-### Quantitative tools
-
-Use this when a structured calculation is better than a narrative answer.
-
----
-
-## CEO Daily Loop
-
-The real value of the TOPY skill set comes from using the reasoning core together with the product workflow skills around it. A CEO can move through the day like this:
-
-| Moment | Skill(s) | What you do |
-|---|---|---|
-| Morning review | `topy-ceo-workspace` | Weekly or daily review of decisions, risks and experiments; the three priorities to work on |
-| New opportunity intake | `topy-projects` | Turn a website or a rough idea into a TOPY project; brainstorm ideas |
-| Business plan creation | `topy-business-plan` | Write the plan after a credit check, follow it, summarise its numbers, export it |
-| Plan critique and next-step selection | `topy-ai-ceo-core`, `topy-fundraising` | Find weak points, test GTM and competitor response, review it like an investor |
-| The company changes | `topy-plan-revision` | Carry a new figure, milestone, KPI or hire through every affected section as a new version |
-| Fundraising | `topy-fundraising` | SEIS Advance Assurance answers, investor pipeline, investor updates |
-| Decisions and records | `topy-ceo-workspace` | Record the decisions, risks, research and experiments that came out of the review |
-
-### How the skills fit together
-
-- **`topy-ai-ceo`** is the entry point: how to reach TOPY, the shared rules, and which skill fits.
-- **`topy-projects`** turns an idea or a website into a TOPY project and explores ideas.
-- **`topy-business-plan`** writes the plan (after a credit check), edits and fixes it, exports it and manages templates.
-- **`topy-plan-revision`** carries a change — funding, price, milestone, KPI, team — through every affected section as a new version.
-- **`topy-fundraising`** reviews the plan like an investor, drafts SEIS Advance Assurance answers and keeps the investor pipeline and updates.
-- **`topy-ceo-workspace`** keeps decisions, risks, the journal, GTM plans, growth experiments and research, and runs the weekly CEO review.
-- **`topy-ai-ceo-core`** thinks like the CEO without touching your account: trade-offs, priorities, crises, competition.
-
-### Typical CEO flow
-
-1. A founder shares a website or an idea — `topy-projects` makes it a project.
-2. `topy-business-plan` writes the first plan and summarises its numbers.
-3. `topy-fundraising` reviews it like an investor; `topy-ai-ceo-core` pressure-tests the strategy.
-4. The company changes — `topy-plan-revision` updates every affected section as a new version.
-5. `topy-ceo-workspace` records the decisions behind it and runs the weekly review.
-
----
-
-## Product Skill Workflow
-
-The product skills work through TOPY's own tools — the same 90+ tools TOPY offers to Claude, ChatGPT and the
-`topy` CLI — so plans, figures and records stay in the founder's TOPY account. Every change is previewed first
-and runs only after the user confirms it; generating a plan costs 50 TOPY credits and the preview shows the
-balance. The full tool list is at [topy.ai/developers](https://topy.ai/developers).
-
----
+Every change in TOPY takes two calls: a preview the agent shows you, then a confirmed call after you
+say yes. Skills never confirm for you.
 
 ## Install
 
-**Claude Code plugin** (skills and the TOPY MCP server together):
-
-```bash
-/plugin marketplace add TOPY-AI-LTD/TOPY-AI-CEO-Skills
-/plugin install topy-ai-ceo@topy-ai
+```sh
+npx @topy-ai/skills install                  # this project, for the agents set up here
+npx @topy-ai/skills install -g               # your user: every project
+npx @topy-ai/skills install -g -a codex,pi   # pick the agents
+npx @topy-ai/skills install --category fundraising,finance
+npx @topy-ai/skills list                     # the catalogue
 ```
 
-**Skills only** (Claude Code, Codex and other agents):
+The core skills always come along. Supported agents: Claude Code, Codex, Pi, Cursor, Gemini CLI,
+OpenCode, GitHub Copilot, Windsurf, Amp, Cline, Goose, Kiro, Qwen Code, Trae, Roo Code, Kilo Code,
+Augment, Factory Droid, OpenHands and Antigravity. See the
+[installer README](packages/skills/README.md) for folders, updates and removal.
 
-```bash
-npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills --all
-npx @topy-ai/ceo skills install        # the same product skills, from the TOPY CLI
-npx skills update                      # upgrade later
-```
+Other ways:
 
----
+- **Claude Code plugins**: `/plugin marketplace add TOPY-AI-LTD/TOPY-AI-CEO-Skills`, then
+  `/plugin install topy-ai-all@topy-ai` (or one plugin, such as `topy-ai@topy-ai` with the MCP server).
+- **Codex plugins**: `codex plugin marketplace add TOPY-AI-LTD/TOPY-AI-CEO-Skills`, then
+  `codex plugin add topy-ai@topy-ai`.
+- **Pi**: `pi install npm:@topy-ai/skills`.
+- **By hand**: each skill is a self-contained folder with a `SKILL.md`; copy
+  `plugins/<plugin>/skills/<id>/` into the folder your agent reads, or zip one and upload it in
+  Claude.ai → Settings → Capabilities → Skills.
 
-## Auth and API
+## Connect TOPY.AI
 
-The product skills need TOPY connected, in one of these ways — no key is pasted into a prompt:
+The core skills run on `https://topy.ai/mcp` (OAuth 2.1: sign in to TOPY.AI, no keys to paste).
 
-1. **MCP connector** (recommended): add `https://topy.ai/mcp` in Claude or ChatGPT, or
-   `claude mcp add --transport http topy https://topy.ai/mcp`, and sign in to TOPY when asked.
-2. **CLI**: `npm i -g @topy-ai/ceo && topy login`; the skills fall back to `topy <tool>` commands.
-3. **API key**: create one under Dashboard → API keys and export `TOPY_API_KEY` for the CLI.
-
-`topy-ai-ceo-core` does not call TOPY and needs none of these.
-
----
-
-## Quick Start
-
-1. Install the plugin or the skills.
-2. Connect TOPY (MCP connector, or `topy login`).
-3. Ask in plain words, or name the skill:
-
-```text
-Use $topy-business-plan to write a business plan for my TOPY project.
-```
-
-```text
-Use $topy-plan-revision: we are raising £250k instead of £200k and hiring a CTO in Q2 2027.
-```
-
-```text
-Use $topy-ai-ceo-core to prioritize five initiatives and explain the opportunity cost of delay.
-```
-
----
-
-## Examples
-
-The core skill package includes example prompts that show what good output should look like:
-
-- [market-entry.md](skills/topy-ai-ceo-core/examples/market-entry.md)
-- [crisis-response.md](skills/topy-ai-ceo-core/examples/crisis-response.md)
-- [prioritization.md](skills/topy-ai-ceo-core/examples/prioritization.md)
-- [fundraising.md](skills/topy-ai-ceo-core/examples/fundraising.md)
-
-There is also a lightweight eval suite for repeatable checks:
-
-- [evals/evals.json](evals/evals.json)
-
----
-
-## Available Skills
-
-| Skill | Purpose |
+| Client | How |
 |---|---|
-| `topy-ai-ceo` | Entry point: connect TOPY, shared rules, pick the right skill |
-| `topy-business-plan` | Generate, read, edit, fix, export plans; templates |
-| `topy-plan-revision` | Revise a whole plan for a change, as a new version |
-| `topy-fundraising` | Investor-ready review, SEIS Advance Assurance, investor pipeline and updates |
-| `topy-ceo-workspace` | Decisions, risks, journal, GTM plans, experiments, research; weekly review |
-| `topy-projects` | Projects from ideas or websites; ideas and brainstorms |
-| `topy-ai-ceo-core` | CEO-level reasoning without the TOPY account |
+| Claude, ChatGPT (web, desktop) | add a custom connector with the URL `https://topy.ai/mcp` |
+| Claude Code | `claude mcp add --transport http topy https://topy.ai/mcp`, or `npx @topy-ai/skills install --mcp` |
+| Codex | `codex mcp add topy --url https://topy.ai/mcp` |
+| Gemini CLI, Cursor, others with remote MCP | server URL `https://topy.ai/mcp` |
+| Clients that only start a command | `npx -y @topy-ai/mcp` after `npx @topy-ai/mcp login`, or with `TOPY_API_KEY` |
+| Terminal and scripts | `npm i -g @topy-ai/cli && topy login` |
 
----
+Scheduled agents use their own API key with a **standing permission** granted in the dashboard:
+see the `topy-scheduled-agent` skill.
 
-## Requirements
+## How the skills fit together
 
-- For the product skills: TOPY connected (MCP connector, `topy login`, or `TOPY_API_KEY`)
-- For `topy-ai-ceo-core`: nothing
-
----
-
-## Repository Structure
-
-```text
-.claude-plugin/          Claude Code plugin and marketplace manifests
-.mcp.json                the TOPY MCP server (https://topy.ai/mcp)
-skills/
-  topy-ai-ceo/           SKILL.md, agents/openai.yaml (Codex)
-  topy-business-plan/
-  topy-plan-revision/
-  topy-fundraising/
-  topy-ceo-workspace/
-  topy-projects/
-  topy-ai-ceo-core/      SKILL.md, agents/, examples/, references/, scripts/
-evals/
-README.md
-CHANGELOG.md
-LICENSE
+```
+topy-connect ─▶ topy-projects ─▶ topy-business-plan ─▶ topy-investor-ready ─▶ topy-plan-revision
+                                        │                        │
+                                        ▼                        ▼
+                     strategy / finance skills        fundraising skills ─▶ topy-seis
+                                        │
+                                        ▼
+       topy-decision-log · topy-risk-register · topy-growth-experiments · topy-founder-journal
+                                        │
+                                        ▼
+                     topy-daily  ·  topy-weekly-review  ·  topy-scheduled-agent
 ```
 
----
+A typical week: `topy-daily` each morning for the three things that matter; strategy and finance
+skills when a decision comes up, with the outcome saved by `topy-decision-log`; `topy-weekly-review`
+on Friday; `topy-plan-revision` when a figure, milestone or hire changes, so the whole plan stays
+consistent; `topy-investor-ready` and the fundraising skills before a raise.
+
+Try: *"Connect to TOPY.AI"*, *"What needs my attention as CEO today?"*, *"Is my plan investor-ready?"*,
+*"Raise £250k instead of £200k across the whole plan"*, *"How much runway do we have?"*
+
+## Packages
+
+| Package | What it is |
+|---|---|
+| [`@topy-ai/skills`](https://www.npmjs.com/package/@topy-ai/skills) | these skills, installed into ~20 agents (`topy-skills`) |
+| [`@topy-ai/mcp`](https://www.npmjs.com/package/@topy-ai/mcp) | a local stdio MCP server for clients that only run local servers (`topy-mcp`) |
+| [`@topy-ai/cli`](https://www.npmjs.com/package/@topy-ai/cli) | TOPY.AI's AI CEO in the terminal (`topy`) |
+
+All three use the same tools as `https://topy.ai/mcp`. API reference: [topy.ai/developers](https://topy.ai/developers).
+
+## Repository structure
+
+```
+plugins/
+  topy-ai/                 core skills + .mcp.json (Claude Code) and mcp.json (Codex)
+  topy-ai-strategy/        topy-ai-fundraising/  topy-ai-finance/
+  topy-ai-operations/      topy-ai-leadership/
+  topy-ai-all/             bundle that depends on all six
+.claude-plugin/marketplace.json     Claude Code marketplace
+.agents/plugins/marketplace.json    Codex marketplace
+skills.json                         machine-readable catalogue
+packages/skills/                    the @topy-ai/skills installer
+evals/                              prompts for checking the advisor skills
+```
+
+The skills are generated from a source catalogue kept next to TOPY.AI's MCP server; the build checks
+every tool a skill names against the server's tool list. Please open an issue rather than editing a
+`SKILL.md`.
 
 ## Releases
 
-This repository follows simple semantic version tags.
-
-- `v0.1.0` initial public release
-- `v0.1.1` README branding and repo validation workflow
-- `v0.2.0` added the general `topy-ai-ceo-core` skill and organized references
-- `v0.3.0` rewrote `topy-ai-ceo-core` into an original, organized executive playbook
-- `v0.3.1` removed packaging artifacts and added a scripts ignore rule
-- `v0.4.0` expanded the core references, examples, and eval suite
-- `v0.4.1` removed the TOPY-specific example set from the core package
-- `v0.4.2` expanded the README into a fuller landing page and usage guide
-- `v0.4.3` added the CEO daily workflow across TOPY product skills
-- `v0.4.5` documented the `--all` install path for the full skills catalog
-- `v0.4.6` expanded the README with the TOPY product skill workflow
-- `v0.5.0` added `topy-init`, standardized `TOPY_AI_KEY`, and documented auth preflight
-- `v0.5.1` added the upgrade flow for installed skills
-- `v0.6.0` product skills rebuilt on TOPY's MCP server and CLI; Claude Code plugin
-- future releases will add new skills, route updates, or installation improvements
-
----
+See [CHANGELOG.md](CHANGELOG.md). `v0.7.0` reorganised the catalogue into 42 skills in six plugins
+and added the `@topy-ai/skills` installer.
 
 ## License
 
-MIT.
+MIT © TOPY AI LTD. Privacy: [topy.ai/privacy](https://topy.ai/privacy).
+
+## Skills
+
+<!-- skills:start -->
+
+**42 skills in 6 plugins**, plus the `topy-ai-all` bundle. Generated from the source catalogue: please open an issue rather than editing a `SKILL.md`.
+
+### TOPY core (MCP) · `topy-ai`
+
+| Skill | Tier | What it does |
+|---|---|---|
+| [`topy-business-plan`](plugins/topy-ai/skills/topy-business-plan/SKILL.md) | core | Write a new TOPY.AI business plan (after a credit check), follow it to the end, then read, edit, fix and export it. |
+| [`topy-connect`](plugins/topy-ai/skills/topy-connect/SKILL.md) | core | Connect an AI agent to TOPY.AI's AI CEO through the MCP server (OAuth, or the CLI / an API key without a browser) and pick the project to work on. |
+| [`topy-daily`](plugins/topy-ai/skills/topy-daily/SKILL.md) | core | The founder's daily check-in on TOPY.AI — plans being written, changes agents made, risks and experiments that need a call — cleared one approved action at a time. |
+| [`topy-decision-log`](plugins/topy-ai/skills/topy-decision-log/SKILL.md) | core | Record a founder's decisions in TOPY with context, options, rationale, confidence and a review date, and later review them against what actually happened. |
+| [`topy-founder-journal`](plugins/topy-ai/skills/topy-founder-journal/SKILL.md) | core | Keep the founder's dated journal and the AI CEO's durable project memory in TOPY, and put each note in the right place so the CEO remembers facts without cluttering them with feelings. |
+| [`topy-growth-experiments`](plugins/topy-ai/skills/topy-growth-experiments/SKILL.md) | core | Run growth experiments end to end in TOPY: a falsifiable hypothesis, one metric and target fixed before launch, one owner, an honest read-out and a ship, kill or iterate call. |
+| [`topy-gtm-plan`](plugins/topy-ai/skills/topy-gtm-plan/SKILL.md) | core | Build and keep the project's go-to-market plan in TOPY (positioning, channels, activation, retention, pricing, sales motion, funnel targets, launch) and hand plan-wide changes to topy-plan-revision. |
+| [`topy-investor-ready`](plugins/topy-ai/skills/topy-investor-ready/SKILL.md) | core | Review a TOPY.AI business plan the way a seed investor would and list the five fixes that matter most, each with its section — then fix the ones the founder picks. |
+| [`topy-investor-relations`](plugins/topy-ai/skills/topy-investor-relations/SKILL.md) | core | Keep a founder's investor pipeline and follow-ups in TOPY, and draft, approve and save the periodic investor update from the project's own records. |
+| [`topy-plan-revision`](plugins/topy-ai/skills/topy-plan-revision/SKILL.md) | core | Carry a change — a funding amount, price, milestone, KPI, hire or team change — through every affected section of a TOPY.AI business plan, consistently, as a new version. |
+| [`topy-plan-templates`](plugins/topy-ai/skills/topy-plan-templates/SKILL.md) | core | Choose, copy, build and refine TOPY.AI business plan templates — official ones, the founder's own, AI-built from a requirement or a document — and set a project's defaults. |
+| [`topy-projects`](plugins/topy-ai/skills/topy-projects/SKILL.md) | core | Create a TOPY.AI project from an idea or an existing website, keep its details right, explore and brainstorm ideas, and manage the media library. |
+| [`topy-research-library`](plugins/topy-ai/skills/topy-research-library/SKILL.md) | core | Keep the research sources behind a project's business plan in TOPY, matched to the claims they support, with clean citations and no invented sources. |
+| [`topy-risk-register`](plugins/topy-ai/skills/topy-risk-register/SKILL.md) | core | Keep the project's risk register in TOPY: score likelihood and impact, name an owner and a mitigation, review on a cadence, and close risks by status, never by deleting them. |
+| [`topy-scheduled-agent`](plugins/topy-ai/skills/topy-scheduled-agent/SKILL.md) | core | Set up an agent that runs on a schedule (a daily brief, a weekly journal) with its own TOPY.AI key and a standing permission, and keep it inside what the founder allowed. |
+| [`topy-seis`](plugins/topy-ai/skills/topy-seis/SKILL.md) | core | Draft the answers for a UK SEIS Advance Assurance application from a TOPY.AI business plan, choose the right qualifying route, and list the documents HMRC expects. |
+| [`topy-weekly-review`](plugins/topy-ai/skills/topy-weekly-review/SKILL.md) | core | A weekly CEO review on TOPY.AI — what was decided, what moved, which risks grew, which experiments need a call — ending in next week's three priorities, recorded only with the founder's yes. |
+
+### Strategy & direction · `topy-ai-strategy`
+
+| Skill | Tier | What it does |
+|---|---|---|
+| [`topy-business-model`](plugins/topy-ai-strategy/skills/topy-business-model/SKILL.md) | connected | Maps how a startup creates, delivers and captures value on a business model canvas, checks that the pieces add up, and turns the riskiest assumptions into cheap, pre-registered tests. |
+| [`topy-competitive-strategy`](plugins/topy-ai-strategy/skills/topy-competitive-strategy/SKILL.md) | connected | Reads competitor moves calmly, war-games the likely responses to a startup's own move, and identifies which defensible advantage the company can realistically build. |
+| [`topy-decision-memo`](plugins/topy-ai-strategy/skills/topy-decision-memo/SKILL.md) | connected | Turns a hard founder call into a one-page decision memo with real options (including doing nothing), weighed trade-offs, a recommendation and the signals that would reverse it. |
+| [`topy-market-entry`](plugins/topy-ai-strategy/skills/topy-market-entry/SKILL.md) | connected | Decides whether, where and how a startup should enter a new geography or customer segment: readiness, bottom-up sizing, entry mode, a beachhead, gated phases and kill criteria set in advance. |
+| [`topy-okrs`](plugins/topy-ai-strategy/skills/topy-okrs/SKILL.md) | connected | Turns a startup's strategy into a small set of quarterly objectives and measurable key results, then scores them honestly at the end of the quarter and carries the lessons forward. |
+| [`topy-prioritization`](plugins/topy-ai-strategy/skills/topy-prioritization/SKILL.md) | connected | Ranks a startup's competing initiatives against one goal and the team's real capacity using RICE, ICE or cost of delay, draws the cut line and writes down what the company will not do. |
+| [`topy-scenario-planning`](plugins/topy-ai-strategy/skills/topy-scenario-planning/SKILL.md) | standalone | Builds a small set of plausible futures around the uncertainties that matter most, tests the company's plans against each, and sets early-warning signals with responses agreed in advance. |
+
+### Fundraising · `topy-ai-fundraising`
+
+| Skill | Tier | What it does |
+|---|---|---|
+| [`topy-cap-table`](plugins/topy-ai-fundraising/skills/topy-cap-table/SKILL.md) | standalone | Build a fully diluted cap table and model dilution across rounds: SAFE/ASA and convertible conversion, option pool top-ups and the founders' ownership after each step. Not legal or tax advice. |
+| [`topy-data-room`](plugins/topy-ai-fundraising/skills/topy-data-room/SKILL.md) | connected | Build the due-diligence data room for a raise: a stage-appropriate checklist, a numbered index, the gaps and red flags to fix before investors find them, and who sees what when. |
+| [`topy-fundraising-strategy`](plugins/topy-ai-fundraising/skills/topy-fundraising-strategy/SKILL.md) | connected | Decide whether to raise, how much, on what instrument, from which kinds of investor and when, tied to the milestones the money must buy, with a fallback if the round is late. |
+| [`topy-pitch-deck`](plugins/topy-ai-fundraising/skills/topy-pitch-deck/SKILL.md) | connected | Build the 10-12 slide investor story from the business plan: one claim per slide, the evidence behind it, and numbers that match the plan exactly. |
+| [`topy-term-sheet`](plugins/topy-ai-fundraising/skills/topy-term-sheet/SKILL.md) | standalone | Read a startup term sheet in plain language: the economic and control terms, what they cost at real exit values, and the few points worth pushing on. Not legal advice. |
+
+### Finance · `topy-ai-finance`
+
+| Skill | Tier | What it does |
+|---|---|---|
+| [`topy-financial-model`](plugins/topy-ai-finance/skills/topy-financial-model/SKILL.md) | connected | Build a driver-based, three-statement-lite startup model (revenue build, headcount, costs, P&L, cash flow, simple balance sheet) with an assumptions sheet, scenarios and checks. |
+| [`topy-pricing-decisions`](plugins/topy-ai-finance/skills/topy-pricing-decisions/SKILL.md) | connected | Make the CEO-level pricing call: what to charge for, how to package it, whether to raise or cut prices, the break-even maths for each option, and a test plan saved as a decision and an experiment. |
+| [`topy-runway`](plugins/topy-ai-finance/skills/topy-runway/SKILL.md) | standalone | Measure burn and runway properly, check whether the company is default alive, and build a tiered cut plan with triggers so the founder decides early instead of in a panic. |
+| [`topy-unit-economics`](plugins/topy-ai-finance/skills/topy-unit-economics/SKILL.md) | standalone | Work out what one customer is worth and costs to win: CAC, contribution margin, LTV, payback, net revenue retention and cohorts, then name the one thing to fix first. |
+
+### Operations & people · `topy-ai-operations`
+
+| Skill | Tier | What it does |
+|---|---|---|
+| [`topy-board-meetings`](plugins/topy-ai-operations/skills/topy-board-meetings/SKILL.md) | connected | Prepare and run a startup board meeting: the board pack, a timed agenda, the asks and decisions, and minutes with actions, built from TOPY's decisions, risks and investor updates. |
+| [`topy-hiring-plan`](plugins/topy-ai-operations/skills/topy-hiring-plan/SKILL.md) | connected | Decide which roles to hire, in what order and when, what they cost against runway, and what each hire must achieve, with a scorecard per role. |
+| [`topy-kpi-dashboard`](plugins/topy-ai-operations/skills/topy-kpi-dashboard/SKILL.md) | standalone | Choose the north-star metric, the input metrics that drive it and the guardrails, and turn them into a weekly scorecard with owners, targets and red/amber/green rules. |
+| [`topy-operating-cadence`](plugins/topy-ai-operations/skills/topy-operating-cadence/SKILL.md) | connected | Set the company's rhythm of weekly, monthly, quarterly and annual meetings, each with an owner, inputs, a timed agenda and the decisions it exists to make. |
+| [`topy-org-design`](plugins/topy-ai-operations/skills/topy-org-design/SKILL.md) | standalone | Design a startup's structure as it grows: who owns which outcomes (DRI and RACI), reporting lines, spans of control and decision rights, plus how to roll the change out. |
+
+### Leadership & decisions · `topy-ai-leadership`
+
+| Skill | Tier | What it does |
+|---|---|---|
+| [`topy-ceo-advisor`](plugins/topy-ai-leadership/skills/topy-ceo-advisor/SKILL.md) | standalone | A general CEO decision advisor for cross-functional, ambiguous or board-level calls: frames the real question, compares options, checks bias, runs the numbers and ends in a recommendation, routing to narrower TOPY skills when one fits. |
+| [`topy-crisis-response`](plugins/topy-ai-leadership/skills/topy-crisis-response/SKILL.md) | connected | Lead a company through a live crisis: classify severity, contain in the first hours, sequence who hears what and when, recover, and run a blameless review, recording the risk and decisions in TOPY. |
+| [`topy-debiasing`](plugins/topy-ai-leadership/skills/topy-debiasing/SKILL.md) | standalone | Stress-test a big call before committing: independent estimates, base rates, a pre-mortem, a red team, a bias scan and pre-set kill criteria, ending in an adjusted confidence. |
+| [`topy-stakeholder-alignment`](plugins/topy-ai-leadership/skills/topy-stakeholder-alignment/SKILL.md) | standalone | Bring the people who matter along on a decision or change: map their power, interests and likely objections, choose the order to talk to them, and prepare each conversation. |
+
+<!-- skills:end -->

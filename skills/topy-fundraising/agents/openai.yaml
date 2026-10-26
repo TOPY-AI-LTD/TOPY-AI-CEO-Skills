@@ -1,8 +1,0 @@
-interface:
-  display_name: "TOPY Fundraising"
-  short_description: "Investor-ready review, SEIS Advance Assurance, investor pipeline and updates"
-  brand_color: "#ff1212"
-  default_prompt: "Use $topy-fundraising to check whether my plan is investor-ready."
-
-policy:
-  allow_implicit_invocation: true

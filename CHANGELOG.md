@@ -72,3 +72,15 @@
 - Removed the REST-only skills they replace (`topy-init`, `topy-dashboard`, `topy-onboarding`,
   `topy-projects`, `topy-business-plans`, `topy-templates`, `topy-billing`, `topy-media`).
 - Added a Claude Code plugin (`.claude-plugin/`) with the TOPY MCP server (`.mcp.json`).
+
+## v0.7.0
+
+- 42 skills in six plugins: core (`topy-ai`, with the MCP server), strategy, fundraising, finance,
+  operations and leadership, plus the `topy-ai-all` bundle; Claude Code and Codex marketplaces,
+  `skills.json` and a Pi package
+- New `@topy-ai/skills` installer for Claude Code, Codex, Pi, Cursor, Gemini CLI and 15 other agents
+- `topy-ai-ceo` is now `topy-connect`; `topy-fundraising` split into `topy-investor-ready`,
+  `topy-seis`, `topy-investor-relations` and the fundraising plugin; `topy-ceo-workspace` split into
+  one skill per record plus `topy-daily` and `topy-weekly-review`; `topy-ai-ceo-core` is now
+  `topy-ceo-advisor`, routing to the focused strategy and leadership skills
+- The CLI is now `@topy-ai/cli` and the local MCP server `@topy-ai/mcp`; `@topy-ai/ceo` is deprecated

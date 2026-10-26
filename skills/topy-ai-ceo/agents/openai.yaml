@@ -1,8 +1,0 @@
-interface:
-  display_name: "TOPY AI CEO"
-  short_description: "Your AI CEO on TOPY.AI: plans, revisions, fundraising, CEO records"
-  brand_color: "#ff1212"
-  default_prompt: "Use $topy-ai-ceo to work on my TOPY projects, business plans, fundraising or CEO records."
-
-policy:
-  allow_implicit_invocation: true

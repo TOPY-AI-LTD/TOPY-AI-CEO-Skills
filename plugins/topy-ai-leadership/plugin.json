@@ -1,0 +1,37 @@
+{
+	"$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+	"name": "topy-ai-leadership",
+	"version": "0.7.0",
+	"description": "TOPY Leadership & decisions skills (4): CEO advisor, Crisis response, Debiasing a big decision, Stakeholder alignment. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
+	"author": {
+		"name": "TOPY AI LTD",
+		"email": "startup@topy.ai",
+		"url": "https://topy.ai"
+	},
+	"homepage": "https://topy.ai/developers",
+	"repository": "https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills",
+	"license": "MIT",
+	"keywords": [
+		"topy.ai",
+		"ai-ceo",
+		"founders",
+		"leadership"
+	],
+	"extensions": {
+		"com.openai": {
+			"interface": {
+				"displayName": "TOPY.AI Leadership & decisions",
+				"shortDescription": "TOPY Leadership & decisions skills (4): CEO advisor, Crisis response, Debiasing a big decision, Stakeholder alignment. A",
+				"longDescription": "TOPY Leadership & decisions skills (4): CEO advisor, Crisis response, Debiasing a big decision, Stakeholder alignment. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
+				"capabilities": [
+					"Read"
+				],
+				"category": "Productivity",
+				"brandColor": "#FF1212",
+				"privacyPolicyURL": "https://topy.ai/privacy",
+				"websiteURL": "https://topy.ai",
+				"developerName": "TOPY AI LTD"
+			}
+		}
+	}
+}
