@@ -357,7 +357,7 @@
 			"category_name": "TOPY core (MCP)",
 			"plugin": "topy-ai",
 			"tier": "core",
-			"summary": "Connect data sources (Stripe, Xero) to TOPY through the founder's dashboard, bind KPIs to them, and sync so actuals arrive on their own with their source.",
+			"summary": "Connect data sources (Stripe, QuickFile) to TOPY through the founder's dashboard, bind KPIs to them, and sync so actuals arrive on their own with their source.",
 			"mcp_tools": [
 				"projects_list",
 				"integrations_list",

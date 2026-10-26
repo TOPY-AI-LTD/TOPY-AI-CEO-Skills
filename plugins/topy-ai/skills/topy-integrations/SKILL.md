@@ -1,6 +1,6 @@
 ---
 name: topy-integrations
-description: Connect data sources (Stripe, Xero) to TOPY through the founder's dashboard, bind KPIs to them, and sync so actuals arrive on their own with their source. Use when the user says things like "connect Stripe"; "update MRR automatically"; "which data sources are connected?"; "sync our numbers now"; "stop me typing in the KPIs every week"; "hook up Google Analytics to signups". Needs the TOPY MCP server.
+description: Connect data sources (Stripe, QuickFile) to TOPY through the founder's dashboard, bind KPIs to them, and sync so actuals arrive on their own with their source. Use when the user says things like "connect Stripe"; "update MRR automatically"; "which data sources are connected?"; "sync our numbers now"; "stop me typing in the KPIs every week"; "hook up Google Analytics to signups". Needs the TOPY MCP server.
 license: MIT
 metadata:
   category: core
@@ -31,11 +31,11 @@ page: the agent only hands over the link.
 | KPI key | Usual provider | Query |
 |---|---|---|
 | `mrr`, `active_subscriptions`, `new_customers`, `churn_rate_monthly` | `stripe` | same name |
-| `revenue_monthly` | `stripe` (card revenue) or `xero` (all income in the books) | `revenue_monthly` |
-| `cash_balance`, `net_burn` | `xero` (bank summary; the month's loss) | same name |
+| `revenue_monthly` | `stripe` (card revenue) or `quickfile` (turnover in the books) | `revenue_monthly` |
+| `cash_balance`, `net_burn`, `gross_margin` | `quickfile` (bank balances; the month's loss; margin after cost of sales) | same name |
 
    Those are the only providers and queries today (`integrations_list` shows them). Anything else (GA4 signups,
-   gross margin, NRR) stays founder-reported or comes from the cofounder who owns it.
+   NRR) stays founder-reported or comes from the cofounder who owns it.
 2. **Connect.** `integration_connect_link` with the provider returns a link to TOPY's dashboard. Give the founder the link; they sign in or paste the key there. When they're back, `integrations_list` to confirm it shows as connected. Don't report it connected until it does.
 3. **Bind KPIs.** `kpi_source_set` per KPI with `{provider, query}` (e.g. `{provider: "stripe", query: "mrr"}`). Preview the list of bindings, confirm after a yes. If a KPI was founder-reported, say that future values will come from the provider instead.
 4. **Sync.** `integration_sync` with the provider (preview, then confirm). It runs as a job and records KPI values with `source` set to the provider. Then `kpi_values_list` for each bound KPI: show the new values.
