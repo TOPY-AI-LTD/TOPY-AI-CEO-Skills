@@ -27,7 +27,7 @@ becomes an *agent key*: it sees only read tools and the records it may add, and 
 1. **Design the routine.** Write its prompt: which reads, what it records, its limits ("at most 3 journal entries a day; never edit or delete"). Keep plan generation and revisions out — they need the founder.
 2. **A key of its own.** The founder creates an API key just for this agent under Dashboard → API keys (`dashboard_link` page `api_keys`), read-write, named after the routine. It goes into the scheduler's secret store as `TOPY_API_KEY` — never in the prompt, a file in a repository, or the chat.
 3. **Grant the standing permission** — the founder does this in the dashboard (API keys → Standing permissions): pick the key, the project, the record kinds and a daily cap each (start low, e.g. 3), and how many days it lasts. Agents can't grant it; don't try.
-4. **Wire the schedule** with `npx -y @topy-ai/mcp` as the MCP server (it reads `TOPY_API_KEY`) or the remote server with that key as the bearer. Claude Routines, Codex Automations or cron all work.
+4. **Wire the schedule** with `npx -y @topy-ai/ceo-mcp` as the MCP server (it reads `TOPY_API_KEY`) or the remote server with that key as the bearer. Claude Routines, Codex Automations or cron all work.
 5. **Verify** (with the agent's key): `account_get` works; `standing_permissions_list` shows the permission, its tools, caps and today's use; a covered write runs at once and appears in `agent_actions_list` with "(standing permission …)".
 6. **Review weekly.** `agent_actions_list` with the founder: anything surprising → lower the cap or revoke in the dashboard.
 

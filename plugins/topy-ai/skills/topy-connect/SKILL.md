@@ -46,9 +46,9 @@ In this order of preference:
    - Claude Code: `claude mcp add --transport http topy https://topy.ai/mcp`, then `/mcp` → **topy** → **Authenticate**. With the `topy-ai` plugin installed the server is already declared: only `/mcp` → Authenticate.
    - Codex: `codex mcp add topy --url https://topy.ai/mcp`. Other clients: add a remote (HTTP) MCP server with that URL and approve the sign-in when asked; don't guess menu names.
 2. **No browser here (servers, CI, SSH).**
-   - Device sign-in: `npx @topy-ai/cli login` prints a link and a code; the user approves it on any device (`topy.ai/oauth/device`). The sign-in renews itself.
+   - Device sign-in: `npx @topy-ai/ceo-cli login` prints a link and a code; the user approves it on any device (`topy.ai/oauth/device`). The sign-in renews itself.
    - Or an API key: the user creates one under Dashboard → API keys and puts it in `TOPY_API_KEY` (environment or the client's secret store) — never in a repository or the chat. A read-only key can only read.
-   - Configure the local MCP server command `npx -y @topy-ai/mcp` (Claude Code: `claude mcp add topy -- npx -y @topy-ai/mcp`).
+   - Configure the local MCP server command `npx -y @topy-ai/ceo-mcp` (Claude Code: `claude mcp add topy -- npx -y @topy-ai/ceo-mcp`).
 3. **Reload.** Many clients load new tools only after a reload. Say the reload step once and wait; don't loop calling tools that aren't loaded.
 
 Call `account_get` again. Only say "connected" when it returns the user's email.

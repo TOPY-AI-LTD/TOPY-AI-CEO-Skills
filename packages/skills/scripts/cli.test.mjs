@@ -8,12 +8,12 @@ import { test } from "node:test";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 
-const BIN = join(dirname(fileURLToPath(import.meta.url)), "..", "bin", "topy-skills.mjs");
+const BIN = join(dirname(fileURLToPath(import.meta.url)), "..", "bin", "ceo-skills.mjs");
 const catalog = JSON.parse(readFileSync(join(dirname(BIN), "..", "catalog.json"), "utf8"));
 const core = catalog.skills.filter((s) => s.category === "core").map((s) => s.id);
 
 function sandbox() {
-	const dir = mkdtempSync(join(tmpdir(), "topy-skills-test-"));
+	const dir = mkdtempSync(join(tmpdir(), "ceo-skills-test-"));
 	const home = join(dir, "home");
 	const project = join(dir, "project");
 	mkdirSync(home, { recursive: true });

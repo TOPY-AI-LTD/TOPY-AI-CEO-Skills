@@ -1,6 +1,6 @@
 {
 	"name": "topy-ai-fundraising",
-	"version": "0.7.0",
+	"version": "0.7.1",
 	"description": "TOPY Fundraising skills (5): Cap table and dilution, Data room, Fundraising strategy, Pitch deck, Term sheet review. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
 	"author": {
 		"name": "TOPY AI LTD",

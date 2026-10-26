@@ -83,4 +83,11 @@
   `topy-seis`, `topy-investor-relations` and the fundraising plugin; `topy-ceo-workspace` split into
   one skill per record plus `topy-daily` and `topy-weekly-review`; `topy-ai-ceo-core` is now
   `topy-ceo-advisor`, routing to the focused strategy and leadership skills
-- The CLI is now `@topy-ai/cli` and the local MCP server `@topy-ai/mcp`; `@topy-ai/ceo` is deprecated
+- The CLI and the local MCP server became separate packages
+
+## v0.7.1
+
+- One naming scheme for the packages and their commands: `@topy-ai/ceo-cli` (`ceo-cli`),
+  `@topy-ai/ceo-mcp` (`ceo-mcp`) and `@topy-ai/ceo-skills` (`ceo-skills`). `@topy-ai/ceo`, `@topy-ai/cli`,
+  `@topy-ai/mcp` and `@topy-ai/skills` were unpublished
+- `topy-connect` and `topy-scheduled-agent` use the new package names

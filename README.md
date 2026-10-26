@@ -5,7 +5,7 @@
   <h1>TOPY AI CEO Skills</h1>
   <p><strong>42 skills that make your coding agent a founder's AI CEO: business plans and revisions, strategy, fundraising, finance, operations and leadership, on top of the TOPY.AI MCP server.</strong></p>
   <p>
-    <a href="https://www.npmjs.com/package/@topy-ai/skills"><img alt="npm" src="https://img.shields.io/npm/v/@topy-ai/skills?style=for-the-badge&color=ff1212" /></a>
+    <a href="https://www.npmjs.com/package/@topy-ai/ceo-skills"><img alt="npm" src="https://img.shields.io/npm/v/@topy-ai/ceo-skills?style=for-the-badge&color=ff1212" /></a>
     <a href="https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-111827?style=for-the-badge" /></a>
     <a href="https://topy.ai/developers"><img alt="MCP" src="https://img.shields.io/badge/MCP-topy.ai%2Fmcp-0f172a?style=for-the-badge" /></a>
   </p>
@@ -40,11 +40,11 @@ say yes. Skills never confirm for you.
 ## Install
 
 ```sh
-npx @topy-ai/skills install                  # this project, for the agents set up here
-npx @topy-ai/skills install -g               # your user: every project
-npx @topy-ai/skills install -g -a codex,pi   # pick the agents
-npx @topy-ai/skills install --category fundraising,finance
-npx @topy-ai/skills list                     # the catalogue
+npx @topy-ai/ceo-skills install                  # this project, for the agents set up here
+npx @topy-ai/ceo-skills install -g               # your user: every project
+npx @topy-ai/ceo-skills install -g -a codex,pi   # pick the agents
+npx @topy-ai/ceo-skills install --category fundraising,finance
+npx @topy-ai/ceo-skills list                     # the catalogue
 ```
 
 The core skills always come along. Supported agents: Claude Code, Codex, Pi, Cursor, Gemini CLI,
@@ -58,7 +58,7 @@ Other ways:
   `/plugin install topy-ai-all@topy-ai` (or one plugin, such as `topy-ai@topy-ai` with the MCP server).
 - **Codex plugins**: `codex plugin marketplace add TOPY-AI-LTD/TOPY-AI-CEO-Skills`, then
   `codex plugin add topy-ai@topy-ai`.
-- **Pi**: `pi install npm:@topy-ai/skills`.
+- **Pi**: `pi install npm:@topy-ai/ceo-skills`.
 - **By hand**: each skill is a self-contained folder with a `SKILL.md`; copy
   `plugins/<plugin>/skills/<id>/` into the folder your agent reads, or zip one and upload it in
   Claude.ai → Settings → Capabilities → Skills.
@@ -70,11 +70,11 @@ The core skills run on `https://topy.ai/mcp` (OAuth 2.1: sign in to TOPY.AI, no 
 | Client | How |
 |---|---|
 | Claude, ChatGPT (web, desktop) | add a custom connector with the URL `https://topy.ai/mcp` |
-| Claude Code | `claude mcp add --transport http topy https://topy.ai/mcp`, or `npx @topy-ai/skills install --mcp` |
+| Claude Code | `claude mcp add --transport http topy https://topy.ai/mcp`, or `npx @topy-ai/ceo-skills install --mcp` |
 | Codex | `codex mcp add topy --url https://topy.ai/mcp` |
 | Gemini CLI, Cursor, others with remote MCP | server URL `https://topy.ai/mcp` |
-| Clients that only start a command | `npx -y @topy-ai/mcp` after `npx @topy-ai/mcp login`, or with `TOPY_API_KEY` |
-| Terminal and scripts | `npm i -g @topy-ai/cli && topy login` |
+| Clients that only start a command | `npx -y @topy-ai/ceo-mcp` after `npx @topy-ai/ceo-mcp login`, or with `TOPY_API_KEY` |
+| Terminal and scripts | `npm i -g @topy-ai/ceo-cli && ceo-cli login` |
 
 Scheduled agents use their own API key with a **standing permission** granted in the dashboard:
 see the `topy-scheduled-agent` skill.
@@ -106,9 +106,9 @@ Try: *"Connect to TOPY.AI"*, *"What needs my attention as CEO today?"*, *"Is my 
 
 | Package | What it is |
 |---|---|
-| [`@topy-ai/skills`](https://www.npmjs.com/package/@topy-ai/skills) | these skills, installed into ~20 agents (`topy-skills`) |
-| [`@topy-ai/mcp`](https://www.npmjs.com/package/@topy-ai/mcp) | a local stdio MCP server for clients that only run local servers (`topy-mcp`) |
-| [`@topy-ai/cli`](https://www.npmjs.com/package/@topy-ai/cli) | TOPY.AI's AI CEO in the terminal (`topy`) |
+| [`@topy-ai/ceo-skills`](https://www.npmjs.com/package/@topy-ai/ceo-skills) | these skills, installed into ~20 agents (`ceo-skills`) |
+| [`@topy-ai/ceo-mcp`](https://www.npmjs.com/package/@topy-ai/ceo-mcp) | a local stdio MCP server for clients that only run local servers (`ceo-mcp`) |
+| [`@topy-ai/ceo-cli`](https://www.npmjs.com/package/@topy-ai/ceo-cli) | TOPY.AI's AI CEO in the terminal (`ceo-cli`) |
 
 All three use the same tools as `https://topy.ai/mcp`. API reference: [topy.ai/developers](https://topy.ai/developers).
 
@@ -123,7 +123,7 @@ plugins/
 .claude-plugin/marketplace.json     Claude Code marketplace
 .agents/plugins/marketplace.json    Codex marketplace
 skills.json                         machine-readable catalogue
-packages/skills/                    the @topy-ai/skills installer
+packages/skills/                    the @topy-ai/ceo-skills installer
 evals/                              prompts for checking the advisor skills
 ```
 
@@ -133,8 +133,8 @@ every tool a skill names against the server's tool list. Please open an issue ra
 
 ## Releases
 
-See [CHANGELOG.md](CHANGELOG.md). `v0.7.0` reorganised the catalogue into 42 skills in six plugins
-and added the `@topy-ai/skills` installer.
+See [CHANGELOG.md](CHANGELOG.md). `v0.7.0` reorganised the catalogue into 42 skills in six plugins;
+`v0.7.1` named the packages `@topy-ai/ceo-cli`, `@topy-ai/ceo-mcp` and `@topy-ai/ceo-skills`.
 
 ## License
 

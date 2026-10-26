@@ -1,7 +1,7 @@
 {
 	"name": "TOPY.AI AI CEO skills",
 	"description": "AI CEO skills for founders, built for TOPY.AI. Core skills run on the TOPY MCP server (https://topy.ai/mcp); connected skills use it when available; standalone skills are CEO methods that work anywhere.",
-	"version": "0.7.0",
+	"version": "0.7.1",
 	"updated": "2026-10-26",
 	"publisher": {
 		"name": "TOPY AI LTD",
@@ -10,7 +10,7 @@
 	},
 	"install": {
 		"claude_code": "/plugin marketplace add TOPY-AI-LTD/TOPY-AI-CEO-Skills",
-		"npm": "npx @topy-ai/skills install",
+		"npm": "npx @topy-ai/ceo-skills install",
 		"mcp_server": "https://topy.ai/mcp"
 	},
 	"tiers": {

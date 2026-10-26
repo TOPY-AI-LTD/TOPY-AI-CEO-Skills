@@ -57,7 +57,7 @@ function detected(scope, root) {
 function parseAgents(value) {
 	return list(value).map((a) => {
 		const id = ALIASES[a.toLowerCase()] || a.toLowerCase();
-		if (!["auto", "all"].includes(id) && !AGENTS[id]) throw new UsageError(`unknown agent ${a} (see \`topy-skills agents\`)`);
+		if (!["auto", "all"].includes(id) && !AGENTS[id]) throw new UsageError(`unknown agent ${a} (see \`ceo-skills agents\`)`);
 		return id;
 	});
 }
@@ -167,11 +167,11 @@ function resolveSelection(catalog, selection) {
 	const ids = new Set();
 	if (selection.all) for (const s of catalog.skills) ids.add(s.id);
 	for (const c of selection.categories || []) {
-		if (!byCategory.has(c)) throw new UsageError(`unknown category ${c} (see \`topy-skills list\`)`);
+		if (!byCategory.has(c)) throw new UsageError(`unknown category ${c} (see \`ceo-skills list\`)`);
 		for (const id of byCategory.get(c)) ids.add(id);
 	}
 	for (const id of selection.skills || []) {
-		if (!catalog.skills.some((s) => s.id === id)) throw new UsageError(`unknown skill ${id} (see \`topy-skills list\`)`);
+		if (!catalog.skills.some((s) => s.id === id)) throw new UsageError(`unknown skill ${id} (see \`ceo-skills list\`)`);
 		ids.add(id);
 	}
 	// The core skills (connect, daily, …) are what every other skill hands off to.
@@ -226,7 +226,7 @@ function syncSkill(id, target, managed, opts, log, stats) {
 	if (fresh) {
 		if (!dry) {
 			mkdirSync(dirname(target), { recursive: true });
-			const staging = `${target}.topy-skills-${process.pid}`;
+			const staging = `${target}.ceo-skills-${process.pid}`;
 			rmSync(staging, { recursive: true, force: true });
 			cpSync(source, staging, { recursive: true });
 			renameSync(staging, target);
@@ -320,7 +320,7 @@ function mcpHelp(scope) {
 		`  Codex        codex mcp add topy --url ${MCP_URL}   (or [mcp_servers.topy] url = "${MCP_URL}" in ~/.codex/config.toml)`,
 		`  Gemini CLI   gemini mcp add --transport http ${user ? "--scope user " : ""}topy ${MCP_URL}`,
 		`  Cursor       Settings → MCP → Add → URL ${MCP_URL}`,
-		"  Pi and agents that start a command: npx -y @topy-ai/mcp (stdio), after `npx @topy-ai/mcp login` (or with TOPY_API_KEY)",
+		"  Pi and agents that start a command: npx -y @topy-ai/ceo-mcp (stdio), after `npx @topy-ai/ceo-mcp login` (or with TOPY_API_KEY)",
 	].join("\n");
 }
 
@@ -332,7 +332,7 @@ function install(opts, { update = false } = {}) {
 	const root = projectRoot(opts);
 	const state = stateFile(scope, root);
 	const previous = readJson(state);
-	if (update && !previous) throw new UsageError(`nothing installed in ${scope === "user" ? "user scope" : root}; run \`topy-skills install\` first`);
+	if (update && !previous) throw new UsageError(`nothing installed in ${scope === "user" ? "user scope" : root}; run \`ceo-skills install\` first`);
 	const previousTargets = previous ? legacyTargets(previous, scope, root) : [];
 	const targets = targetsFor(opts, scope, root, previous ? { targets: previousTargets } : null);
 	const selection = update ? previous.selection : mergeSelection(previous?.selection, selectionFrom(opts));
@@ -370,7 +370,7 @@ function install(opts, { update = false } = {}) {
 	console.log(`${stats.installed} new, ${stats.updated} files updated, ${stats.unchanged} unchanged, ${stats.kept} kept${stats.removed ? `, ${stats.removed} retired skills removed` : ""}.`);
 	if (stats.kept) console.log("Files you edited were kept. Rerun with --force to replace them.");
 	const legacyCodex = previousTargets.find((t) => t.dir.endsWith(join(".codex", "skills")));
-	if (legacyCodex) console.log(`Note: Codex now reads ~/.agents/skills. Move to it with \`topy-skills install --scope user --agent codex\`, then delete ${legacyCodex.dir}/topy-*.`);
+	if (legacyCodex) console.log(`Note: Codex now reads ~/.agents/skills. Move to it with \`ceo-skills install --scope user --agent codex\`, then delete ${legacyCodex.dir}/topy-*.`);
 	if (!update && !(opts["--mcp"] && scope === "project")) console.log(`\n${mcpHelp(scope)}`);
 	if (!update) console.log(`\nRestart your agent (or start a new session) to load the skills. Try: "Connect to TOPY.AI" or "What needs my attention as CEO today?"`);
 }
@@ -426,7 +426,7 @@ function listCmd(opts) {
 		console.log(`\n${c.name} (--category ${c.id})`);
 		for (const s of inCat) console.log(`  ${s.id.padEnd(30)} ${s.summary}`);
 	}
-	console.log(`\n${rows.length} skills. Install: npx @topy-ai/skills install [--category strategy,finance] [--agent codex,pi] [--scope user]`);
+	console.log(`\n${rows.length} skills. Install: npx @topy-ai/ceo-skills install [--category strategy,finance] [--agent codex,pi] [--scope user]`);
 }
 
 function agentsCmd(opts) {
@@ -455,13 +455,13 @@ function doctor(opts) {
 		console.log(`${ok ? "PASS" : "FAIL"} ${line}`);
 		if (!ok) problems++;
 	};
-	console.log(`@topy-ai/skills ${PKG.version}, ${catalog.skills.length} skills in the package`);
+	console.log(`@topy-ai/ceo-skills ${PKG.version}, ${catalog.skills.length} skills in the package`);
 	if (!state) {
 		console.log(`INFO nothing installed in ${scope} scope${scope === "project" ? ` (${root})` : ""}`);
 		return;
 	}
 	report(true, `record ${stateFile(scope, root)} (installed v${state.version})`);
-	if (state.version !== PKG.version) console.log(`INFO installed v${state.version}, package v${PKG.version}: run \`npx @topy-ai/skills@latest update${scope === "user" ? " --scope user" : ""}\``);
+	if (state.version !== PKG.version) console.log(`INFO installed v${state.version}, package v${PKG.version}: run \`npx @topy-ai/ceo-skills@latest update${scope === "user" ? " --scope user" : ""}\``);
 	for (const { dir, agents } of legacyTargets(state, scope, root)) {
 		const missing = state.skills.filter((id) => !existsSync(join(dir, id, "SKILL.md")));
 		report(!missing.length, `${agents.map((a) => AGENTS[a]?.name || a).join(", ")}: ${state.skills.length - missing.length}/${state.skills.length} skills in ${dir}${missing.length ? ` (missing: ${missing.join(", ")})` : ""}`);
@@ -470,7 +470,7 @@ function doctor(opts) {
 	}
 	if (scope === "project") {
 		const mcp = readJson(join(root, ".mcp.json"));
-		console.log(`INFO MCP server in .mcp.json: ${mcp?.mcpServers?.["topy"] ? "yes" : "no (topy-skills mcp, or --mcp on install)"}`);
+		console.log(`INFO MCP server in .mcp.json: ${mcp?.mcpServers?.["topy"] ? "yes" : "no (ceo-skills mcp, or --mcp on install)"}`);
 	}
 	if (problems) process.exitCode = 1;
 }
@@ -482,10 +482,10 @@ function mcp(opts) {
 }
 
 function help() {
-	console.log(`@topy-ai/skills ${PKG.version}: the TOPY.AI AI CEO skills for Claude Code, Codex, Pi, Cursor,
+	console.log(`@topy-ai/ceo-skills ${PKG.version}: the TOPY.AI AI CEO skills for Claude Code, Codex, Pi, Cursor,
 Gemini CLI and other coding agents
 
-Usage: npx @topy-ai/skills <command> [options]
+Usage: npx @topy-ai/ceo-skills <command> [options]
 
 Commands
   install [SKILL ...]   Install skills (all by default; the core skills always come along)
@@ -511,14 +511,14 @@ Options
   --installed, --json   For list and agents
 
 Examples
-  npx @topy-ai/skills install                          # this project, for the agents set up here
-  npx @topy-ai/skills install -g -a codex,pi           # every project, Codex and Pi (~/.agents/skills)
-  npx @topy-ai/skills install -a claude,codex --category strategy,fundraising --mcp
-  npx @topy-ai/skills@latest update -g
+  npx @topy-ai/ceo-skills install                          # this project, for the agents set up here
+  npx @topy-ai/ceo-skills install -g -a codex,pi           # every project, Codex and Pi (~/.agents/skills)
+  npx @topy-ai/ceo-skills install -a claude,codex --category strategy,fundraising --mcp
+  npx @topy-ai/ceo-skills@latest update -g
 
 Also: Claude Code plugins (/plugin marketplace add TOPY-AI-LTD/TOPY-AI-CEO-Skills),
 Codex plugins (codex plugin marketplace add TOPY-AI-LTD/TOPY-AI-CEO-Skills),
-Pi packages (pi install npm:@topy-ai/skills).`);
+Pi packages (pi install npm:@topy-ai/ceo-skills).`);
 }
 
 function main(argv) {
@@ -546,13 +546,13 @@ function main(argv) {
 		case "mcp":
 			return mcp(opts);
 		default:
-			throw new UsageError(`unknown command ${command}; see \`topy-skills help\``);
+			throw new UsageError(`unknown command ${command}; see \`ceo-skills help\``);
 	}
 }
 
 try {
 	main(process.argv.slice(2));
 } catch (error) {
-	console.error(`topy-skills: ${error.message}`);
+	console.error(`ceo-skills: ${error.message}`);
 	process.exitCode = error instanceof UsageError ? 2 : 1;
 }

@@ -1,6 +1,6 @@
 {
-	"name": "@topy-ai/skills",
-	"version": "0.7.0",
+	"name": "@topy-ai/ceo-skills",
+	"version": "0.7.1",
 	"description": "Install the TOPY.AI AI CEO skills (business plans, strategy, fundraising, finance, operations, leadership) into Claude Code, Codex, Pi, Cursor, Gemini CLI, OpenCode, Copilot and other coding agents, for one project or for your user. Also a Pi package.",
 	"type": "module",
 	"license": "MIT",
@@ -29,7 +29,7 @@
 		"mcp"
 	],
 	"bin": {
-		"topy-skills": "bin/topy-skills.mjs"
+		"ceo-skills": "bin/ceo-skills.mjs"
 	},
 	"pi": {
 		"skills": [
