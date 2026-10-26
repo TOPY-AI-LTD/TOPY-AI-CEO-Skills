@@ -17,5 +17,6 @@
     "mcp"
   ],
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json"
+  "mcpServers": "./.mcp.json",
+  "privacyPolicyUrl": "https://topy.ai/privacy"
 }
