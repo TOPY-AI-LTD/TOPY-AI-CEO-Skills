@@ -1,6 +1,6 @@
 # @topy-ai/ceo-skills
 
-The [TOPY.AI](https://topy.ai) AI CEO skills for **Claude Code, Codex, Pi, Cursor, Gemini CLI, OpenCode, GitHub Copilot, Windsurf** and other coding agents: 42 skills for business plans, strategy, fundraising, finance, operations and leadership, powered by the TOPY.AI MCP server.
+The [TOPY.AI](https://topy.ai) AI CEO skills for **Claude Code, Codex, Pi, Cursor, Gemini CLI, OpenCode, GitHub Copilot, Windsurf** and other coding agents: 51 skills for goals and KPIs, business plans, strategy, fundraising, finance, operations and leadership, powered by the TOPY.AI MCP server.
 
 Install them into one project, or for your user so every project gets them.
 
@@ -63,7 +63,7 @@ npx @topy-ai/ceo-skills install --category strategy,fundraising       # categori
 npx @topy-ai/ceo-skills install topy-okrs topy-runway     # single skills
 ```
 
-The 17 core skills (connect, daily brief, weekly review, business plan, plan revision, decision log, risk register…) always come along: the other skills hand off to them. Strategy, fundraising, finance, operations and leadership skills also work without a TOPY account.
+The 23 core skills (connect, goal tree, operating board, daily brief, weekly review, KPIs and alerts, business plan, plan revision, decision log, risk register…) always come along: the other skills hand off to them. Strategy, fundraising, finance, operations and leadership skills also work without a TOPY account.
 
 ## Connect the MCP server
 

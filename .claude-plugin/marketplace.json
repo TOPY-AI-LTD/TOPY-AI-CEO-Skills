@@ -7,14 +7,14 @@
 	},
 	"metadata": {
 		"description": "AI CEO skills for founders, built for TOPY.AI. Core skills run on the TOPY MCP server (https://topy.ai/mcp); connected skills use it when available; standalone skills are CEO methods that work anywhere.",
-		"version": "0.7.1"
+		"version": "0.8.0"
 	},
 	"plugins": [
 		{
 			"name": "topy-ai",
 			"source": "./plugins/topy-ai",
-			"description": "TOPY core: connects the TOPY MCP server and runs the AI CEO day to day — Business plans, Connect to TOPY.AI, Daily CEO check-in, Decision log, Founder journal and project memory, Growth experiments….",
-			"version": "0.7.1",
+			"description": "TOPY core: connects the TOPY MCP server and runs the AI CEO day to day — Alerts, Business plans, Connect to TOPY.AI, Customer personas, Daily CEO check-in, Decision log….",
+			"version": "0.8.0",
 			"category": "productivity",
 			"keywords": [
 				"topy.ai",
@@ -26,8 +26,8 @@
 		{
 			"name": "topy-ai-strategy",
 			"source": "./plugins/topy-ai-strategy",
-			"description": "TOPY Strategy & direction skills (7): Business model, Competitive strategy, Decision memo, Market entry, OKRs, Prioritization…. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
-			"version": "0.7.1",
+			"description": "TOPY Strategy & direction skills (8): Business model, Competitive strategy, Decision memo, Market entry, OKRs, Prioritization…. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
+			"version": "0.8.0",
 			"category": "productivity",
 			"keywords": [
 				"topy.ai",
@@ -40,7 +40,7 @@
 			"name": "topy-ai-fundraising",
 			"source": "./plugins/topy-ai-fundraising",
 			"description": "TOPY Fundraising skills (5): Cap table and dilution, Data room, Fundraising strategy, Pitch deck, Term sheet review. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
-			"version": "0.7.1",
+			"version": "0.8.0",
 			"category": "productivity",
 			"keywords": [
 				"topy.ai",
@@ -52,8 +52,8 @@
 		{
 			"name": "topy-ai-finance",
 			"source": "./plugins/topy-ai-finance",
-			"description": "TOPY Finance skills (4): Financial model, Pricing decisions, Runway and burn, Unit economics. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
-			"version": "0.7.1",
+			"description": "TOPY Finance skills (6): Financial model, Monthly close, Plan vs actual, Pricing decisions, Runway and burn, Unit economics. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
+			"version": "0.8.0",
 			"category": "productivity",
 			"keywords": [
 				"topy.ai",
@@ -66,7 +66,7 @@
 			"name": "topy-ai-operations",
 			"source": "./plugins/topy-ai-operations",
 			"description": "TOPY Operations & people skills (5): Board meetings, Hiring plan, KPI dashboard, Operating cadence, Org design. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
-			"version": "0.7.1",
+			"version": "0.8.0",
 			"category": "productivity",
 			"keywords": [
 				"topy.ai",
@@ -79,7 +79,7 @@
 			"name": "topy-ai-leadership",
 			"source": "./plugins/topy-ai-leadership",
 			"description": "TOPY Leadership & decisions skills (4): CEO advisor, Crisis response, Debiasing a big decision, Stakeholder alignment. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
-			"version": "0.7.1",
+			"version": "0.8.0",
 			"category": "productivity",
 			"keywords": [
 				"topy.ai",
@@ -91,8 +91,8 @@
 		{
 			"name": "topy-ai-all",
 			"source": "./plugins/topy-ai-all",
-			"description": "All 42 TOPY AI CEO skills in one install: TOPY core (MCP), Strategy & direction, Fundraising, Finance, Operations & people, Leadership & decisions.",
-			"version": "0.7.1",
+			"description": "All 51 TOPY AI CEO skills in one install: TOPY core (MCP), Strategy & direction, Fundraising, Finance, Operations & people, Leadership & decisions.",
+			"version": "0.8.0",
 			"category": "productivity",
 			"keywords": [
 				"topy.ai",

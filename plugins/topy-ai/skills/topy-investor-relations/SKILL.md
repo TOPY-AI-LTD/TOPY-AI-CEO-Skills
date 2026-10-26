@@ -1,11 +1,11 @@
 ---
 name: topy-investor-relations
-description: Keep a founder's investor pipeline and follow-ups in TOPY, and draft, approve and save the periodic investor update from the project's own records. Use when the user says things like "who do I need to follow up with?"; "add this investor to my pipeline"; "move Northgate to meeting stage"; "write this month's investor update"; "where does my raise stand?"; "an investor passed, log it". Needs the TOPY MCP server.
+description: Keep a founder's investor pipeline and follow-ups in TOPY, draft the monthly investor update from the company's sourced numbers, and send it only with the founder's approval of text and recipients. Use when the user says things like "who do I need to follow up with?"; "add this investor to my pipeline"; "move Northgate to meeting stage"; "write this month's investor update"; "where does my raise stand?"; "an investor passed, log it". Needs the TOPY MCP server.
 license: MIT
 metadata:
   category: core
   tier: core
-  version: 0.1.0
+  version: 0.2.0
   docs: https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/plugins/topy-ai/skills/topy-investor-relations/SKILL.md
 ---
 # Investor relations
@@ -14,7 +14,7 @@ A raise is won on follow-through: the right next step with each investor on the 
 
 ## When to use
 - The founder asks who to chase, adds or moves an investor, or logs a pass.
-- Month end (or quarter end): time for the investor update.
+- Month end (after `topy-monthly-close`), or quarter end: time for the investor update.
 - Before a partner meeting, to read back everything recorded about one fund.
 - Not for: deciding how much to raise and from whom (`topy-fundraising-strategy`); the board pack and minutes (`topy-board-meetings`); the pitch narrative (`topy-pitch-deck`).
 
@@ -57,27 +57,30 @@ Preview `investor_contact_create` / `investor_contact_update`, show the preview,
 
 ### 5. Draft the investor update
 1. Find the last sent update (`investor_updates_list`, newest `sent_at`) and read it with `investor_update_get` for its numbers and asks; then read what happened since: `decisions_list`, `growth_experiments_list`, `journal_entries_list`, `risks_list`.
-2. Ask the founder for the headline numbers for the period (revenue or MRR, users, burn, runway). TOPY records do not hold verified financials: never infer them.
-3. Draft in this order: headline (one sentence) · numbers (with change vs last period) · highlights · lowlights and what is being done · key decisions · what experiments taught us · top risks · asks (specific: "intro to a head of ops at a UK clinic group") · thanks.
-4. Leave out anything from the journal the founder has not cleared for investors.
-5. Show the full draft. After the founder approves the text, preview `investor_update_create` with `update_type` (`monthly` default, or `quarterly`), `subject`, `content`, `payload_json` (e.g. `{"period": "2026-10", "metrics": {...}, "asks": [...]}`) and `status: "draft"`; confirm on a yes.
-6. TOPY does not send email. Once the founder has sent it, preview `investor_update_update` with `status: "sent"` and `sent_at`.
+2. Best after the month's close (`topy-monthly-close`), so the financial KPIs have this month's actuals. Preview `investor_update_draft` with `period` (e.g. `"2026-10"`), `tone` (the founder's: plain, upbeat, candid) and `include` (`["kpis", "milestones", "cash", "asks"]`); confirm on a yes. It creates an `investor_updates` record with `status: "draft"` and `payload_json.figures[]`, each figure with its `source`.
+3. Check the figures: any figure without a `source`, or with a stale period, is flagged to the founder, not smoothed over. A number the founder supplies is recorded as "source: founder". Never infer financials.
+4. Edit the draft in this order: headline (one sentence) · numbers (with change vs last period) · highlights · lowlights and what is being done · key decisions · what experiments taught us · top risks · asks (specific: "intro to a head of ops at a UK clinic group") · thanks. Leave out anything from the journal the founder has not cleared for investors. Save edits with `investor_update_update` (read with `investor_update_get` first; `payload_json` is replaced whole). Without the draft tool, write it by hand and save with `investor_update_create` (`update_type` `monthly` or `quarterly`, `subject`, `content`, `payload_json`, `status: "draft"`).
+5. **Recipients.** From `investor_contacts_list`, propose who gets it (existing investors, `committed`, and `meeting`/`diligence` contacts who asked to be kept updated); the founder confirms the list.
+6. **Send (W3, external).** Two ways:
+   - The founder sends it from their own email: give the final text; once sent, preview `investor_update_update` with `status: "sent"` and `sent_at`.
+   - `investor_update_send` with `recipient_contact_ids`: the preview shows the full text and every recipient; send only after an explicit yes to this exact preview. Every send is approved one at a time: no standing permission or agent key covers it, and a scheduled agent never sends. The result records `sent_at` and recipients.
 
 ### 6. Removing someone
 Prefer `investor_contact_update` with `status: "passed"` or `"not_now"`: the history stays. Use `investor_contact_delete` only when the investor asks to be removed or the founder wants their personal data gone. Say plainly that delete is permanent and cannot be undone, then follow the two-call rule.
 
 ## Output
 - Pipeline: table `Investor | Fund | Stage | Last contact | Next step | Due`, overdue first, then stage counts.
-- Update: the full text under its subject line, then "Saved as draft in TOPY" only when the tool result says so.
+- Update: the full text under its subject line, a figures table `Figure | Value | Period | Source`, the proposed recipients, then "Saved as draft" or "Sent to n investors" only when the tool result says so.
 
 ## Example
 Founder of Brindle Loop (a fictional UK B2B scheduling startup): "Who do I chase, and draft October's update."
 - `investor_contacts_list` → 14 contacts. Overdue: Dana Reyes (Halden Ventures, `meeting`, follow-up 2026-10-21, "send pilot retention numbers"). Stage counts: 6 lead, 3 contacted, 3 meeting, 1 diligence, 1 passed.
 - Agent proposes moving Halden's follow-up to 2026-10-29 once the numbers are sent; founder agrees; preview → confirm.
-- For the update, the agent reads 3 decisions, 2 finished experiments and 1 new high risk, asks for the numbers (MRR £8.4k, up from £7.1k; runway 11 months), drafts, and saves it as a draft after the founder approves the text.
+- For the update, the agent previews `investor_update_draft` for October; after the yes the draft holds MRR £8.4k (source: stripe) and runway 11 months (source: ledger). It adds 3 decisions and 1 new high risk, the founder edits the asks, approves 9 recipients, and approves the send preview.
 
 ## Quality bar
-- [ ] Every figure in the update came from the founder or a TOPY record, and is labelled with its period.
+- [ ] Every figure in the update has a `source` (tool or "founder") and a period.
+- [ ] Recipients were confirmed by the founder; the send preview was approved as shown.
 - [ ] Overdue follow-ups listed first, each with a concrete next step and date.
 - [ ] Stage names match the existing records.
 - [ ] Asks are specific enough that an investor can act on them in one reply.
@@ -86,7 +89,8 @@ Founder of Brindle Loop (a fictional UK B2B scheduling startup): "Who do I chase
 
 ## Guardrails
 - Changes in TOPY take two calls: a preview first, shown to the user, then `confirm: true` with the `confirmation` only after they agree. Never confirm for the user.
-- Investor tools are not covered by standing permissions: a scheduled agent's key cannot add or change contacts or updates. Leave those for the founder.
+- A scheduled agent with a standing permission may create an update draft (`investor_update_draft`) within its daily cap; it cannot add or change contacts, and it can never send.
+- Sending is an external effect (W3): every send is previewed with full text and recipients and approved one by one by the founder. Never under a standing permission.
 - Never invent investors, funds, commitments, valuations or figures. A rumour of interest is not `committed`.
 - Investor contacts hold third-party personal data: keep work email, fund and what the raise needs. No personal phone, address, social profiles or private remarks.
 - Never describe a deal as closed, or an amount as raised, before the founder confirms it.

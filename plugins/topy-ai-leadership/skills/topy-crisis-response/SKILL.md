@@ -1,11 +1,11 @@
 ---
 name: topy-crisis-response
-description: 'Lead a company through a live crisis: classify severity, contain in the first hours, sequence who hears what and when, recover, and run a blameless review, recording the risk and decisions in TOPY. Use when the user says things like "we have a crisis, what do I do in the next two hours?"; "our production data may have leaked"; "our biggest customer just threatened to leave"; "my co-founder / CTO is quitting"; "a post about us is going viral and it''s bad"; "we can''t make payroll next month". Uses TOPY when it is connected.'
+description: 'Lead a company through a live crisis: classify severity, contain in the first hours, sequence who hears what and when, recover, and run a blameless review, kept as an incident record in TOPY with its alert, risk and decisions. Use when the user says things like "we have a crisis, what do I do in the next two hours?"; "our production data may have leaked"; "our biggest customer just threatened to leave"; "my co-founder / CTO is quitting"; "a post about us is going viral and it''s bad"; "we can''t make payroll next month". Uses TOPY when it is connected.'
 license: MIT
 metadata:
   category: leadership
   tier: connected
-  version: 0.1.0
+  version: 0.2.0
   docs: https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/plugins/topy-ai-leadership/skills/topy-crisis-response/SKILL.md
 ---
 # Crisis response
@@ -26,8 +26,9 @@ comes before root cause and before polishing the message.
 - Ask only what is needed to act, one question at a time: what happened and when; known vs suspected; who is
   affected; what is exposed (data, money, contracts, safety); who can act now.
 - If people's safety is at risk, the first step is emergency services, not this skill.
-- With TOPY connected, call `risks_list` to see whether this risk was already on the register and what
-  mitigation was planned; reuse it rather than start blank.
+- With TOPY connected, read first: `incidents_list` (status open) so the same incident is not opened twice;
+  `alerts_list` for the alert that fired (a KPI crossing a threshold is often the first signal) and its time;
+  `risks_list` to see whether this risk was already on the register and what mitigation was planned.
 - Without TOPY, ask whether anyone had flagged this risk before and what was agreed then.
 
 ## Workflow
@@ -43,12 +44,18 @@ comes before root cause and before polishing the message.
    - Stop the bleeding: revoke access, pause the feature or campaign, freeze payments, secure evidence.
    - Separate facts from suspicion in the log; do not speculate in writing about causes or blame.
    - Decide who must be told now (step 4) and draft a holding statement.
+   - With TOPY connected, open the record: preview `incident_create` with `incident_type` (`security`,
+     `outage`, `customer`, `people`, `financial`, `legal`, `reputation`), `severity` (the level above),
+     `summary` (facts only), `impact` (what and who is affected, as ranges), `mitigation` (containment so far),
+     `status: "open"`, `owner_user_id` (the incident lead, if they have a TOPY account). Put the alert id and
+     the related risk id in its details. Confirm on a yes; containment never waits for the record.
    - Level 3-4: call the company's lawyer. Some obligations have short clocks: for example, under UK and
      EU GDPR a reportable personal-data breach must generally be notified to the regulator within 72 hours
      of becoming aware of it. Insurance policies and contracts may also require prompt notice. The lawyer
      confirms what applies.
 3. **First 24 hours: stabilise.** Set a check-in rhythm (e.g. every 2-4 hours at level 3-4); update the
-   facts log; confirm the blast radius is not growing; brief each audience in sequence; make the decisions
+   facts log (and the incident with `incident_update` at each check-in: read with `incident_get`, merge, then
+   preview); confirm the blast radius is not growing; brief each audience in sequence; make the decisions
    that cannot wait (refunds, credits, temporary coverage of a departed person's work).
 4. **Sequence the communication.** Narrow and private first, then wider:
    1) the people needed to contain it; 2) the strongest ally and the most powerful approver (often the lead
@@ -69,13 +76,18 @@ comes before root cause and before polishing the message.
    (churn, morale, recruiting).
 7. **Run a blameless review** within two weeks (rule of thumb): timeline, what went well, contributing
    causes (the system, not the person), what was lucky, actions with owners and dates.
-8. **Record it.** With TOPY connected, offer to:
-   - save the incident as a risk with `risk_create` (cause, likelihood, impact, mitigation owner), and
+8. **Record it.** With TOPY connected, each write previewed and confirmed on a yes:
+   - close the incident with `incident_update`: `root_cause` (system causes), `mitigation` (what fixed it and
+     what prevents a repeat), `status: "closed"` (`mitigated` while the fix is temporary); the alert is resolved through `topy-alerts`;
+   - update the matching risk with `risk_update` (status `occurred`, new scores, mitigation) or, if there was
+     none, add it with `risk_create` so the exposure stays tracked;
    - save the key calls (e.g. "notify all customers", "pause launch") with `decision_create`.
+   `incident_delete` only for a duplicate or a mistake: permanent (W4). A false alarm is resolved with that as
+   the root cause, not deleted.
 
 ## Output
 ```
-Crisis plan: <short name> · level <1-4> · lead <name> · opened <time>
+Crisis plan: <short name> · level <1-4> · lead <name> · opened <time> · incident <id, if saved>
 Facts (confirmed) · Unknowns · Exposure (data/money/contracts/safety)
 Next 2 hours | action | owner | done by
 Next 24 hours | action | owner | done by
@@ -98,14 +110,19 @@ Timeline · Impact · What worked · Contributing causes · What was luck · Act
 - The review names system causes, not scapegoats.
 
 ## Guardrails
-- Changes in TOPY take two calls: `risk_create` and `decision_create` first return a preview, shown to the
-  user; call again with `confirm: true` and the `confirmation` only after they agree. Never confirm for the user.
+- Changes in TOPY take two calls: a preview first, shown to the user, then `confirm: true` with the
+  `confirmation` only after they agree. Never confirm for the user.
+- The agent never speaks for the company: every external statement, customer notice or regulator contact is
+  drafted here and sent only by the founder (or with their explicit approval of that exact text, one at a time).
+- Personal-data breach: state the statutory clock (e.g. 72 hours under UK/EU GDPR from awareness) at the start,
+  and recommend a lawyer immediately.
 - Never invent facts, impact figures, customer counts or quotes; label estimates as ranges.
 - Not legal advice: breach notification, regulator contact, litigation threats, dismissals, suspensions,
   workplace investigations and public statements about individuals go to a lawyer or HR adviser.
 - Never suggest destroying records, misleading regulators, customers or investors, or retaliating.
 
 ## Related skills
+- `topy-alerts` — the alert that fired, and resolving it when the incident closes.
 - `topy-stakeholder-alignment` — deeper stakeholder mapping when recovery needs buy-in.
 - `topy-risk-register` — keep the risk and its mitigation tracked after the incident.
 - `topy-decision-log` — the decisions made under pressure, reviewed later.

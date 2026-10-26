@@ -1,11 +1,11 @@
 ---
 name: topy-fundraising-strategy
-description: Decide whether to raise, how much, on what instrument, from which kinds of investor and when, tied to the milestones the money must buy, with a fallback if the round is late. Use when the user says things like "how much should we raise?"; "we need to raise in the next 90 days, where do we start?"; "should we raise a pre-seed or keep bootstrapping?"; "SAFE, ASA or a priced round?"; "what milestones do we need before our seed round?"; "who should we pitch first, angels or VCs?". Uses TOPY when it is connected.
+description: Decide whether to raise, how much, on what instrument, from which kinds of investor and when, tied to the milestones the money must buy and to TOPY's runway and cap table, saved as a planned round, with a fallback if the round is late. Use when the user says things like "how much should we raise?"; "we need to raise in the next 90 days, where do we start?"; "should we raise a pre-seed or keep bootstrapping?"; "SAFE, ASA or a priced round?"; "what milestones do we need before our seed round?"; "who should we pitch first, angels or VCs?". Uses TOPY when it is connected.
 license: MIT
 metadata:
   category: fundraising
   tier: connected
-  version: 0.1.0
+  version: 0.2.0
   docs: https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/plugins/topy-ai-fundraising/skills/topy-fundraising-strategy/SKILL.md
 ---
 # Fundraising strategy
@@ -14,7 +14,8 @@ Treats a raise as a capital decision, not a calendar event: the amount comes fro
 must reach plus a buffer to raise again, the valuation range comes from the dilution the founders accept, and
 the timing comes from runway. The founder leaves with one page they can defend to a co-founder or an
 investor, and a plan B for the case where the round takes longer than hoped. With TOPY connected it starts
-from the business plan's funding ask and the existing investor pipeline.
+from the business plan's funding ask, the computed runway, the stored cap table and the investor pipeline,
+and saves the raise as a planned round that the cap table, data room and deck skills build on.
 
 ## When to use
 - "How much should we raise?", "when do we start?", "SAFE or priced?", "who do we pitch?", "is it time?".
@@ -30,6 +31,11 @@ from the business plan's funding ask and the existing investor pipeline.
 - With TOPY connected, read first:
   - `plans_list` to find the current plan, then `plan_get` to read its funding requirement, use of funds,
     financial projections and milestones. Quote the plan's ask; do not silently replace it.
+  - `runway_get` for `cash`, `avg_net_burn_3m`, `runway_months_current`, `runway_months_scenario` and
+    `zero_cash_date`, with their `sources`. Use these instead of asking; if it has no data, ask the founder
+    and label the figures `source: founder` (or run `topy-monthly-close` first).
+  - `cap_table_get` for fully diluted shares, the pool and outstanding convertibles; `rounds_list` for a
+    round already planned or open (update it rather than adding a second).
   - `investor_contacts_list` to see who is already in the pipeline and at what stage.
 - Without TOPY, ask for the latest model or deck and the list of investors the founder is talking to.
 - Never ask for bank logins or investor login details; balances and totals are enough.
@@ -53,7 +59,7 @@ from the business plan's funding ask and the existing investor pipeline.
    | Net burn to milestone (e.g. 15 months, ramping) | 1,350k | model / plan |
    | Buffer: 6 months × 110k end-state burn | 660k | assumption |
    | One-offs (legal, equipment) | 40k | founder |
-   | Less cash on hand | −300k | bank |
+   | Less cash on hand | −300k | `runway_get` (or bank) |
    | Less committed grant | −100k | award letter |
    | **Raise** | **1,650k** → round to a clean ask, e.g. 1.6-1.75M | |
    Common rule of thumb: total runway after the raise of roughly 18-24 months. Shorter means raising again
@@ -61,7 +67,8 @@ from the business plan's funding ask and the existing investor pipeline.
 4. **Turn dilution into a valuation range, not the other way round.**
    `post-money = raise ÷ dilution` and `pre-money = post-money − raise`.
    Raise 1.65M at 15% dilution → post 11.0M, pre 9.35M. At 20% → post 8.25M, pre 6.6M. At 25% → post 6.6M.
-   This is what the founders *need* to accept the deal, not what the market will pay. Test it against
+   This is what the founders *need* to accept the deal, not what the market will pay. Outstanding SAFEs and
+   notes from the cap table convert on top of this; model the full path in `topy-cap-table`. Test it against
    evidence the founder brings (recent comparable rounds they can cite, investor feedback). Never state a
    market valuation without a source. If the needed valuation is far above what investors signal, shrink the
    raise to a nearer milestone or change the milestone, rather than hoping.
@@ -84,7 +91,8 @@ from the business plan's funding ask and the existing investor pipeline.
    10% meeting-to-commit rate → about 90 first meetings. Label the rate as an assumption; refine after the
    first 15-20 meetings.
 8. **Set the timeline backwards from cash.**
-   `latest start date = zero-cash date − buffer months − process length`.
+   `latest start date = zero-cash date − buffer months − process length` (zero-cash date from `runway_get`
+   when connected; give both the current-pace and the plan-scenario dates).
    Typical phases (rule of thumb): preparation 3-6 weeks (deck, model, data room); active process 6-12 weeks
    run in a tight window so conversations overlap; closing and legals 3-8 weeks. Start A-tier meetings only
    after practising on C and B. Rule of thumb: do not start a raise with under ~6 months of runway.
@@ -97,6 +105,11 @@ from the business plan's funding ask and the existing investor pipeline.
 11. **Reconcile with the plan.** If the amount, use of funds or milestones differ from the saved plan, list
     the differences and hand them to `topy-plan-revision`. New investors to track go to
     `topy-investor-relations`.
+12. **Save the round (connected).** Preview `round_create` with `name` (e.g. "Seed 2027"), `round_type`
+    (`pre_seed` · `seed` · `series_a` …), `pre_money` and `amount` from steps 3-4 (the founder's chosen
+    point in the range), `price_per_share` only for a priced round, `pool_top_up_pct`, and `status` planned.
+    Show it, and confirm only after the founder says yes. It is a plan, not an offer; the data room
+    (`topy-data-room`) and deck (`topy-pitch-deck`) then read the same numbers.
 
 ## Output
 ```
@@ -121,9 +134,12 @@ Differences from saved plan: <list or "none">
 - No invented investor names, fund theses, cheque sizes or comparable rounds.
 
 ## Guardrails
-- TOPY reads here change nothing. Any change to the plan goes through `topy-plan-revision`, which takes two
-  calls: a preview shown to the user, then `confirm: true` with the `confirmation` only after they agree.
-  Never confirm for the user.
+- Changes in TOPY take two calls: a preview shown to the user, then `confirm: true` with the `confirmation`
+  only after they agree. Never confirm for the user. That holds for `round_create` here and for plan changes
+  through `topy-plan-revision`.
+- Figures come from tools with their source (`runway_get`, `cap_table_get`, the plan) or from the founder,
+  labelled `source: founder`; assumptions are labelled. A round record is a plan: signing and money
+  happen with lawyers, outside the agent.
 - Never invent figures, investors, customers, quotes or sources; label assumptions as assumptions.
 - Not legal, tax or investment advice. Securities rules on who may be approached and how (e.g. financial
   promotion rules in the UK, private placement rules elsewhere), SEIS/EIS eligibility and instrument choice

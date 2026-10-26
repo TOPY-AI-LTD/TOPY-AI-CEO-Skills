@@ -1,11 +1,11 @@
 ---
 name: topy-financial-model
-description: Build a driver-based, three-statement-lite startup model (revenue build, headcount, costs, P&L, cash flow, simple balance sheet) with an assumptions sheet, scenarios and checks. Use when the user says things like "build a financial model for my startup"; "I need 3-year projections for investors"; "turn my business plan numbers into a model"; "are my revenue projections realistic?"; "what happens to cash if we hire 4 people next quarter?"; "make a base, downside and upside case". Uses TOPY when it is connected.
+description: Build a driver-based, three-statement-lite startup model (revenue build, headcount, costs, P&L, cash flow, simple balance sheet) with an assumptions sheet, scenarios and checks, saved in TOPY as financial scenarios with monthly projections. Use when the user says things like "build a financial model for my startup"; "I need 3-year projections for investors"; "turn my business plan numbers into a model"; "are my revenue projections realistic?"; "what happens to cash if we hire 4 people next quarter?"; "make a base, downside and upside case". Uses TOPY when it is connected.
 license: MIT
 metadata:
   category: finance
   tier: connected
-  version: 0.1.0
+  version: 0.2.0
   docs: https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/plugins/topy-ai-finance/skills/topy-financial-model/SKILL.md
 ---
 # Financial model
@@ -14,7 +14,8 @@ Builds the model a founder actually runs the company on: a few drivers on one as
 monthly revenue build, a headcount plan and costs, which roll into a P&L, a cash flow and a simple balance
 sheet. Change a driver and everything moves. The model is honest about what is known (actuals), what is
 believed (assumptions with sources) and what is hoped (upside case). With TOPY connected it starts from the
-business plan's financial section and flags where model and plan disagree.
+business plan's financial section, saves each case as a financial scenario with monthly projections (so
+`topy-plan-vs-actual` and `topy-runway` can compare reality against it), and flags where model and plan disagree.
 
 ## When to use
 - "Financial model", "projections", "3-year forecast", "do our numbers add up", "base/downside case".
@@ -29,6 +30,10 @@ business plan's financial section and flags where model and plan disagree.
 - With TOPY connected, read first: `plans_list` to find the current plan, then `plan_get` to read the
   financial projections, pricing, team, milestones and funding requirement. Record the plan's headline
   figures (revenue by year, headcount, burn, raise) to compare against at the end.
+- Then `financial_scenarios_list`: is there already a `plan` scenario (extracted from the plan) or a `current`
+  one? `financial_scenario_get` reads its `assumptions`, and `financial_projections_list` (by `metric`, `from`,
+  `to`) its monthly figures. Start from these instead of retyping. No `plan` scenario yet → offer
+  `plan_financials_extract` (writes the plan's projections as the `plan` scenario; preview first).
 - Without TOPY, ask for the latest projections, deck numbers or bookkeeping export.
 - Never ask for bank or accounting-system logins; exports and totals are enough.
 
@@ -79,7 +84,20 @@ business plan's financial section and flags where model and plan disagree.
     segments = total; no hard-coded numbers outside Assumptions; month-over-month growth, gross margin and
     revenue per employee compared with the company's own actuals (and benchmarks only if the founder cites a
     source); headcount × salary matches the people-cost line.
-11. **Compare with the saved plan.** List each headline figure: plan vs model, difference, reason. If the
+11. **Save the model in TOPY (with a yes).** One financial scenario per case:
+    - `financial_scenario_create` (or `financial_scenario_update` for an existing one) with `name` (`plan` ·
+      `current` · `conservative` · `optimistic` · a custom name), `currency`, `assumptions` (the drivers as an
+      object: growth, price, churn, hiring timetable…), `pricing_model`, `unit_economics`, `notes` (sources and
+      what changed). Updates replace JSON fields whole: read with `financial_scenario_get` and merge first.
+    - `financial_projections_upsert` with rows `{period_date, metric_name, metric_value, metadata_json}`, one per
+      month and metric. `metric_name` uses the KPI keys (`revenue_monthly`, `mrr`, `net_burn`, `cash_balance`,
+      `gross_margin`, `new_customers`, `churn_rate_monthly`) so plan-vs-actual can match them; put
+      `{"origin": {"type": "founder" | "agent"}, "assumption_refs": [...]}` in `metadata_json`.
+    - Never overwrite the `plan` scenario with a re-forecast: a re-forecast is `current`. If a scenario has
+      `origin` type `plan` and was edited by the founder (`edited: true`), say what will change before updating.
+    - `financial_scenario_delete` only for a duplicate or a mistake: permanent (W4), clear yes required.
+    Each write is a preview first, confirmed only after the founder agrees.
+12. **Compare with the saved plan.** List each headline figure: plan vs model, difference, reason. If the
     plan must change (a revenue line, the raise, headcount), hand the list to `topy-plan-revision`, which
     previews the change across every section before anything is applied.
 
@@ -93,6 +111,7 @@ Scenarios: scenario | changed drivers | month-18 cash | zero-cash month | revenu
 Top sensitivity: driver | ±20% effect on month-18 cash
 Checks: list with pass/fail
 Plan vs model: figure | plan | model | difference | reason
+Saved in TOPY: scenario name | id | projection rows written
 ```
 
 ## Quality bar
@@ -103,9 +122,11 @@ Plan vs model: figure | plan | model | difference | reason
 - Differences from the saved plan are listed, not silently overwritten.
 
 ## Guardrails
-- The skill only reads TOPY. Changes to plan figures go through `topy-plan-revision`, which takes two calls:
-  a preview shown to the user, then `confirm: true` with the `confirmation` only after they agree. Never
-  confirm for the user.
+- Changes in TOPY take two calls: a preview shown to the user, then `confirm: true` with the `confirmation`
+  only after they agree. Never confirm for the user. Changes to the plan document itself go through
+  `topy-plan-revision`.
+- Actuals in the model come only from tools with a `source` (CFO-sourced KPI values) or from the founder,
+  labelled "source: founder"; projections are labelled projections.
 - Never invent actuals, benchmarks, market data or customer numbers; projections are labelled projections.
 - Not tax or accounting advice: tax, VAT, payroll on-costs, R&D credits and revenue recognition need the
   company's accountant.
@@ -116,4 +137,6 @@ Plan vs model: figure | plan | model | difference | reason
 - `topy-unit-economics` — CAC, LTV and payback that drive the revenue build.
 - `topy-hiring-plan` — the headcount tab.
 - `topy-plan-revision` — carry changed figures through the saved plan.
+- `topy-plan-vs-actual` — compare the saved scenarios with actuals each month.
+- `topy-scenario-planning` — the uncertainties and triggers behind the downside and upside cases.
 - `topy-fundraising-strategy` — the raise the model must fund.

@@ -5,7 +5,7 @@ license: MIT
 metadata:
   category: core
   tier: core
-  version: 0.1.0
+  version: 0.2.0
   docs: https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/plugins/topy-ai/skills/topy-risk-register/SKILL.md
 ---
 # Risk register
@@ -15,8 +15,9 @@ A risk register is useful only if it is honest, scored the same way every time, 
 ## When to use
 - The founder names a worry, a dependency or a threat, or a review surfaces one.
 - A weekly or monthly risk review; before a board meeting or investor update.
+- An alert keeps firing or points to a lasting exposure (a KPI trending the wrong way for weeks): escalate it to a risk.
 - Something changed (a competitor raised, a key customer wobbled): rescore.
-- Not for: a risk that has already happened (`topy-crisis-response`); a technical security audit (a security specialist); deciding a mitigation with big trade-offs (`topy-decision-memo`, then log it in `topy-decision-log`).
+- Not for: a risk that has already happened (`topy-crisis-response`); acknowledging or resolving a single alert (`topy-alerts`); a technical security audit (a security specialist); deciding a mitigation with big trade-offs (`topy-decision-memo`, then log it in `topy-decision-log`).
 
 ## Before you start
 - Know the project (`projects_list`; can be left out with one project).
@@ -58,7 +59,13 @@ Preview `risk_create` (`status` defaults to `open`), show it, confirm with `conf
 3. For each risk reviewed, ask what changed. Rescore only with evidence the founder gives.
 4. Changes: read with `risk_get`, merge into the existing `metadata_json` (it is replaced whole), preview `risk_update`, confirm on a yes.
 
-### 6. Leaving the register
+### 6. Escalate an alert to a risk
+1. `alerts_list` (status `open`): look for alerts that repeat on the same KPI, are `critical`, or describe an exposure that will outlast the alert (cash runway falling, churn rising two periods in a row).
+2. Check `risks_list` for an existing risk on the same cause; if there is one, rescore it with the alert as evidence (step 5) instead of adding a duplicate.
+3. Otherwise draft a risk from the alert: cause → effect title, the KPI and threshold as the early warning, scores from the founder's judgement (the alert is evidence, not a score). Put `{"alert_ids": ["…"], "kpi_id": "…", "origin": {"type": "agent", "from": "alert"}}` in `metadata_json`.
+4. Preview `risk_create`, confirm on a yes. Closing the alert itself stays with `topy-alerts`; if it has already happened and is hurting customers, it is an incident (`topy-crisis-response`).
+
+### 7. Leaving the register
 Change `status`, never delete:
 - `mitigating`: work under way.
 - `accepted`: the founder chose to live with it; record why in `metadata_json.accepted_reason`.
@@ -82,15 +89,18 @@ Founder of Cobblestone Freight (a fictional same-day courier app): "Add a risk: 
 - [ ] No closed risk without a written reason.
 - [ ] `metadata_json` sent whole on update.
 - [ ] Every write was previewed and confirmed only after a yes.
+- [ ] Risks raised from alerts carry the alert ids; no duplicate of an existing risk.
 
 ## Guardrails
 - Changes in TOPY take two calls: a preview first, shown to the user, then `confirm: true` with the `confirmation` only after they agree. Never confirm for the user.
 - Never delete a risk to make the register look better, and never lower a score without new evidence. A register with no high risks in an early-stage company is a warning sign: say so.
 - Never invent probabilities, amounts or events; label the founder's estimates as estimates.
 - Deletes are permanent (risk W4): duplicates and mistakes only.
+- Alert values are facts only as recorded by the tool (with their `source`); never restate them with invented precision.
 - Legal, regulatory and insurance risks: say when a lawyer or broker should look at them.
 
 ## Related skills
+- `topy-alerts` — the rules and alerts that feed the register.
 - `topy-crisis-response` — when a risk has occurred.
 - `topy-decision-log` — record the choice to accept or mitigate a big risk.
 - `topy-daily` — surfaces open risks needing a call.

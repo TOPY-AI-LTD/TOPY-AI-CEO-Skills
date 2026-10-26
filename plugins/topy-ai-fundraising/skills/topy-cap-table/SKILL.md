@@ -1,18 +1,20 @@
 ---
 name: topy-cap-table
-description: 'Build a fully diluted cap table and model dilution across rounds: SAFE/ASA and convertible conversion, option pool top-ups and the founders'' ownership after each step. Not legal or tax advice. Use when the user says things like "how much will I own after the seed round?"; "build our cap table"; "how do our SAFEs convert?"; "how big should the option pool be?"; "model dilution across the next two rounds"; "what does a 5 million post-money cap mean for us?".'
+description: 'Keep the fully diluted cap table in TOPY and model dilution across rounds: SAFE/ASA and convertible conversion, option pool top-ups and the founders'' ownership after each step, simulated without writing. Not legal or tax advice. Use when the user says things like "how much will I own after the seed round?"; "build our cap table"; "how do our SAFEs convert?"; "how big should the option pool be?"; "model dilution across the next two rounds"; "what does a 5 million post-money cap mean for us?". Uses TOPY when it is connected.'
 license: MIT
 metadata:
   category: fundraising
-  tier: standalone
-  version: 0.1.0
+  tier: connected
+  version: 0.2.0
   docs: https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/plugins/topy-ai-fundraising/skills/topy-cap-table/SKILL.md
 ---
 # Cap table and dilution
 
 Shows the founder, step by step, who owns what today and after each financing: convertibles turning into
 shares, the option pool being topped up, new money coming in. The arithmetic is visible so the founder can
-check it and explain it to a co-founder or investor. **This is a model for decisions, not legal or tax
+check it and explain it to a co-founder or investor. With TOPY connected the table lives in TOPY (share
+classes, holders, holdings, convertibles, rounds), so the fundraising, term-sheet and data-room skills read
+the same numbers, and round scenarios run through `round_simulate`, which never writes. **This is a model for decisions, not legal or tax
 advice: the company's legal records (share register, signed instruments) are the source of truth, and a
 lawyer must confirm conversions and an accountant the tax treatment before anything is issued.**
 
@@ -27,7 +29,12 @@ lawyer must confirm conversions and an accountant the tax treatment before anyth
   each convertible's amount, cap type, discount, interest and date; the round being modelled.
 - Ask for the exact wording of each convertible's conversion clause when it matters: "post-money" and
   "pre-money" caps convert differently, and definitions of capitalisation vary between documents.
-- No TOPY tools are needed. Never ask for personal identity details of shareholders; names or labels suffice.
+- With TOPY connected, read first: `cap_table_get` (as_of, basic and fully diluted shares, classes, holders with
+  `pct_basic`/`pct_fd`, option pool, convertibles). If it is empty, build it (step 2). For detail use
+  `cap_share_classes_list`, `cap_holders_list`, `cap_holdings_list`, `convertibles_list` and `rounds_list`.
+- Without TOPY, collect the same facts from the founder and work by hand; nothing below depends on the tools.
+- Never ask for personal identity details of shareholders; names or labels suffice (`email` only if the
+  founder wants it stored).
 
 ## Workflow
 1. **Build today's fully diluted table.** Fully diluted = issued shares + granted options (vested or not)
@@ -38,19 +45,33 @@ lawyer must confirm conversions and an accountant the tax treatment before anyth
    | Founder B | Ordinary | 4,500,000 | 45.0% |
    | Option pool (granted + unallocated) | Options | 1,000,000 | 10.0% |
    | **Total** | | **10,000,000** | **100%** |
-2. **Convert a post-money SAFE/ASA.** Ownership = investment ÷ post-money cap, measured on the
+2. **Store today's table in TOPY (connected only).** Write in this order, each as a preview the founder
+   checks row by row, then `confirm: true` with the `confirmation` after their yes:
+   - share classes: `cap_share_class_create` (`name`, `seniority`, `liquidation_pref_multiple`,
+     `participating`, `votes_per_share`);
+   - holders: `cap_holder_create` (`name`, `holder_type`: `founder` · `employee` · `investor` · `pool`);
+   - holdings: `cap_holding_create` (`holder_id`, `share_class_id`, `shares`, `acquired_at`, `vesting`);
+   - convertibles: `convertible_create` (`holder_id`, `instrument`: `safe` · `note`, `amount`,
+     `valuation_cap`, `discount`, `status`).
+   Then `cap_table_get` and check the totals equal the founder's share register. To correct a row, read it
+   (`cap_share_class_get`, `cap_holder_get`, `cap_holding_get`, `convertible_get`), merge, and preview
+   `cap_share_class_update`, `cap_holder_update`, `cap_holding_update` or `convertible_update` (object
+   fields such as `vesting` are replaced whole). A convertible that has converted gets `status` updated, not
+   deleted. `cap_share_class_delete`, `cap_holder_delete`, `cap_holding_delete` and `convertible_delete` are
+   permanent (W4): only for rows entered by mistake, after a clear yes.
+3. **Convert a post-money SAFE/ASA.** Ownership = investment ÷ post-money cap, measured on the
    capitalisation just before the new money. Example: 500k at a 5.0M post-money cap → 10%.
    Solve for SAFE shares S: `S ÷ (10,000,000 + S) = 0.10` → `S = 1,111,111`. Conversion price =
    5,000,000 ÷ 11,111,111 = 0.45 per share. Several post-money SAFEs each take their percentage, so they
    dilute the founders (not each other): two 10% SAFEs cost the founders 20 points before the round starts.
    Under the widely used post-money SAFE form, a pool increase made in the priced round generally falls on
    existing holders rather than the SAFE; check the "capitalisation" definition in the actual document.
-3. **Convert a pre-money cap or convertible note.** Conversion price = the lower of
+4. **Convert a pre-money cap or convertible note.** Conversion price = the lower of
    `cap price = pre-money cap ÷ pre-money fully diluted shares` and `round price × (1 − discount)`.
    Notes add accrued interest: `amount converting = principal × (1 + rate × years)` (simple interest; check
    the note). Illustrative: 250k at 8% for 1 year = 270k; cap 4.0M on 10,000,000 shares → 0.40; round
    price 0.69 with 20% discount → 0.552; converts at 0.40 → 675,000 shares.
-4. **Model the priced round with the pool top-up ("pool shuffle").** Example: raise 2.0M at 8.0M pre-money
+5. **Model the priced round with the pool top-up ("pool shuffle").** Example: raise 2.0M at 8.0M pre-money
    (post 10.0M → new investor 20%), pool to be 10% of post-money, pool top-up counted in the pre-money.
    Let N = post-money fully diluted shares. Pre-round shares after SAFE conversion = 11,111,111;
    existing pool 1,000,000.
@@ -66,22 +87,30 @@ lawyer must confirm conversions and an accountant the tax treatment before anyth
    | **Total** | **14,444,444** | | **100%** |
    Check: pre-money shares (11,555,556) × 0.692 ≈ 8.0M. The top-up (444,444 × 0.692 ≈ 0.31M) sits inside the
    pre-money, so the founders' effective pre-money is about 7.7M, not 8.0M.
-5. **Chain rounds.** Each round: `ownership after = ownership before × (1 − new round % − pool top-up %)`
+   With TOPY connected, run the same round through `round_simulate` (`pre_money`, `amount`,
+   `pool_top_up_pct`, whether the top-up sits in the pre-money): it returns the post-round table, each
+   holder's dilution and the SAFE conversions, and writes nothing. Show its result beside the hand maths;
+   if they differ, find why (cap type, "capitalisation" definition) before trusting either. A planned
+   round already in `rounds_list` can be simulated as-is.
+6. **Chain rounds.** Each round: `ownership after = ownership before × (1 − new round % − pool top-up %)`
    (when the top-up is a share of post-money). Founders at 62.3% after seed; a Series A selling 20% with a
    further 5-point pool top-up → 62.3% × 0.75 = 46.7%. Show a path table: round | raise | pre | post | new
    investor % | pool % | founders %.
-6. **Size the pool from hires, not habit.** Pool = Σ expected grants for hires in the next 12-24 months
+7. **Size the pool from hires, not habit.** Pool = Σ expected grants for hires in the next 12-24 months
    (from `topy-hiring-plan`), plus a small reserve. A pool sized "because 10-15% is common" (rule of thumb)
    often over-dilutes founders when the top-up sits in the pre-money. Negotiate with the hiring plan in hand.
-7. **Run the sensitivities.** Founders' ownership after the round at ±20% on pre-money, ±5 points on pool
+8. **Run the sensitivities.** Founders' ownership after the round at ±20% on pre-money, ±5 points on pool
    size, and with/without each SAFE. Show which lever moves founder ownership most.
-8. **Country notes.** UK: tax-advantaged options usually mean EMI (with an HMRC-agreed valuation and timely
+9. **Country notes.** UK: tax-advantaged options usually mean EMI (with an HMRC-agreed valuation and timely
    notification); SEIS/EIS investors must meet conditions (e.g. not being "connected" with the company,
    which includes holding more than 30%), and ordinary shares without preferences are generally required.
    `topy-seis` covers advance assurance. US and elsewhere: option pricing and securities filings have their
-   own rules. In every country, the lawyer and accountant confirm before issuing.
-9. **Reconcile with the legal record.** The model must tie to the share register / stock ledger and registry
-   filings. Any difference (an undocumented promise, an unrecorded transfer) is listed for the lawyer.
+   own rules. In every country, the lawyer and accountant confirm before issuing. After a round actually
+   closes (signed and paid, outside the agent), record the new holdings and converted convertibles in
+   TOPY as in step 2.
+10. **Reconcile with the legal record.** The model must tie to the share register / stock ledger and registry
+   filings, and the TOPY record must tie to both. Any difference (an undocumented promise, an unrecorded
+   transfer) is listed for the lawyer; the TOPY rows are not "fixed" to hide it.
 
 ## Output
 ```
@@ -104,11 +133,16 @@ Not legal or tax advice: <one line>
 - Differences from the legal record are listed, not smoothed over.
 
 ## Guardrails
-- Not legal or tax advice. A lawyer must confirm conversion mechanics against the signed instruments, and
+- Changes in TOPY take two calls: a preview first, shown to the user, then `confirm: true` with the
+  `confirmation` only after they agree. Never confirm for the user; no standing permission covers equity records.
+- Equity and money are recorded and simulated only: issuing shares, granting options, signing and receiving
+  money happen with the lawyer and outside the agent.
+- Numbers come from the founder's legal records or TOPY tools; the source of each figure is stated. A lawyer must confirm conversion mechanics against the signed instruments, and
   draft any issue, transfer or option grant; an accountant must confirm tax (option schemes, SEIS/EIS,
   founder share valuations). Say so in the output.
 - Never invent valuations, round sizes or investor terms; future rounds are scenarios the founder chose.
-- Never alter or "clean up" historical records in the model to look tidier; flag them instead.
+- Never alter or "clean up" historical records in the model or in TOPY to look tidier; flag them instead.
+  Deletes are permanent (W4) and only for mistakes.
 - Share and holder data is confidential; minimise personal details.
 
 ## Related skills

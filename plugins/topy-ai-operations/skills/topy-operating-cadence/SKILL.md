@@ -5,7 +5,7 @@ license: MIT
 metadata:
   category: operations
   tier: connected
-  version: 0.1.0
+  version: 0.2.0
   docs: https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/plugins/topy-ai-operations/skills/topy-operating-cadence/SKILL.md
 ---
 # Operating cadence
@@ -13,7 +13,8 @@ metadata:
 Designs the small set of recurring forums a startup runs on, so information arrives while it can still be
 acted on and decisions have a regular home. Each forum gets one owner, a fixed timed agenda, an input pack
 prepared beforehand and a short list of the decisions it exists to make. Meetings that do none of that are
-cut. With TOPY connected the agreed cadence can be saved to the project memory so later reviews follow it.
+cut. With TOPY connected each forum becomes a meeting record in TOPY, the rules go into project memory, and
+the recurring CEO work (daily brief, weekly review, monthly close) is suggested as scheduled routines.
 
 ## When to use
 - Too many meetings, or the wrong ones; problems surface late; priorities change every week; a new
@@ -26,7 +27,8 @@ cut. With TOPY connected the agreed cadence can be saved to the project memory s
 - Ask one question at a time: team size and leadership; meetings today with length and attendees; what
   metrics and plans exist; fixed external dates.
 - With TOPY connected, call `memories_list` first to see whether a cadence or meeting rules were saved
-  before; build on them instead of starting over.
+  before; build on them instead of starting over. `tasks_list` (status `todo`) shows how many follow-ups
+  meetings already generate and how many are overdue: a sign of forums that decide without closing the loop.
 - Without TOPY, ask the founder to paste the current calendar of recurring meetings.
 
 ## Workflow
@@ -68,8 +70,16 @@ cut. With TOPY connected the agreed cadence can be saved to the project memory s
    the books close; quarterly planning finished before the quarter starts; board meetings after a monthly review.
 8. **Set the review.** After 6 weeks ask each attendee: which forum produced decisions, which was theatre.
    Adjust once, then hold the rhythm for a quarter.
-9. **Offer to save it.** With TOPY connected, offer to store the agreed cadence (forums, owners, days,
-   agenda rules) with `memory_create` so `topy-weekly-review` and later sessions follow it.
+9. **Save it** (connected; each write a preview, confirmed only after the founder agrees):
+   - The rules (forums, owners, days, agenda rules) with `memory_create` (`memory_type: preference`) so
+     `topy-weekly-review` and later sessions follow it.
+   - The next occurrence of each forum with `meeting_create`: `meeting_type` (`team` for internal forums,
+     `board` or `investor` for those), `title`, `scheduled_at`, `attendees`, `agenda` (the timed items),
+     `status: "planned"`. Put the recurrence ("weekly, Monday 09:30") in the title or agenda notes.
+10. **Suggest routines, the AI CEO's side of the rhythm** (01 §4): daily brief at 07:30 (`topy-daily`),
+    weekly review on Friday (`topy-weekly-review`), monthly close on the first working day
+    (`topy-monthly-close`), quarterly planning two weeks before quarter end (`topy-okrs`). Each is a scheduled
+    agent with its own standing permission, set up with `topy-scheduled-agent`; this skill only proposes them.
 
 ## Output
 ```
@@ -89,8 +99,10 @@ Review: <date>, questions to ask
 - At least one existing meeting was cut, merged or made asynchronous, or the audit shows why not.
 
 ## Guardrails
-- Changes in TOPY take two calls: `memory_create` first returns a preview, shown to the user; call it again
-  with `confirm: true` and the `confirmation` only after they agree. Never confirm for the user.
+- Changes in TOPY take two calls: a preview first, shown to the user, then `confirm: true` with the
+  `confirmation` only after they agree. Never confirm for the user.
+- Calendar invitations are not sent from TOPY: the founder sends them. Never set up a standing permission
+  for the founder; that happens in the dashboard (`topy-scheduled-agent`).
 - Never invent research on meeting productivity; time thresholds are rules of thumb.
 - Respect time zones and working-time rules; for statutory works councils, union consultation or board
   procedures, say that a lawyer or company secretary should confirm requirements.
@@ -102,3 +114,5 @@ Review: <date>, questions to ask
 - `topy-kpi-dashboard` — the scorecard the weekly forum reads.
 - `topy-okrs` — the quarterly goals the planning forum sets.
 - `topy-board-meetings` — the board forum and its pack.
+- `topy-monthly-close` — the monthly finance forum's input.
+- `topy-scheduled-agent` — run the CEO routines on a schedule.

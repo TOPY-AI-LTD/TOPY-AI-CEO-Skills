@@ -1,7 +1,7 @@
 {
 	"name": "topy-ai",
-	"version": "0.7.1",
-	"description": "TOPY core: connects the TOPY MCP server and runs the AI CEO day to day — Business plans, Connect to TOPY.AI, Daily CEO check-in, Decision log, Founder journal and project memory, Growth experiments….",
+	"version": "0.8.0",
+	"description": "TOPY core: connects the TOPY MCP server and runs the AI CEO day to day — Alerts, Business plans, Connect to TOPY.AI, Customer personas, Daily CEO check-in, Decision log….",
 	"author": {
 		"name": "TOPY AI LTD",
 		"email": "startup@topy.ai",

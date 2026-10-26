@@ -91,3 +91,16 @@
   `@topy-ai/ceo-mcp` (`ceo-mcp`) and `@topy-ai/ceo-skills` (`ceo-skills`). `@topy-ai/ceo`, `@topy-ai/cli`,
   `@topy-ai/mcp` and `@topy-ai/skills` were unpublished
 - `topy-connect` and `topy-scheduled-agent` use the new package names
+
+## v0.8.0
+
+- The AI CEO now works on real operating records in TOPY: goals and quarterly objectives, KPIs with recorded
+  values and computed health, milestones, tasks, personas and customer journeys, financial scenarios with plan vs
+  actual and runway, meetings and board packs, the cap table, data rooms, pitch decks, data sources and alerts
+- 9 new skills: `topy-goal-tree`, `topy-operating-board`, `topy-milestones`, `topy-customer-personas`,
+  `topy-monthly-close`, `topy-plan-vs-actual`, `topy-user-journey`, `topy-alerts`, `topy-integrations`
+- 20 skills upgraded to read and write those records (daily, weekly review, OKRs, KPI dashboard, hiring plan,
+  runway, financial model, scenario planning, investor relations, board meetings, operating cadence, GTM,
+  growth experiments, cap table, fundraising strategy, term sheet, data room, pitch deck, crisis response, risk
+  register); kpi-dashboard, runway, scenario-planning, cap-table and term-sheet now connect to TOPY
+

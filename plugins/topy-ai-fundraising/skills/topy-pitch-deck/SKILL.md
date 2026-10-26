@@ -1,11 +1,11 @@
 ---
 name: topy-pitch-deck
-description: 'Build the 10-12 slide investor story from the business plan: one claim per slide, the evidence behind it, and numbers that match the plan exactly. Use when the user says things like "turn my business plan into a pitch deck"; "write the slides for our seed round"; "what should go on each slide?"; "review my deck before I send it to investors"; "our deck is 25 slides, help me cut it"; "what''s the story of our pitch?". Uses TOPY when it is connected.'
+description: Generate the 10-12 slide investor deck from the business plan in TOPY, review it slide by slide (one claim per slide, numbers that match the plan exactly) and export it as PPTX or PDF. Use when the user says things like "turn my business plan into a pitch deck"; "write the slides for our seed round"; "generate a deck from our plan in TOPY"; "review my deck before I send it to investors"; "our deck is 25 slides, help me cut it"; "what's the story of our pitch?". Uses TOPY when it is connected.
 license: MIT
 metadata:
   category: fundraising
   tier: connected
-  version: 0.1.0
+  version: 0.2.0
   docs: https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/plugins/topy-ai-fundraising/skills/topy-pitch-deck/SKILL.md
 ---
 # Pitch deck
@@ -13,8 +13,9 @@ metadata:
 Turns a business plan into the short story an investor reads in a few minutes: what is broken, why this
 team fixes it, the proof so far, and what the money buys. Each slide makes one claim in its headline and
 proves it in the body. Every number is lifted from the plan (or the founder's sourced data) so the deck,
-the model and the data room never disagree. The skill writes the content and structure; design is up to
-the founder's tool of choice.
+the model and the data room never disagree. With TOPY connected the deck is generated from the plan (a
+credit-charged job), reviewed against the same rules below, edited slide by slide and exported; without
+it, the skill writes the outline for the founder's own design tool.
 
 ## When to use
 - "Make a deck from my plan", "what goes on each slide", "review my deck", "cut my deck down".
@@ -28,6 +29,8 @@ the founder's tool of choice.
 - With TOPY connected, read first: `plans_list` to find the current plan, then `plan_get` to read the
   executive summary, problem, solution, market, competition, business model, go-to-market, team,
   financials, funding requirement and milestones. Note each section's figures; they are the deck's numbers.
+- With TOPY connected, also `decks_list`: a deck for this plan may exist; review and edit it with `deck_get`
+  rather than paying to generate another.
 - Without TOPY, ask for the plan or a one-page summary and the latest metrics.
 - If there is no raise plan yet, run `topy-fundraising-strategy` first; a deck without a clear ask is a
   brochure.
@@ -70,13 +73,23 @@ the founder's tool of choice.
    has given it.
 7. **Make two versions if needed.** Send-ahead: readable without a voice, slightly denser, no animations.
    Presenting: sparse slides, the detail in speaker notes (2-4 bullets per slide).
-8. **Run the four tests.**
+8. **Generate in TOPY (connected).** `deck_estimate` first and tell the founder the credit cost (risk W2).
+   Only after a yes, preview `deck_generate` with `plan_id`, `audience`, `slides` (8–16) and an optional
+   `title`, then `confirm: true` with the `confirmation`. It is a job: follow it with `deck_status`, then
+   read the result with `deck_get`; apply the order (step 3) and version (step 7) with `deck_update`. A failed
+   generation is refunded automatically; generating again costs credits again, so ask.
+9. **Run the four tests** (on the generated deck or the outline).
    - *Skim test*: read only the headlines in order; they must tell the whole story.
    - *Consistency test*: every figure matches `plan_get` output (or the model) exactly; list mismatches.
    - *"So what" test*: each slide answers why an investor should care; cut slides that do not.
    - *Objection test*: list the five questions an investor will ask; each is answered on a slide or in the
      appendix.
-9. **Report gaps, do not paper over them.** Missing traction, an unsourced market figure, no competitor
+10. **Fix slides.** Each change (a headline, a number, a reordered slide) is a `deck_update` preview the
+    founder sees, then a confirm. Never change a number on a slide so it disagrees with the plan; if the
+    plan is wrong, fix the plan first (`topy-plan-revision`).
+11. **Export.** `deck_export` with `format` pptx or pdf gives a file for the founder; it changes nothing and
+    sends nothing. Sending the deck, or sharing it via the data room, is the founder's call.
+12. **Report gaps, do not paper over them.** Missing traction, an unsourced market figure, no competitor
    evidence: list them as gaps with the fix. Plan sections that are weak → `topy-investor-ready`. A figure
    that must change in the plan (e.g. a new raise amount) → `topy-plan-revision`.
 
@@ -100,8 +113,11 @@ Gaps to fix before sending: gap | fix | owner
 - Gaps are listed honestly rather than filled with adjectives.
 
 ## Guardrails
-- The skill only reads TOPY. Changing a plan figure goes through `topy-plan-revision`: a preview shown to
-  the user, then `confirm: true` with the `confirmation` only after they agree. Never confirm for the user.
+- Changes in TOPY take two calls: a preview shown to the user, then `confirm: true` with the `confirmation`
+  only after they agree. Never confirm for the user. Plan figures change only through `topy-plan-revision`.
+- Generating a deck costs credits (W2): state the `deck_estimate` cost and get a yes before every
+  generation or retry.
+- Numbers come only from the plan or TOPY tools with a source, or from the founder, labelled as such.
 - Never invent figures, customers, logos, quotes, investors, press or awards; label projections as
   projections and assumptions as assumptions.
 - Customer names and logos only with the customer's permission; no personal data of customers on slides.

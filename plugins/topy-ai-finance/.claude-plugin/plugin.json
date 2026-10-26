@@ -1,7 +1,7 @@
 {
 	"name": "topy-ai-finance",
-	"version": "0.7.1",
-	"description": "TOPY Finance skills (4): Financial model, Pricing decisions, Runway and burn, Unit economics. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
+	"version": "0.8.0",
+	"description": "TOPY Finance skills (6): Financial model, Monthly close, Plan vs actual, Pricing decisions, Runway and burn, Unit economics. Add the topy-ai plugin too, for the core skills and the TOPY MCP server.",
 	"author": {
 		"name": "TOPY AI LTD",
 		"email": "startup@topy.ai",

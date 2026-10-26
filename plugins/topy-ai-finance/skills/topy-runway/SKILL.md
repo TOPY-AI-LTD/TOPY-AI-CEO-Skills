@@ -1,33 +1,43 @@
 ---
 name: topy-runway
-description: Measure burn and runway properly, check whether the company is default alive, and build a tiered cut plan with triggers so the founder decides early instead of in a panic. Use when the user says things like "how much runway do we have?"; "are we default alive or default dead?"; "when do we run out of cash?"; "we need to cut burn, where do we start?"; "what if the fundraise takes six months longer?"; "can we get to profitability on the cash we have?".
+description: Measure burn and runway properly, check whether the company is default alive, and build a tiered cut plan with triggers so the founder decides early instead of in a panic. Use when the user says things like "how much runway do we have?"; "are we default alive or default dead?"; "when do we run out of cash?"; "we need to cut burn, where do we start?"; "what if the fundraise takes six months longer?"; "can we get to profitability on the cash we have?". Uses TOPY when it is connected.
 license: MIT
 metadata:
   category: finance
-  tier: standalone
-  version: 0.1.0
+  tier: connected
+  version: 0.2.0
   docs: https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/plugins/topy-ai-finance/skills/topy-runway/SKILL.md
 ---
 # Runway and burn
 
 Tells the founder how long the money lasts, whether the company can reach break-even on the cash it has,
 and what to cut, in which order, if it cannot. Runway is computed on cash, not profit, and forward-looking,
-not just from last month. The cut plan is written while there is still time to choose: each tier has a
+not just from last month. With TOPY connected the figures come from the company's own records (`runway_get`,
+CFO-sourced KPI values); without it, the founder's exports work the same way. The cut plan is written while there is still time to choose: each tier has a
 trigger, a saving and a date, so the decision is made once, calmly, and then executed if the trigger fires.
 
 ## When to use
 - "Runway", "burn", "zero-cash date", "default alive", "cut plan", "what if the raise slips".
-- Monthly, as part of the CEO's finance review; immediately when a raise is delayed or revenue misses.
+- Monthly, as part of the close (`topy-monthly-close`); immediately when a raise is delayed or revenue misses.
 - Not for: a full three-statement model (use `topy-financial-model`); deciding the raise amount (use
   `topy-fundraising-strategy`); diagnosing CAC or churn (use `topy-unit-economics`).
 
 ## Before you start
-- Ask one question at a time: cash today; committed money and its expected date; cash in and cash out per
+- With TOPY connected, read first:
+  - `runway_get` (scenario `current`): `cash`, `avg_net_burn_3m`, `runway_months_current`,
+    `runway_months_scenario`, `zero_cash_date` and `sources`. Run it again with scenario `plan` for the plan view.
+  - `kpi_values_list` for the KPI keys `cash_balance`, `net_burn` and `revenue_monthly` (last 6 periods): the
+    trend, and each value's `source` and `period_date`. A value older than the KPI's cadence is stale: say so.
+  - `plan_vs_actual_get` (scenario `plan`, metrics `net_burn,revenue_monthly,cash_balance`, last 3-6 months):
+    where burn or revenue drifted from the plan, and `assumptions_broken`.
+  - If `runway_get` has no cash or burn (no values recorded yet), fall back to manual input below and offer
+    `topy-monthly-close` to record the actuals.
+- Without TOPY, ask one question at a time: cash today; committed money and its expected date; cash in and cash out per
   month for 3-6 months; expected revenue growth; planned cost changes; the cash floor the founder will not
   go below.
 - Ask for one-offs separately (annual prepayments received, a legal bill, equipment) so they do not distort
   the monthly burn.
-- No TOPY tools are needed. Never ask for bank logins; balances and statements the founder exports are enough.
+- TOPY is optional: the method works on exported figures. Never ask for bank logins; balances and statements the founder exports are enough.
 
 ## Workflow
 1. **Measure burn on cash.**
@@ -35,7 +45,10 @@ trigger, a saving and a date, so the decision is made once, calmly, and then exe
    - `net burn = cash out − cash in` (cash in = customer receipts, not invoiced revenue).
    - Use a 3-month average and strip out one-offs. If annual prepayments are large, spread them or show
      both views.
-2. **Compute runway two ways.**
+2. **Compute runway two ways, and give both current pace and plan.**
+   - With TOPY: report `runway_months_current` (cash ÷ 3-month average net burn) and `runway_months_scenario`
+     (on the plan's hiring and revenue) side by side; never only one. If they differ by more than 3 months,
+     say which plan assumption causes it (from `assumptions_broken`).
    - Trailing: `runway (months) = cash ÷ average net burn (last 3 months)`.
    - Forward: month-by-month cash projection with planned hires and expected revenue; the zero-cash month is
      where cash first goes below zero. Always report the forward figure; the trailing one is a sanity check.
@@ -80,14 +93,15 @@ trigger, a saving and a date, so the decision is made once, calmly, and then exe
    payments (payroll taxes, VAT) that cannot be deferred without consequences.
 7. **Stress the timing.** Re-run the forward projection with the raise 3 and 6 months late and revenue 20%
    below plan. Report the zero-cash month in each and which tier would fire when.
-8. **Record the decision.** The cut plan is a decision: hand it to `topy-decision-memo` for the options and
+8. **Record the decision.** This skill only reads TOPY. Missing actuals are recorded through `topy-monthly-close`
+   (each value with its `source`); a big plan gap goes to `topy-plan-vs-actual`. The cut plan is a decision: hand it to `topy-decision-memo` for the options and
    trade-offs, and update the model in `topy-financial-model`. If plan figures change, `topy-plan-revision`.
 
 ## Output
 ```
 Runway review: <company> · cash as of <date> · prepared <date>
 Burn (3-mo avg, one-offs removed): gross <x>/mo · net <y>/mo
-Runway: trailing <a> months · forward <b> months · zero-cash month <month>
+Runway: current pace <a> months · on plan <b> months · zero-cash month <month> (source: <runway_get / founder>)
 Default alive? yes/no · break-even month <m> · cash low point <z> · growth needed to stay above floor <g%>
 Status: comfortable / plan / act / emergency
 Levers: lever | saving | runway gain | reversible | time | side effect
@@ -101,9 +115,14 @@ Stress test: scenario | zero-cash month | tier that fires
 - The default-alive check shows its arithmetic and the cash low point.
 - Every cut tier has a dated, observable trigger and a computed saving.
 - The stress test includes a late raise.
+- With TOPY: both current-pace and plan runway shown, every figure with its source and date.
 
 ## Guardrails
-- Never invent cash, revenue or cost figures; label growth rates and savings as assumptions.
+- Never invent cash, revenue or cost figures; label growth rates and savings as assumptions. With TOPY, cash and
+  burn come only from CFO-sourced values (`runway_get` sources or KPI values with a `source`); founder-given
+  figures are labelled "source: founder".
+- Read-only in TOPY: no writes from this skill; recording actuals happens in `topy-monthly-close` with a
+  preview and the founder's yes.
 - Not legal, tax or accounting advice. Redundancies need an employment lawyer (consultation and notice rules
   vary by country); deferring tax or supplier payments, director duties when insolvency is possible (e.g.
   wrongful trading in the UK) and creditor negotiations need a lawyer or accountant. Flag these early.
@@ -111,6 +130,8 @@ Stress test: scenario | zero-cash month | tier that fires
 - Do not recommend hiding the cash position from the board or investors; bad news travels best early.
 
 ## Related skills
+- `topy-monthly-close` — record the month's actuals that feed `runway_get`.
+- `topy-plan-vs-actual` — why burn or revenue drifted from the plan.
 - `topy-financial-model` — the full monthly model behind the forward runway.
 - `topy-fundraising-strategy` — the raise and its latest safe start date.
 - `topy-unit-economics` — which growth spend pays back fast enough to keep.

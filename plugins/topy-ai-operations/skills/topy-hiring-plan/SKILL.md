@@ -1,11 +1,11 @@
 ---
 name: topy-hiring-plan
-description: Decide which roles to hire, in what order and when, what they cost against runway, and what each hire must achieve, with a scorecard per role. Use when the user says things like "who should we hire first?"; "build me a hiring plan for the next 12 months"; "can we afford two engineers and a salesperson?"; "should this be a full-time hire or a contractor?"; "write a scorecard for our first sales hire"; "our plan says we hire 6 people, is that realistic?". Uses TOPY when it is connected.
+description: Decide which roles to hire, in what order and when, what they cost against runway, and what each hire must achieve, with a scorecard per role; with TOPY each hire is saved as a hire milestone. Use when the user says things like "who should we hire first?"; "build me a hiring plan for the next 12 months"; "can we afford two engineers and a salesperson?"; "should this be a full-time hire or a contractor?"; "write a scorecard for our first sales hire"; "our plan says we hire 6 people, is that realistic?". Uses TOPY when it is connected.
 license: MIT
 metadata:
   category: operations
   tier: connected
-  version: 0.1.0
+  version: 0.2.0
   docs: https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/plugins/topy-ai-operations/skills/topy-hiring-plan/SKILL.md
 ---
 # Hiring plan
@@ -13,7 +13,8 @@ metadata:
 Turns the company's next milestones into a short, ordered list of hires. Each role is justified by the
 work it unblocks, timed by a trigger rather than a calendar wish, costed against runway, and defined by a
 scorecard of outcomes so the founder knows what "a good hire" means before the first interview. With TOPY
-connected it starts from the team and milestone sections of the business plan.
+connected it starts from the team and milestone sections of the business plan and the hire milestones already
+in TOPY, and saves each agreed hire as a milestone so the operating board tracks it.
 
 ## When to use
 - "Who do we hire first?", "hiring plan", "can we afford X?", "contractor or employee?", "scorecard for...".
@@ -29,6 +30,8 @@ connected it starts from the team and milestone sections of the business plan.
   - `plans_list` to find the current plan for the project, then `plan_get` to read its team, milestones,
     operations and financial sections. Note the headcount and salary assumptions the plan already makes;
     the hiring plan must either match them or say plainly where it differs.
+  - `milestones_list` and keep those with `milestone_type: hire`: hires already planned (often extracted from
+    the plan, with `details.origin`), their `status`, `due_date` and costs. Build on them, don't duplicate.
 - Without TOPY, ask for the milestones and the planned headcount line from whatever model or deck exists.
 - Never ask for employees' personal data. Roles and costs are enough.
 
@@ -69,9 +72,16 @@ connected it starts from the team and milestone sections of the business plan.
    stage does.
 10. **Reconcile with the plan.** If the hiring plan changes headcount, start months or salary lines from the
     saved business plan, list the differences and hand them to `topy-plan-revision`; do not edit the plan here.
-11. **Offer to record the decision.** With TOPY connected, offer to save "Hiring plan for <period>" with
-    `decision_create`: the options considered (e.g. hire now, contractor, wait), the chosen sequence, the
-    cut line and the review date.
+11. **Save each hire as a milestone (TOPY, with a yes).** Adding a hire is a D2 decision: show the full
+    list first. For each new role, preview `milestone_create` with `name` ("Hire: first AE"),
+    `milestone_type: "hire"`, `status: "planned"`, `due_date` (the target start), and `details`
+    {`objective_id` (the goal it serves), `owner_role` (who runs the hiring), `salary_gbp` (annual base),
+    `cost_gbp` (fully loaded monthly cost), `start_month` (e.g. "2027-04"), `origin: {"type": "founder"}`}.
+    Confirm each only after the founder agrees. Existing hire milestones that change (date, cost, cancelled)
+    are updated through `topy-milestones`; one marked `edited` or extracted from the plan is named before it
+    is touched. A cancelled hire is `superseded`, not deleted.
+12. **Offer to record the decision.** Offer to save "Hiring plan for <period>" with `decision_create`: the
+    options considered (e.g. hire now, contractor, wait), the chosen sequence, the cut line and the review date.
 
 ## Output
 ```
@@ -101,10 +111,13 @@ Interview loop: stage | interviewer | what it tests | scorecard item
 - Salary and on-cost figures come from the founder, their accountant or a source they name; otherwise they
   are marked assumptions.
 - Differences from the saved business plan are listed, not silently overwritten.
+- Every agreed hire exists once as a `hire` milestone with cost, salary and start month.
 
 ## Guardrails
-- Changes in TOPY take two calls: `decision_create` first returns a preview, shown to the user; call it
-  again with `confirm: true` and the `confirmation` only after they agree. Never confirm for the user.
+- Changes in TOPY take two calls: a preview first, shown to the user, then `confirm: true` with the
+  `confirmation` only after they agree. Never confirm for the user.
+- Adding headcount is D2: always the founder's yes, never under a standing permission. Changes to the plan's
+  headcount or salary figures go through `topy-plan-revision`, never edited here.
 - Never invent salary benchmarks, candidate names or market data; label assumptions as assumptions.
 - Employment status, contracts, visas, equity grants, notice periods and anti-discrimination rules are
   legal questions: flag them for a lawyer or HR adviser in the relevant country.
@@ -117,4 +130,5 @@ Interview loop: stage | interviewer | what it tests | scorecard item
 - `topy-runway` — burn, runway and the cut plan the cut line feeds.
 - `topy-financial-model` — the headcount driver in the model.
 - `topy-plan-revision` — carry changed headcount or salaries through the saved plan.
+- `topy-milestones` — track hire milestones to done, missed or superseded.
 - `topy-decision-log` — keep the hiring decision and review it later.

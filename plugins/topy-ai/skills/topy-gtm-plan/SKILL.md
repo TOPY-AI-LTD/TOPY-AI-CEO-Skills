@@ -1,11 +1,11 @@
 ---
 name: topy-gtm-plan
-description: Build and keep the project's go-to-market plan in TOPY (positioning, channels, activation, retention, pricing, sales motion, funnel targets, launch) and hand plan-wide changes to topy-plan-revision. Use when the user says things like "write our go-to-market plan"; "how are we going to get customers?"; "update the GTM, we're dropping paid ads"; "which channels should we focus on?"; "set funnel targets for next quarter"; "plan the launch". Needs the TOPY MCP server.
+description: Build and keep the project's go-to-market plan in TOPY (positioning, channels, activation, retention, pricing, sales motion, funnel targets, launch), mapped to the stages of the customer journey, and hand plan-wide changes to topy-plan-revision. Use when the user says things like "write our go-to-market plan"; "how are we going to get customers?"; "update the GTM, we're dropping paid ads"; "which channels should we focus on?"; "set funnel targets for next quarter"; "plan the launch". Needs the TOPY MCP server.
 license: MIT
 metadata:
   category: core
   tier: core
-  version: 0.1.0
+  version: 0.2.0
   docs: https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills/blob/main/plugins/topy-ai/skills/topy-gtm-plan/SKILL.md
 ---
 # Go-to-market plan
@@ -20,7 +20,7 @@ A go-to-market plan answers one question concretely: who buys, why, how they fin
 
 ## Before you start
 - Know the project (`projects_list`; can be left out with one project).
-- Read first: `gtm_plans_list` (update an existing plan rather than starting a parallel one), `project_get`, `plans_list` and `plan_get` (the marketing, sales and financial sections), `research_sources_list`, `growth_experiments_list` (what was already tried and learned).
+- Read first: `gtm_plans_list` (update an existing plan rather than starting a parallel one), `project_get`, `plans_list` and `plan_get` (the marketing, sales and financial sections), `research_sources_list`, `growth_experiments_list` (what was already tried and learned), `journeys_list` (the customer journeys per persona, their stages and the KPIs on each stage).
 - Ask, one at a time, only for what those do not answer.
 - If TOPY tools are missing, run `topy-connect`.
 
@@ -44,23 +44,26 @@ A go-to-market plan answers one question concretely: who buys, why, how they fin
 - `pricing_strategy`: model, value metric, tiers and price points as the founder has set them, e.g. `{"model": "per location", "tiers": [{"name": "Starter", "price_gbp_month": 49}]}`. A new or changed price is a decision: use `topy-pricing-decisions`.
 - `sales_motion`: self-serve, inside sales, founder-led, partner or channel, with who does it and how many hours a week.
 
-### 5. Funnel targets
+### 5. Map to the customer journey
+If journeys exist (`journeys_list`), hang every GTM element on a stage of the beachhead persona's journey: channels on awareness and consideration, activation steps on the first-value stage, retention on the use and renew stages. Store the map in `metadata_json.journey_map`, e.g. `{"journey_id": "<id>", "stages": {"Discover": ["instructor_facebook_groups", "seo"], "Trial": ["activation: first reminder in 10 min"], "Renew": ["monthly usage email"]}}`. A stage with no GTM element, or with the biggest drop, is the first gap to fix or test. No journey yet → offer `topy-user-journey` (the plan still works without it).
+
+### 6. Funnel targets
 Work back from the revenue goal the founder gives: revenue ÷ average revenue per customer = customers; ÷ close or conversion rate = qualified leads or trials; ÷ lead rate = visitors or contacts. Store in `funnel_targets`, e.g. `{"period": "2027-Q1", "new_customers": 30, "trials": 250, "visitors": 8000, "assumptions": {"trial_to_paid": 0.12, "visit_to_trial": 0.03}, "source": "founder figures Oct 2026"}`. Every rate is either the founder's real figure or labelled an assumption to test.
 
-### 6. Launch plan
+### 7. Launch plan
 `launch_plan`: phases with dates, owner and the gate to move on, e.g. `{"phases": [{"name": "Private beta", "from": "2026-11-15", "gate": "10 active clinics"}, {"name": "Public launch", "from": "2027-01-20"}]}`.
 
-### 7. Save
+### 8. Save
 - New plan: preview `gtm_plan_create` (`name` defaults to "Primary GTM"), show the full plan, confirm with `confirm: true` and the `confirmation` only after the founder agrees.
 - Change: `gtm_plan_get`, preview `gtm_plan_update` with only the changed fields. List fields and `metadata_json` are replaced whole, so send the complete new list. For a major pivot, keep history: create a new record (e.g. "GTM v2, Nov 2026") instead of overwriting, and log the reason with `topy-decision-log`.
 - `gtm_plan_delete` only when the founder asks to remove an abandoned draft; say it is permanent and cannot be undone, then follow the two-call rule.
 - GTM tools are not covered by standing permissions: a scheduled agent cannot write them.
 
-### 8. Check against the business plan
+### 9. Check against the business plan
 Compare the GTM with the plan's marketing, sales, pricing and financial sections. Any mismatch in a figure, price, channel, target or launch date that the plan relies on goes to `topy-plan-revision`, which analyses the change across the plan and writes a new plan version, keeping the original. Do not edit plan sections from this skill.
 
 ## Output
-Sections in order: Positioning · Value proposition · Channels (primary / testing) · Activation · Retention · Pricing · Sales motion · Funnel targets (table `Stage | Target | Rate | Real or assumed`) · Launch phases · Open questions · Changes for `topy-plan-revision`.
+Sections in order: Positioning · Value proposition · Channels (primary / testing) · Activation · Retention · Pricing · Sales motion · Journey map (table `Stage | GTM elements | Stage KPI | Gap`) · Funnel targets (table `Stage | Target | Rate | Real or assumed`) · Launch phases · Open questions · Changes for `topy-plan-revision`.
 
 ## Example
 Founder of Quillmoor (a fictional booking tool for independent driving instructors): "We're dropping Google Ads; update the GTM."
@@ -73,6 +76,7 @@ Founder of Quillmoor (a fictional booking tool for independent driving instructo
 - [ ] One or two primary channels, each with a reason it reaches that segment.
 - [ ] Funnel targets add up from the revenue goal, and every rate is marked real or assumed.
 - [ ] Nothing contradicts a killed experiment without saying why.
+- [ ] Where journeys exist, every stage has a GTM element or is listed as a gap.
 - [ ] Mismatches with the business plan listed for `topy-plan-revision`.
 - [ ] Every write was previewed and confirmed only after a yes.
 
@@ -85,6 +89,7 @@ Founder of Quillmoor (a fictional booking tool for independent driving instructo
 
 ## Related skills
 - `topy-plan-revision` — carry a GTM change through the business plan.
+- `topy-user-journey` — the journeys and stage KPIs the GTM is mapped to.
 - `topy-growth-experiments` — test the channels marked as tests.
 - `topy-pricing-decisions` — set or change the price.
 - `topy-research-library` — evidence behind segment and market claims.
