@@ -1,0 +1,8 @@
+interface:
+  display_name: "TOPY Plan Revision"
+  short_description: "Revise a whole plan for a changed figure, milestone, KPI or team"
+  brand_color: "#ff1212"
+  default_prompt: "Use $topy-plan-revision to update my plan: we are raising £250k instead of £200k."
+
+policy:
+  allow_implicit_invocation: true

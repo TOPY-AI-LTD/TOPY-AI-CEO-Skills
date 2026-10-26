@@ -63,3 +63,12 @@
 ## v0.5.1
 
 - Documented the `skills update` upgrade path for installed skills
+
+## v0.6.0
+
+- Rebuilt the product skills on TOPY's remote MCP server (https://topy.ai/mcp) and the `topy` CLI
+  (`@topy-ai/ceo`): `topy-ai-ceo`, `topy-business-plan`, `topy-plan-revision`, `topy-fundraising`,
+  `topy-ceo-workspace`, `topy-projects`. Changes are previewed and confirmed; no key in prompts.
+- Removed the REST-only skills they replace (`topy-init`, `topy-dashboard`, `topy-onboarding`,
+  `topy-projects`, `topy-business-plans`, `topy-templates`, `topy-billing`, `topy-media`).
+- Added a Claude Code plugin (`.claude-plugin/`) with the TOPY MCP server (`.mcp.json`).

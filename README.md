@@ -50,7 +50,7 @@
 |---|---|
 | Repository | `TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
 | License | `MIT` |
-| Version | `v0.5.0` |
+| Version | `v0.6.0` |
 | Primary install | `npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills` |
 
 ---
@@ -193,256 +193,91 @@ The real value of the TOPY skill set comes from using the reasoning core togethe
 
 | Moment | Skill(s) | What you do |
 |---|---|---|
-| Morning review | `topy-dashboard`, `topy-projects`, `topy-billing`, `topy-init` | Review active projects, check resource constraints, and confirm the TOPY key and account state before starting expensive work |
-| New opportunity intake | `topy-onboarding` | Convert a website, local file, brainstorm, or rough idea into a structured project |
-| Business plan creation | `topy-business-plans` | Draft or regenerate the plan for a project, then prepare it for review or export |
-| Plan critique and next-step selection | `topy-ai-ceo-core` | Analyze the plan, find weak points, evaluate GTM strategy, test competitor response, and recommend the next move |
-| Template design | `topy-templates` | Turn strong plan patterns into reusable templates so future projects start faster |
-| Project editing and decisions | `topy-projects` | Update the live project record with the decisions, risks, research, and action items that came out of the review |
-| Media and assets | `topy-media` | Attach and manage uploaded or URL-based media that supports the project or plan |
+| Morning review | `topy-ceo-workspace` | Weekly or daily review of decisions, risks and experiments; the three priorities to work on |
+| New opportunity intake | `topy-projects` | Turn a website or a rough idea into a TOPY project; brainstorm ideas |
+| Business plan creation | `topy-business-plan` | Write the plan after a credit check, follow it, summarise its numbers, export it |
+| Plan critique and next-step selection | `topy-ai-ceo-core`, `topy-fundraising` | Find weak points, test GTM and competitor response, review it like an investor |
+| The company changes | `topy-plan-revision` | Carry a new figure, milestone, KPI or hire through every affected section as a new version |
+| Fundraising | `topy-fundraising` | SEIS Advance Assurance answers, investor pipeline, investor updates |
+| Decisions and records | `topy-ceo-workspace` | Record the decisions, risks, research and experiments that came out of the review |
 
 ### How the skills fit together
 
-- Use **`topy-dashboard`** when you want the router skill to choose the right workflow.
-- Use **`topy-onboarding`** to create the first structured project record from raw input.
-- Use **`topy-business-plans`** to create, edit, export, and regenerate the business plan.
-- Use **`topy-ai-ceo-core`** to think like the CEO: diagnose the weak points, choose the next step, and pressure-test the strategy.
-- Use **`topy-projects`** to keep project decisions, research, and resources synchronized.
-- Use **`topy-templates`** to capture a reusable structure once the plan shape is working.
-- Use **`topy-billing`** to understand credits, entitlements, and subscription limits before expensive actions.
-- Use **`topy-media`** to manage the supporting assets attached to the work.
-- Use **`topy-init`** first when the TOPY key is missing or the environment has not been prepared yet.
-
-### Skill map
-
-| Skill | Typical inputs | Typical outputs |
-|---|---|---|
-| `topy-dashboard` | A broad CEO task, a request to choose the right workflow, or a multi-skill starting point | A routed next step and the right specialist skill |
-| `topy-onboarding` | Website URL, local file, brainstorm, or short idea | A structured project record with initial scope and context |
-| `topy-projects` | Existing project ID, project metadata, resources, or edits | Updated project records, archived or restored state, and project-level decisions |
-| `topy-business-plans` | Project context, plan options, template choices, edits, or export request | A generated, edited, regenerated, or exported business plan |
-| `topy-templates` | Template content, structure goals, or refinement request | A reusable business-plan template definition |
-| `topy-billing` | Account status, credit questions, entitlements, subscription actions | Credit balance, transaction data, plans, or checkout/portal actions |
-| `topy-media` | Image URL, uploaded asset reference, or deletion request | Media registration, listing, or removal actions |
-| `topy-init` | Missing key, new environment, or first-time setup | A ready `TOPY_AI_KEY` and confirmed base URL |
-| `topy-ai-ceo-core` | A decision, trade-off, plan, market move, crisis, or uncertainty question | A structured decision memo with recommendation, risks, and next steps |
+- **`topy-ai-ceo`** is the entry point: how to reach TOPY, the shared rules, and which skill fits.
+- **`topy-projects`** turns an idea or a website into a TOPY project and explores ideas.
+- **`topy-business-plan`** writes the plan (after a credit check), edits and fixes it, exports it and manages templates.
+- **`topy-plan-revision`** carries a change — funding, price, milestone, KPI, team — through every affected section as a new version.
+- **`topy-fundraising`** reviews the plan like an investor, drafts SEIS Advance Assurance answers and keeps the investor pipeline and updates.
+- **`topy-ceo-workspace`** keeps decisions, risks, the journal, GTM plans, growth experiments and research, and runs the weekly CEO review.
+- **`topy-ai-ceo-core`** thinks like the CEO without touching your account: trade-offs, priorities, crises, competition.
 
 ### Typical CEO flow
 
-1. A founder sends a website, file, or rough concept.
-2. `topy-onboarding` turns it into a project.
-3. `topy-business-plans` creates a first-pass plan.
-4. `topy-ai-ceo-core` reviews the plan, identifies weak points, and recommends the next step.
-5. `topy-projects` stores the decision trail and supporting research.
-6. `topy-templates` captures the reusable structure if the pattern is worth repeating.
-7. `topy-billing` verifies that the current account can support more generation or growth.
-8. `topy-media` attaches any files or visual assets needed for the plan.
-9. `topy-init` is used first whenever the key is missing, expired, or not loaded in the environment.
+1. A founder shares a website or an idea — `topy-projects` makes it a project.
+2. `topy-business-plan` writes the first plan and summarises its numbers.
+3. `topy-fundraising` reviews it like an investor; `topy-ai-ceo-core` pressure-tests the strategy.
+4. The company changes — `topy-plan-revision` updates every affected section as a new version.
+5. `topy-ceo-workspace` records the decisions behind it and runs the weekly review.
 
 ---
 
 ## Product Skill Workflow
 
-The product skills are not separate from the CEO work. They are the operating system the CEO uses every day.
-
-### 1. Start with the project
-
-Use `topy-onboarding` to turn raw material into a structured project:
-
-- website URL
-- local file
-- brainstorm notes
-- rough idea or founder pitch
-
-What you get:
-
-- a project record
-- initial scope
-- source context
-- a base to iterate from
-
-### 2. Shape the plan
-
-Use `topy-business-plans` to create the business plan from that project.
-
-What you get:
-
-- initial plan draft
-- edited sections
-- regenerated weak sections
-- exportable output
-
-### 3. Pressure-test the plan
-
-Use `topy-ai-ceo-core` to act like the CEO and challenge the plan:
-
-- what is weak or missing
-- what are the biggest assumptions
-- what is the GTM sequence
-- what are the weak competitors and likely responses
-- what is the next best step
-
-This is where the CEO answers:
-
-- should we continue?
-- should we change the plan?
-- should we wait?
-- should we kill the idea?
-
-### 4. Keep the project live
-
-Use `topy-projects` to record the project state after the decision:
-
-- decisions made
-- risks discovered
-- research and notes
-- updated metadata
-- archive or restore actions
-
-### 5. Turn good structure into a template
-
-Use `topy-templates` when a plan shape is repeatable:
-
-- create a template from a strong structure
-- refine the template
-- reuse it for similar opportunities
-
-### 6. Check limits before expensive actions
-
-Use `topy-billing` before generation-heavy or access-controlled operations:
-
-- credits
-- subscriptions
-- entitlements
-- portal or checkout actions
-
-### 7. Attach supporting assets
-
-Use `topy-media` for files, images, or URL-based assets that belong to the project or plan.
-
-### 8. Initialize access when needed
-
-Use `topy-init` when the environment is not ready yet:
-
-- set `TOPY_AI_KEY`
-- confirm `https://topy.ai/api`
-- stop any non-core workflow until auth is available
-
-### Why this matters for a CEO
-
-A good CEO workflow is not:
-
-- one prompt
-- one plan
-- one answer
-
-It is a loop:
-
-1. capture the opportunity
-2. turn it into a project
-3. generate a plan
-4. critique the plan
-5. update the project
-6. turn the pattern into a template
-7. manage credits and constraints
-8. keep the supporting assets organized
-
-That is the daily operating loop the TOPY skills are built to support.
+The product skills work through TOPY's own tools — the same 90+ tools TOPY offers to Claude, ChatGPT and the
+`topy` CLI — so plans, figures and records stay in the founder's TOPY account. Every change is previewed first
+and runs only after the user confirms it; generating a plan costs 50 TOPY credits and the preview shows the
+balance. The full tool list is at [topy.ai/developers](https://topy.ai/developers).
 
 ---
 
 ## Install
 
-Install the full catalog:
+**Claude Code plugin** (skills and the TOPY MCP server together):
 
 ```bash
-npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills
+/plugin marketplace add TOPY-AI-LTD/TOPY-AI-CEO-Skills
+/plugin install topy-ai-ceo@topy-ai
 ```
 
-Install all skills without prompting:
+**Skills only** (Claude Code, Codex and other agents):
 
 ```bash
 npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills --all
-```
-
-Install a specific skill:
-
-```bash
-npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills --skill topy-ai-ceo-core
-```
-
-Install the initializer:
-
-```bash
-npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills --skill topy-init
-```
-
-Install for Codex:
-
-```bash
-npx skills add TOPY-AI-LTD/TOPY-AI-CEO-Skills --agent codex
-```
-
-Use a local checkout:
-
-```bash
-npx skills add ./topy-ai-ceo-skills
-```
-
-Upgrade installed skills:
-
-```bash
-npx skills update
-```
-
-Upgrade a single skill:
-
-```bash
-npx skills update topy-init
+npx @topy-ai/ceo skills install        # the same product skills, from the TOPY CLI
+npx skills update                      # upgrade later
 ```
 
 ---
 
 ## Auth and API
 
-All non-core TOPY skills call the live API at:
+The product skills need TOPY connected, in one of these ways — no key is pasted into a prompt:
 
-```text
-https://topy.ai/api
-```
+1. **MCP connector** (recommended): add `https://topy.ai/mcp` in Claude or ChatGPT, or
+   `claude mcp add --transport http topy https://topy.ai/mcp`, and sign in to TOPY when asked.
+2. **CLI**: `npm i -g @topy-ai/ceo && topy login`; the skills fall back to `topy <tool>` commands.
+3. **API key**: create one under Dashboard → API keys and export `TOPY_API_KEY` for the CLI.
 
-Use `TOPY_AI_KEY` as the bearer token for those calls. If the key is missing:
-
-1. stop the workflow
-2. route the user to `topy-init`
-3. ask them to set `TOPY_AI_KEY`
-4. resume the original skill only after auth is available
-
-`topy-ai-ceo-core` does not call the TOPY API and does not require the key.
+`topy-ai-ceo-core` does not call TOPY and needs none of these.
 
 ---
 
 ## Quick Start
 
-1. Install the repo or the skill you need.
-2. If the key is missing, start with `topy-init`.
-3. Set `TOPY_AI_KEY` in your shell or agent environment.
-4. Ask the agent to use the relevant TOPY skill.
-5. If you are unsure, start with `topy-ai-ceo-core`.
-6. Use the examples or evals when you want a repeatable prompt pattern.
-
-Examples:
+1. Install the plugin or the skills.
+2. Connect TOPY (MCP connector, or `topy login`).
+3. Ask in plain words, or name the skill:
 
 ```text
-Use $topy-ai-ceo-core to evaluate a market entry decision with trade-offs and a recommendation.
+Use $topy-business-plan to write a business plan for my TOPY project.
+```
+
+```text
+Use $topy-plan-revision: we are raising £250k instead of £200k and hiring a CTO in Q2 2027.
 ```
 
 ```text
 Use $topy-ai-ceo-core to prioritize five initiatives and explain the opportunity cost of delay.
-```
-
-```text
-Use $topy-ai-ceo-core to handle a crisis response plan with immediate containment and stakeholder sequencing.
 ```
 
 ---
@@ -466,46 +301,36 @@ There is also a lightweight eval suite for repeatable checks:
 
 | Skill | Purpose |
 |---|---|
-| `topy-ai-ceo-core` | Recommended starting point for CEO-level reasoning |
-| `topy-init` | Initialize `TOPY_AI_KEY` and confirm the TOPY API base URL |
-| `topy-dashboard` | Router skill for TOPY workflows and skill selection |
-| `topy-onboarding` | Create projects from website, file, brainstorm, or direct idea |
-| `topy-projects` | Inspect, edit, archive, restore, and manage project resources |
-| `topy-business-plans` | Generate, inspect, edit, export, and manage business plans |
-| `topy-templates` | Create and edit business-plan templates |
-| `topy-billing` | Inspect credits, entitlements, subscriptions, and billing flows |
-| `topy-media` | List, register, and delete media assets |
+| `topy-ai-ceo` | Entry point: connect TOPY, shared rules, pick the right skill |
+| `topy-business-plan` | Generate, read, edit, fix, export plans; templates |
+| `topy-plan-revision` | Revise a whole plan for a change, as a new version |
+| `topy-fundraising` | Investor-ready review, SEIS Advance Assurance, investor pipeline and updates |
+| `topy-ceo-workspace` | Decisions, risks, journal, GTM plans, experiments, research; weekly review |
+| `topy-projects` | Projects from ideas or websites; ideas and brainstorms |
+| `topy-ai-ceo-core` | CEO-level reasoning without the TOPY account |
 
 ---
 
 ## Requirements
 
-- A valid `TOPY_AI_KEY`
-- Access to the TOPY backend API that powers the route maps in each skill
-- `npx skills` available in the user environment
+- For the product skills: TOPY connected (MCP connector, `topy login`, or `TOPY_API_KEY`)
+- For `topy-ai-ceo-core`: nothing
 
 ---
 
 ## Repository Structure
 
 ```text
+.claude-plugin/          Claude Code plugin and marketplace manifests
+.mcp.json                the TOPY MCP server (https://topy.ai/mcp)
 skills/
-  topy-ai-ceo-core/
-    SKILL.md
-    agents/
-    examples/
-    references/
-    scripts/
-  topy-init/
-    SKILL.md
-    agents/
-  topy-dashboard/
-  topy-onboarding/
+  topy-ai-ceo/           SKILL.md, agents/openai.yaml (Codex)
+  topy-business-plan/
+  topy-plan-revision/
+  topy-fundraising/
+  topy-ceo-workspace/
   topy-projects/
-  topy-business-plans/
-  topy-templates/
-  topy-billing/
-  topy-media/
+  topy-ai-ceo-core/      SKILL.md, agents/, examples/, references/, scripts/
 evals/
 README.md
 CHANGELOG.md
@@ -531,6 +356,7 @@ This repository follows simple semantic version tags.
 - `v0.4.6` expanded the README with the TOPY product skill workflow
 - `v0.5.0` added `topy-init`, standardized `TOPY_AI_KEY`, and documented auth preflight
 - `v0.5.1` added the upgrade flow for installed skills
+- `v0.6.0` product skills rebuilt on TOPY's MCP server and CLI; Claude Code plugin
 - future releases will add new skills, route updates, or installation improvements
 
 ---

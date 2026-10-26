@@ -1,0 +1,21 @@
+{
+  "name": "topy-ai-ceo",
+  "version": "0.6.0",
+  "description": "TOPY.AI's AI CEO for Claude Code: business plans, plan revisions, fundraising (incl. SEIS), the CEO workspace and projects, through TOPY's MCP server, plus a general CEO decision advisor.",
+  "author": {
+    "name": "TOPY AI LTD",
+    "url": "https://topy.ai"
+  },
+  "homepage": "https://topy.ai/developers",
+  "repository": "https://github.com/TOPY-AI-LTD/TOPY-AI-CEO-Skills",
+  "license": "MIT",
+  "keywords": [
+    "ceo",
+    "business-plan",
+    "fundraising",
+    "seis",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

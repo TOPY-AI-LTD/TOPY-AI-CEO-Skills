@@ -1,58 +1,22 @@
 ---
 name: topy-projects
-description: List, inspect, edit, archive, restore, and manage project resources in TOPY using TOPY_AI_KEY. Use when the user wants to change or review an existing project record.
+description: Projects and ideas in TOPY.AI — create a project from an idea or an existing website, update its details, archive it, and generate or brainstorm startup ideas. Use when the user wants to start working on a new company or idea in TOPY, change what a project says about the business, or explore ideas.
 ---
 
-# TOPY Projects
+# Projects and ideas
 
-## Intent
+Follow the shared rules in `topy-ai-ceo`. A project is the company or idea TOPY works on; plans and
+records belong to a project.
 
-Work with existing project records and their attached project resources.
+- **See them.** `projects_list`; details with `project_get`.
+- **From an idea.** `project_create_from_idea` with a clear `title` and a `description` (what it does,
+  for whom, how it makes money; add `keywords`, `industries`, `unique_selling_points` when known).
+- **From a website.** `project_create_from_website` with the `url`; it reads the site as a job — follow
+  it with `project_job_get` until it finishes, then `project_get`.
+- **Change details.** `project_update` (name, one-liner, description, industry, target market,
+  geography, website, keywords). Keep the user's wording.
+- **Archive / restore.** `project_delete` / `project_restore` (archiving is reversible).
+- **Ideas.** `ideas_generate` around a topic or market; `idea_get`; `idea_brainstorm` (by `idea_id`, or a
+  free-text `term`) for market, competitors and angles; `idea_to_project` turns a saved idea into a project.
 
-## Allowed operations
-
-- List the current user’s projects
-- Inspect a project
-- Edit project metadata
-- Archive or restore a project
-- Read or edit project resources
-
-## Route map
-
-- `GET https://topy.ai/api/v1/projects/my?include_pending=true&view=active`
-- `GET https://topy.ai/api/v1/projects/{project_id}`
-- `PATCH https://topy.ai/api/v1/projects/{project_id}`
-- `DELETE https://topy.ai/api/v1/projects/{project_id}`
-- `POST https://topy.ai/api/v1/projects/{project_id}/restore`
-- Project resources under `https://topy.ai/api/v1/projects/{project_id}/...`
-
-## API and auth
-
-See [references/auth-and-api.md](../topy-ai-ceo-core/references/auth-and-api.md) for the shared convention.
-
-## Resource groups
-
-- Research sources
-- Decisions
-- Journal entries
-- GTM plans
-- Memory nodes
-- Risks
-- Investor contacts
-- Investor updates
-- Growth experiments
-
-## Rules
-
-- Before any API call, verify that `TOPY_AI_KEY` is available.
-- Use `https://topy.ai/api` as the base URL for all calls.
-- Resolve the project explicitly before mutating anything.
-- Preserve existing structured data unless the user asked for a replacement.
-- Keep resource edits inside the resource type the user named.
-- Do not use this skill for business-plan generation, template editing, billing, or media operations.
-
-## Failure behavior
-
-- If `TOPY_AI_KEY` is missing, stop and route the user to `topy-init`.
-- If the project is missing or inaccessible, surface that directly.
-- If the payload does not match the backend schema, stop and ask for the missing fields.
+Then continue with `topy-business-plan` when the user wants a plan for it.

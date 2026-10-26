@@ -1,45 +1,13 @@
-# Auth and API Convention
+# Connecting to TOPY
 
-Use this reference for every non-core TOPY workflow.
+`topy-ai-ceo-core` itself never calls TOPY. When the user wants something done in their TOPY account
+(plans, revisions, projects, records), hand over to the product skills, starting with `topy-ai-ceo`.
 
-## Base URL
+They reach TOPY in one of these ways — never by asking the user for a key in the chat:
 
-All API calls should target:
+1. **MCP tools** from the TOPY connector, `https://topy.ai/mcp` (Claude, ChatGPT, Claude Code, Cursor),
+   signed in with the user's TOPY account.
+2. **The `topy` CLI** (`npm i -g @topy-ai/ceo`, `topy login`), or `TOPY_API_KEY` from Dashboard → API keys.
 
-```text
-https://topy.ai/api
-```
-
-Append the route path to that base URL, for example:
-
-```text
-https://topy.ai/api/v1/projects/my?include_pending=true&view=active
-```
-
-## Authentication
-
-- Read the user-scoped API key from `TOPY_AI_KEY`.
-- Send it as a bearer token.
-- Do not invent another key name for the same workflow.
-
-Example:
-
-```http
-Authorization: Bearer <TOPY_AI_KEY>
-```
-
-## Preflight rule
-
-Before making any non-core TOPY API call:
-
-1. Check whether `TOPY_AI_KEY` is available.
-2. If it is missing, stop.
-3. Route the user to `topy-init` to set it up.
-4. Do not proceed with a partial or guessed auth state.
-
-## Call style
-
-- Keep payloads faithful to the backend schema.
-- Use the smallest valid request body.
-- Prefer explicit route selection over vague “dashboard” language when calling the API.
-- If a route requires a project ID, resolve that first before mutating anything.
+Every change is previewed first and runs only after the user confirms it. The REST API underneath is
+`https://topy.ai/api/v1`; the tool catalogue is at `https://topy.ai/api/v1/agent/tools`.
